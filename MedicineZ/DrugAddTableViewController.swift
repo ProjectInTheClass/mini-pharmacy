@@ -7,10 +7,15 @@
 //
 
 import UIKit
+protocol AddAlarmViewDelegateProtocol2 {
+    func addDrugList(drugItem: [String:String])
+    
+}
 
 class DrugAddTableViewController: UITableViewController, UISearchBarDelegate, XMLParserDelegate {
 
-   
+    var delegate:AddAlarmViewDelegateProtocol2?
+
     //searching
     @IBOutlet var searchBar: UISearchBar!
     var filteredDatas = [[String : String]]()
@@ -72,6 +77,12 @@ class DrugAddTableViewController: UITableViewController, UISearchBarDelegate, XM
         index += 1
         tableView.reloadData()
         
+    }
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if self.navigationController?.topViewController != self {
+            delegate?.addDrugList(drugItem: selectedData)
+        }
     }
     
     // XMLParserDelegate 함수

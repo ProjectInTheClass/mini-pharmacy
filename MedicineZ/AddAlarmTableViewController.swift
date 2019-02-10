@@ -10,7 +10,7 @@ import UIKit
 
 
 
-class AddAlarmTableViewController: UITableViewController, AddAlarmViewDelegateProtocol, UITextFieldDelegate, UNUserNotificationCenterDelegate {
+class AddAlarmTableViewController: UITableViewController, AddAlarmViewDelegateProtocol, AddAlarmViewDelegateProtocol2, UITextFieldDelegate, UNUserNotificationCenterDelegate {
     var eatingDay: String = ""
     var notEatingDay: String = ""
     var monday: Bool = false
@@ -21,7 +21,8 @@ class AddAlarmTableViewController: UITableViewController, AddAlarmViewDelegatePr
     var saturday: Bool = false
     var sunday: Bool = false
     var repetition: String = ""
-    
+    var drugItems = [[String:String]]()
+
     var alarmGranted: Bool = false
 
     
@@ -184,8 +185,15 @@ class AddAlarmTableViewController: UITableViewController, AddAlarmViewDelegatePr
         
     }
     
+    func addDrugList(drugItem: [String:String]){
+        self.drugItems.append(drugItem)
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let vc = segue.destination as? AlarmRepetitionTableViewController {
+            vc.delegate = self
+        }
+        if let vc = segue.destination as? DrugAddTableViewController{
             vc.delegate = self
         }
     }
