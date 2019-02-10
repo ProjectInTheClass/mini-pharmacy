@@ -42,8 +42,11 @@ class DrugAddTableViewController: UITableViewController, UISearchBarDelegate, XM
     var index = 1
     
     @IBAction func selectDrug(_ sender: Any) {
-       print(selectedData)
-       
+        delegate?.addDrugList(drugItem: selectedData)
+        let alert = UIAlertController(title: "선택", message: "선택되었습니다.", preferredStyle: .alert)
+        let cancelAction = UIAlertAction(title: "확인", style: .cancel, handler: nil)
+        alert.addAction(cancelAction)
+        self.present(alert, animated: true, completion: nil)
     }
     
     func requestDrugInfo(i:Int) {
@@ -81,7 +84,6 @@ class DrugAddTableViewController: UITableViewController, UISearchBarDelegate, XM
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillAppear(animated)
         if self.navigationController?.topViewController != self {
-            delegate?.addDrugList(drugItem: selectedData)
         }
     }
     

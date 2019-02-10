@@ -25,6 +25,37 @@ class AddAlarmTableViewController: UITableViewController, AddAlarmViewDelegatePr
 
     var alarmGranted: Bool = false
 
+    var drugListName = [String]()
+    @IBOutlet weak var drugList1: UILabel!
+    @IBOutlet weak var drugList2: UILabel!
+    @IBOutlet weak var drugList3: UILabel!
+    @IBOutlet weak var drugList4: UILabel!
+    @IBOutlet weak var drugList5: UILabel!
+    @IBOutlet weak var drugList6: UILabel!
+    @IBOutlet weak var drugList7: UILabel!
+    @IBOutlet weak var drugList8: UILabel!
+    @IBOutlet weak var drugList9: UILabel!
+    @IBOutlet weak var drugList10: UILabel!
+    
+    @IBAction func cellDelete(_ sender: Any) {
+        print(drugItems)
+        
+        let drugLastIndex = drugItems.count - 1
+        if drugLastIndex >= 0{
+        drugItems.remove(at: drugLastIndex)
+        }
+        drugList1.text = ""
+        drugList2.text = ""
+        drugList3.text = ""
+        drugList4.text = ""
+        drugList5.text = ""
+        drugList6.text = ""
+        drugList7.text = ""
+        drugList8.text = ""
+        drugList9.text = ""
+        drugList10.text = ""
+        self.viewWillAppear(true)
+    }
     
     @IBOutlet weak var alarmRepetition: UILabel!
     
@@ -149,7 +180,17 @@ class AddAlarmTableViewController: UITableViewController, AddAlarmViewDelegatePr
         
         alarmTimeSetting.inputView = datePicker
         alarmRepetition.text = repetition
-
+        
+        drugList1.text = ""
+        drugList2.text = ""
+        drugList3.text = ""
+        drugList4.text = ""
+        drugList5.text = ""
+        drugList6.text = ""
+        drugList7.text = ""
+        drugList8.text = ""
+        drugList9.text = ""
+        drugList10.text = ""
     }
     
     @objc func dismissPicker() {
@@ -199,7 +240,75 @@ class AddAlarmTableViewController: UITableViewController, AddAlarmViewDelegatePr
     }
     
     override func viewWillAppear(_ animated: Bool) {
-         alarmRepetition.text = repetition
+        alarmRepetition.text = repetition
+        if drugItems.count == 1{
+            drugList1.text = "💊 " + drugItems[0]["ITEM_NAME"]!
+        }else if drugItems.count == 2{
+            drugList1.text = "💊 " + drugItems[0]["ITEM_NAME"]!
+            drugList2.text = "💊 " + drugItems[1]["ITEM_NAME"]!
+        }else if drugItems.count == 3{
+            drugList1.text = "💊 " + drugItems[0]["ITEM_NAME"]!
+            drugList2.text = "💊 " + drugItems[1]["ITEM_NAME"]!
+            drugList3.text = "💊 " + drugItems[2]["ITEM_NAME"]!
+        }else if drugItems.count == 4{
+            drugList1.text = "💊 " + drugItems[0]["ITEM_NAME"]!
+            drugList2.text = "💊 " + drugItems[1]["ITEM_NAME"]!
+            drugList3.text = "💊 " + drugItems[2]["ITEM_NAME"]!
+            drugList4.text = "💊 " + drugItems[3]["ITEM_NAME"]!
+        }else if drugItems.count == 5{
+            drugList1.text = "💊 " + drugItems[0]["ITEM_NAME"]!
+            drugList2.text = "💊 " + drugItems[1]["ITEM_NAME"]!
+            drugList3.text = "💊 " + drugItems[2]["ITEM_NAME"]!
+            drugList4.text = "💊 " + drugItems[3]["ITEM_NAME"]!
+            drugList5.text = "💊 " + drugItems[4]["ITEM_NAME"]!
+        }else if drugItems.count == 6{
+            drugList1.text = "💊 " + drugItems[0]["ITEM_NAME"]!
+            drugList2.text = "💊 " + drugItems[1]["ITEM_NAME"]!
+            drugList3.text = "💊 " + drugItems[2]["ITEM_NAME"]!
+            drugList4.text = "💊 " + drugItems[3]["ITEM_NAME"]!
+            drugList5.text = "💊 " + drugItems[4]["ITEM_NAME"]!
+            drugList6.text = "💊 " + drugItems[5]["ITEM_NAME"]!
+        }else if drugItems.count == 7{
+            drugList1.text = "💊 " + drugItems[0]["ITEM_NAME"]!
+            drugList2.text = "💊 " + drugItems[1]["ITEM_NAME"]!
+            drugList3.text = "💊 " + drugItems[2]["ITEM_NAME"]!
+            drugList4.text = "💊 " + drugItems[3]["ITEM_NAME"]!
+            drugList5.text = "💊 " + drugItems[4]["ITEM_NAME"]!
+            drugList6.text = "💊 " + drugItems[5]["ITEM_NAME"]!
+            drugList7.text = "💊 " + drugItems[6]["ITEM_NAME"]!
+        }else if drugItems.count == 8{
+            drugList1.text = "💊 " + drugItems[0]["ITEM_NAME"]!
+            drugList2.text = "💊 " + drugItems[1]["ITEM_NAME"]!
+            drugList3.text = "💊 " + drugItems[2]["ITEM_NAME"]!
+            drugList4.text = "💊 " + drugItems[3]["ITEM_NAME"]!
+            drugList5.text = "💊 " + drugItems[4]["ITEM_NAME"]!
+            drugList6.text = "💊 " + drugItems[5]["ITEM_NAME"]!
+            drugList7.text = "💊 " + drugItems[6]["ITEM_NAME"]!
+            drugList8.text = "💊 " + drugItems[7]["ITEM_NAME"]!
+        }else if drugItems.count == 9{
+            drugList1.text = "💊 " + drugItems[0]["ITEM_NAME"]!
+            drugList2.text = "💊 " + drugItems[1]["ITEM_NAME"]!
+            drugList3.text = "💊 " + drugItems[2]["ITEM_NAME"]!
+            drugList4.text = "💊 " + drugItems[3]["ITEM_NAME"]!
+            drugList5.text = "💊 " + drugItems[4]["ITEM_NAME"]!
+            drugList6.text = "💊 " + drugItems[5]["ITEM_NAME"]!
+            drugList7.text = "💊 " + drugItems[6]["ITEM_NAME"]!
+            drugList8.text = "💊 " + drugItems[7]["ITEM_NAME"]!
+            drugList9.text = "💊 " + drugItems[8]["ITEM_NAME"]!
+        }else if drugItems.count == 10{
+            drugList1.text = "💊 " + drugItems[0]["ITEM_NAME"]!
+            drugList2.text = "💊 " + drugItems[1]["ITEM_NAME"]!
+            drugList3.text = "💊 " + drugItems[2]["ITEM_NAME"]!
+            drugList4.text = "💊 " + drugItems[3]["ITEM_NAME"]!
+            drugList5.text = "💊 " + drugItems[4]["ITEM_NAME"]!
+            drugList6.text = "💊 " + drugItems[5]["ITEM_NAME"]!
+            drugList7.text = "💊 " + drugItems[6]["ITEM_NAME"]!
+            drugList8.text = "💊 " + drugItems[7]["ITEM_NAME"]!
+            drugList9.text = "💊 " + drugItems[8]["ITEM_NAME"]!
+            drugList10.text = "💊 " + drugItems[9]["ITEM_NAME"]!
+        }
+        
+        
     }
     
     func setLocalNotification() {
@@ -226,12 +335,16 @@ class AddAlarmTableViewController: UITableViewController, AddAlarmViewDelegatePr
             }
         }
     }
+    
+//    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+//
+//    }
     /*
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let vc = segue.destination as? TimeViewController {
             vc.delegate = self
         }
-    }
+    } section 1, row 3-12
  */
  
     // MARK: - Table view data source
@@ -247,13 +360,7 @@ class AddAlarmTableViewController: UITableViewController, AddAlarmViewDelegatePr
 //    }
 //
 //    
-//    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-//
-//        // Configure the cell...
-//
-//        return cell
-//    }
+    
     
 
     /*
