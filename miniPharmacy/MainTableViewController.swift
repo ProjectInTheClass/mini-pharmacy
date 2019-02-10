@@ -13,6 +13,12 @@ class MainTableViewController: UITableViewController {
      var alarmItems = [[String:String]]()
     var alarmItem = [String: String]()
     var repetition = ""
+    var alarmName = ""
+    var memo = ""
+    var alarmTime = ""
+    var alarmRepetition = ""
+    var when = ""
+    
 /*
     func longPressCalled(_ longPress: UILongPressGestureRecognizer) {
         print("longPressCalled")
@@ -40,7 +46,15 @@ class MainTableViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         tableView.reloadData()//데이터 계속 리로드해주는 거
-   //     alarmItem[alarmName] = alarmName
+        /*
+        alarmItem["alarmName"] = alarmName
+        alarmItem["alarmTime"] = alarmTime
+        alarmItem["memo"] = memo
+        alarmItem["alarmRepetition"] = alarmRepetition
+        alarmItem["when"] = when
+        print("alarmName = \(alarmName)")
+        alarmItems.append(alarmItem)
+         */
 
     }
     
@@ -63,12 +77,22 @@ class MainTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath) as! TableViewCell
         //cell.textLabel?.numberOfLines = 0
         cell.alarmName?.text = DataCenter.sharedInstnce.drugList[indexPath.row].alarmName
+       // alarmItem["alarmName"] = DataCenter.sharedInstnce.drugList[indexPath.row].alarmName
+       // print("alarmName = \(DataCenter.sharedInstnce.drugList[indexPath.row].alarmName)")
+        
         cell.alarmTimeSetting?.text = DataCenter.sharedInstnce.drugList[indexPath.row].alarmTimeSetting
+       // alarmItem["alarmTime"] = DataCenter.sharedInstnce.drugList[indexPath.row].alarmTimeSetting
+       // print("alarmTime = \(DataCenter.sharedInstnce.drugList[indexPath.row].alarmTimeSetting)")
+        
         
         cell.repetition?.text = DataCenter.sharedInstnce.drugList[indexPath.row].repetition
+      //  alarmItem["alarmRepetition"] = DataCenter.sharedInstnce.drugList[indexPath.row].repetition
     
         
         cell.segment?.text = DataCenter.sharedInstnce.drugList[indexPath.row].segment
+      //  alarmItem["when"] = DataCenter.sharedInstnce.drugList[indexPath.row].segment
+        
+        //alarmItems.append(alarmItem)
         
         //cell.textLabel!.text = DataCenter.sharedInstnce.drugList[indexPath.row].alarmName
         //cell.detailTextLabel!.text = DataCenter.sharedInstnce.drugList[indexPath.row].alarmLabel
@@ -79,8 +103,14 @@ class MainTableViewController: UITableViewController {
         
         if let detailVC = segue.destination as? AlarmInfoTableViewController{
             
-            if let drugIdx = self.tableView.indexPathForSelectedRow{
-                detailVC.alarmInfo = alarmItems[drugIdx.row]
+            if let drugIdx = self.tableView.indexPathForSelectedRow {
+                detailVC.alarmInfoName = DataCenter.sharedInstnce.drugList[drugIdx.row].alarmName
+                detailVC.alarmInfoTime = DataCenter.sharedInstnce.drugList[drugIdx.row].alarmTimeSetting!
+                detailVC.alarmInfoWhen = DataCenter.sharedInstnce.drugList[drugIdx.row].segment
+                detailVC.alarmInfoRepetition = DataCenter.sharedInstnce.drugList[drugIdx.row].repetition!
+                detailVC.alarmInfoMemo = DataCenter.sharedInstnce.drugList[drugIdx.row].memo
+                detailVC.alarmInfoEatingDay = DataCenter.sharedInstnce.drugList[drugIdx.row].eatingDay!
+                detailVC.alarmInfoNotEatingDay = DataCenter.sharedInstnce.drugList[drugIdx.row].notEatingDay!
                 
             }
         }
