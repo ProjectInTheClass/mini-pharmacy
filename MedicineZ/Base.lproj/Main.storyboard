@@ -145,7 +145,7 @@
                         <barButtonItem key="leftBarButtonItem" systemItem="search" id="2DD-Hg-Yil">
                             <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
-                                <segue destination="TEH-qr-aLq" kind="show" id="bfQ-eK-GWq"/>
+                                <segue destination="TEH-qr-aLq" kind="show" id="HAn-Np-V6q"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="bmX-Tq-gwQ">
@@ -1896,7 +1896,7 @@
                                                                 <color key="titleColor" red="0.016804177310000001" green="0.19835099580000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             </state>
                                                             <connections>
-                                                                <segue destination="Rsa-XG-ERq" kind="show" id="0oD-cA-axb"/>
+                                                                <segue destination="mJV-Yn-Wjp" kind="show" id="CAM-Hc-lqu"/>
                                                             </connections>
                                                         </button>
                                                     </subviews>
@@ -2229,24 +2229,23 @@
         <!--View Controller-->
         <scene sceneID="I0Y-tt-QVr">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="QAX-CY-AR3" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="Rsa-XG-ERq" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="cAo-bV-5q0">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <searchBar contentMode="redraw" text="" placeholder="약 이름을 검색하세요" translatesAutoresizingMaskIntoConstraints="NO" id="Scq-Vq-8Qp">
-                                <rect key="frame" x="0.0" y="64" width="375" height="56"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="56"/>
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="아섹정" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5id-dI-aJv">
-                                <rect key="frame" x="56" y="140" width="54" height="23"/>
+                                <rect key="frame" x="56" y="96" width="54" height="23"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VJj-IC-Txv">
-                                <rect key="frame" x="16" y="135" width="30" height="30"/>
+                                <rect key="frame" x="16" y="91" width="30" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="30" id="5hZ-hg-vKw"/>
                                     <constraint firstAttribute="height" constant="30" id="LIZ-HS-fh8"/>
@@ -2272,7 +2271,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lqd-x2-Vf4">
-                                <rect key="frame" x="16" y="181" width="30" height="30"/>
+                                <rect key="frame" x="16" y="137" width="30" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="W7c-b3-kmu"/>
                                     <constraint firstAttribute="width" constant="30" id="dQj-HR-TwQ"/>
@@ -2322,6 +2321,7 @@
                         </barButtonItem>
                     </navigationItem>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="QAX-CY-AR3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4089" y="157"/>
         </scene>
@@ -3107,6 +3107,6 @@
         <image name="settings" width="18" height="18"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="sAj-bB-OiF"/>
+        <segue reference="dLT-G8-pn4"/>
     </inferredMetricsTieBreakers>
 </document>
