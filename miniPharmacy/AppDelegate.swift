@@ -1,8 +1,8 @@
 //
 //  AppDelegate.swift
-//  miniPharmacy
+//  MedicineZ
 //
-//  Created by CAU on 08/02/2019.
+//  Created by CAU on 10/01/2019.
 //  Copyright © 2019 CAU. All rights reserved.
 //
 
@@ -13,9 +13,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
+    var alarmLabel : String?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        DataCenter.sharedInstnce.load()
+        DataCenter.sharedInstnce.load2()
+        
+        DataCenter.sharedInstnce.HomeUpdateCheck = true
+        DataCenter.sharedInstnce.TimeLineUpdateCheck = true
+        
+//        DataCenter.sharedInstnce.drugListTimeSync()
+        
         return true
     }
 
@@ -27,6 +37,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationDidEnterBackground(_ application: UIApplication) {
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+        DataCenter.sharedInstnce.save()
+        DataCenter.sharedInstnce.save2()
+
     }
 
     func applicationWillEnterForeground(_ application: UIApplication) {

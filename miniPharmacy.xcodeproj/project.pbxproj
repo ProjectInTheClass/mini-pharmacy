@@ -7,99 +7,194 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		5230661B220D23C80004C8E2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5230661A220D23C80004C8E2 /* AppDelegate.swift */; };
-		5230661D220D23C80004C8E2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5230661C220D23C80004C8E2 /* ViewController.swift */; };
-		52306620220D23C80004C8E2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5230661E220D23C80004C8E2 /* Main.storyboard */; };
-		52306622220D23C90004C8E2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 52306621220D23C90004C8E2 /* Assets.xcassets */; };
-		52306625220D23C90004C8E2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 52306623220D23C90004C8E2 /* LaunchScreen.storyboard */; };
+		5234878421E82403004BB1F3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5234878321E82403004BB1F3 /* AppDelegate.swift */; };
+		5234878621E82403004BB1F3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5234878521E82403004BB1F3 /* ViewController.swift */; };
+		5234878921E82403004BB1F3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5234878721E82403004BB1F3 /* Main.storyboard */; };
+		5234878E21E82404004BB1F3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5234878C21E82404004BB1F3 /* LaunchScreen.storyboard */; };
+		5247B32321EC638B000161D4 /* DrawingCanvasView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5247B31621EC638B000161D4 /* DrawingCanvasView.swift */; };
+		5247B32421EC638B000161D4 /* CHContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5247B31721EC638B000161D4 /* CHContentViewController.swift */; };
+		5247B32521EC638B000161D4 /* UIViewController+Navigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5247B31821EC638B000161D4 /* UIViewController+Navigation.swift */; };
+		5247B32621EC638B000161D4 /* NavigationControllers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5247B31921EC638B000161D4 /* NavigationControllers.swift */; };
+		5247B32721EC638B000161D4 /* CHPagingScrollViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5247B31A21EC638B000161D4 /* CHPagingScrollViewController.swift */; };
+		5247B32821EC638B000161D4 /* CHViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5247B31B21EC638B000161D4 /* CHViews.swift */; };
+		5247B32921EC638B000161D4 /* CHPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5247B31C21EC638B000161D4 /* CHPickerViewController.swift */; };
+		5247B32A21EC638B000161D4 /* SwipeActionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5247B31D21EC638B000161D4 /* SwipeActionTableViewCell.swift */; };
+		5247B32B21EC638B000161D4 /* FIlters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5247B31E21EC638B000161D4 /* FIlters.swift */; };
+		5247B32C21EC638B000161D4 /* CHTableViewControllers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5247B31F21EC638B000161D4 /* CHTableViewControllers.swift */; };
+		5247B32D21EC638B000161D4 /* CHModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5247B32021EC638B000161D4 /* CHModalViewController.swift */; };
+		5247B32E21EC638B000161D4 /* CHControls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5247B32121EC638B000161D4 /* CHControls.swift */; };
+		5247B32F21EC638B000161D4 /* RecordButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5247B32221EC638B000161D4 /* RecordButton.swift */; };
+		525C84B5220BE6BD00953458 /* TimeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525C84B4220BE6BD00953458 /* TimeViewController.swift */; };
+		525C84D7220C275F00953458 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525C84D6220C275F00953458 /* TableViewCell.swift */; };
+		525C84D9220C3B0600953458 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525C84D8220C3B0600953458 /* MapViewController.swift */; };
+		527B8FE8220423D1009BCEB0 /* MainTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527B8FE7220423D1009BCEB0 /* MainTableViewController.swift */; };
+		527B8FED22055F38009BCEB0 /* MedicineZ-Bridging-Header.m in Sources */ = {isa = PBXBuildFile; fileRef = 527B8FEC22055F38009BCEB0 /* MedicineZ-Bridging-Header.m */; };
+		527B8FF02205671A009BCEB0 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 527B8FEF2205671A009BCEB0 /* libsqlite3.tbd */; };
+		52A807EC21EC4E3600EB99B5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 52A807EB21EC4E3600EB99B5 /* Assets.xcassets */; };
+		52E47353220B02AB00C8D8B7 /* DataCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52E47352220B02AB00C8D8B7 /* DataCenter.swift */; };
+		52F3D1BD220D64D8007D2F20 /* AlarmRepetitionTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F3D1BC220D64D8007D2F20 /* AlarmRepetitionTableViewController.swift */; };
+		52F3D1BF220D7BDB007D2F20 /* eatingDayInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F3D1BE220D7BDB007D2F20 /* eatingDayInfo.swift */; };
+		52F3D1C522100E8C007D2F20 /* AlarmInfoTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F3D1C422100E8C007D2F20 /* AlarmInfoTableViewController.swift */; };
+		52F897F02202CC4F007E1F0D /* userInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F897EF2202CC4F007E1F0D /* userInfo.swift */; };
+		52F897F22202CEBA007E1F0D /* AddAlarmTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F897F12202CEBA007E1F0D /* AddAlarmTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		52306617220D23C80004C8E2 /* miniPharmacy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = miniPharmacy.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		5230661A220D23C80004C8E2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		5230661C220D23C80004C8E2 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		5230661F220D23C80004C8E2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		52306621220D23C90004C8E2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		52306624220D23C90004C8E2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		52306626220D23C90004C8E2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5234878021E82403004BB1F3 /* MedicineZ.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MedicineZ.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		5234878321E82403004BB1F3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		5234878521E82403004BB1F3 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		5234878821E82403004BB1F3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		5234878D21E82404004BB1F3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		5234878F21E82404004BB1F3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5247B31621EC638B000161D4 /* DrawingCanvasView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawingCanvasView.swift; sourceTree = "<group>"; };
+		5247B31721EC638B000161D4 /* CHContentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CHContentViewController.swift; sourceTree = "<group>"; };
+		5247B31821EC638B000161D4 /* UIViewController+Navigation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Navigation.swift"; sourceTree = "<group>"; };
+		5247B31921EC638B000161D4 /* NavigationControllers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationControllers.swift; sourceTree = "<group>"; };
+		5247B31A21EC638B000161D4 /* CHPagingScrollViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CHPagingScrollViewController.swift; sourceTree = "<group>"; };
+		5247B31B21EC638B000161D4 /* CHViews.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CHViews.swift; sourceTree = "<group>"; };
+		5247B31C21EC638B000161D4 /* CHPickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CHPickerViewController.swift; sourceTree = "<group>"; };
+		5247B31D21EC638B000161D4 /* SwipeActionTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwipeActionTableViewCell.swift; sourceTree = "<group>"; };
+		5247B31E21EC638B000161D4 /* FIlters.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FIlters.swift; sourceTree = "<group>"; };
+		5247B31F21EC638B000161D4 /* CHTableViewControllers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CHTableViewControllers.swift; sourceTree = "<group>"; };
+		5247B32021EC638B000161D4 /* CHModalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CHModalViewController.swift; sourceTree = "<group>"; };
+		5247B32121EC638B000161D4 /* CHControls.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CHControls.swift; sourceTree = "<group>"; };
+		5247B32221EC638B000161D4 /* RecordButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordButton.swift; sourceTree = "<group>"; };
+		525C84B4220BE6BD00953458 /* TimeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeViewController.swift; sourceTree = "<group>"; };
+		525C84D6220C275F00953458 /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
+		525C84D8220C3B0600953458 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		527B8FE7220423D1009BCEB0 /* MainTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTableViewController.swift; sourceTree = "<group>"; };
+		527B8FEB22055F37009BCEB0 /* MedicineZ-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MedicineZ-Bridging-Header.h"; sourceTree = "<group>"; };
+		527B8FEC22055F38009BCEB0 /* MedicineZ-Bridging-Header.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "MedicineZ-Bridging-Header.m"; sourceTree = "<group>"; };
+		527B8FEF2205671A009BCEB0 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
+		52A807EB21EC4E3600EB99B5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		52E47352220B02AB00C8D8B7 /* DataCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataCenter.swift; sourceTree = "<group>"; };
+		52F3D1BC220D64D8007D2F20 /* AlarmRepetitionTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmRepetitionTableViewController.swift; sourceTree = "<group>"; };
+		52F3D1BE220D7BDB007D2F20 /* eatingDayInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = eatingDayInfo.swift; sourceTree = "<group>"; };
+		52F3D1C422100E8C007D2F20 /* AlarmInfoTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmInfoTableViewController.swift; sourceTree = "<group>"; };
+		52F897EF2202CC4F007E1F0D /* userInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = userInfo.swift; sourceTree = "<group>"; };
+		52F897F12202CEBA007E1F0D /* AddAlarmTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAlarmTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		52306614220D23C80004C8E2 /* Frameworks */ = {
+		5234877D21E82403004BB1F3 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				527B8FF02205671A009BCEB0 /* libsqlite3.tbd in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		5230660E220D23C80004C8E2 = {
+		5234877721E82403004BB1F3 = {
 			isa = PBXGroup;
 			children = (
-				52306619220D23C80004C8E2 /* miniPharmacy */,
-				52306618220D23C80004C8E2 /* Products */,
+				5234878221E82403004BB1F3 /* MedicineZ */,
+				5234878121E82403004BB1F3 /* Products */,
+				527B8FEE2205671A009BCEB0 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
-		52306618220D23C80004C8E2 /* Products */ = {
+		5234878121E82403004BB1F3 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				52306617220D23C80004C8E2 /* miniPharmacy.app */,
+				5234878021E82403004BB1F3 /* MedicineZ.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		52306619220D23C80004C8E2 /* miniPharmacy */ = {
+		5234878221E82403004BB1F3 /* MedicineZ */ = {
 			isa = PBXGroup;
 			children = (
-				5230661A220D23C80004C8E2 /* AppDelegate.swift */,
-				5230661C220D23C80004C8E2 /* ViewController.swift */,
-				5230661E220D23C80004C8E2 /* Main.storyboard */,
-				52306621220D23C90004C8E2 /* Assets.xcassets */,
-				52306623220D23C90004C8E2 /* LaunchScreen.storyboard */,
-				52306626220D23C90004C8E2 /* Info.plist */,
+				5247B31521EC638B000161D4 /* PilotPlant */,
+				5234878321E82403004BB1F3 /* AppDelegate.swift */,
+				5234878521E82403004BB1F3 /* ViewController.swift */,
+				5234878721E82403004BB1F3 /* Main.storyboard */,
+				52A807EB21EC4E3600EB99B5 /* Assets.xcassets */,
+				5234878C21E82404004BB1F3 /* LaunchScreen.storyboard */,
+				5234878F21E82404004BB1F3 /* Info.plist */,
+				52F897EF2202CC4F007E1F0D /* userInfo.swift */,
+				52F897F12202CEBA007E1F0D /* AddAlarmTableViewController.swift */,
+				527B8FE7220423D1009BCEB0 /* MainTableViewController.swift */,
+				525C84D6220C275F00953458 /* TableViewCell.swift */,
+				527B8FEC22055F38009BCEB0 /* MedicineZ-Bridging-Header.m */,
+				527B8FEB22055F37009BCEB0 /* MedicineZ-Bridging-Header.h */,
+				52E47352220B02AB00C8D8B7 /* DataCenter.swift */,
+				525C84B4220BE6BD00953458 /* TimeViewController.swift */,
+				525C84D8220C3B0600953458 /* MapViewController.swift */,
+				52F3D1BC220D64D8007D2F20 /* AlarmRepetitionTableViewController.swift */,
+				52F3D1BE220D7BDB007D2F20 /* eatingDayInfo.swift */,
+				52F3D1C422100E8C007D2F20 /* AlarmInfoTableViewController.swift */,
 			);
-			path = miniPharmacy;
+			path = MedicineZ;
+			sourceTree = "<group>";
+		};
+		5247B31521EC638B000161D4 /* PilotPlant */ = {
+			isa = PBXGroup;
+			children = (
+				5247B31621EC638B000161D4 /* DrawingCanvasView.swift */,
+				5247B31721EC638B000161D4 /* CHContentViewController.swift */,
+				5247B31821EC638B000161D4 /* UIViewController+Navigation.swift */,
+				5247B31921EC638B000161D4 /* NavigationControllers.swift */,
+				5247B31A21EC638B000161D4 /* CHPagingScrollViewController.swift */,
+				5247B31B21EC638B000161D4 /* CHViews.swift */,
+				5247B31C21EC638B000161D4 /* CHPickerViewController.swift */,
+				5247B31D21EC638B000161D4 /* SwipeActionTableViewCell.swift */,
+				5247B31E21EC638B000161D4 /* FIlters.swift */,
+				5247B31F21EC638B000161D4 /* CHTableViewControllers.swift */,
+				5247B32021EC638B000161D4 /* CHModalViewController.swift */,
+				5247B32121EC638B000161D4 /* CHControls.swift */,
+				5247B32221EC638B000161D4 /* RecordButton.swift */,
+			);
+			path = PilotPlant;
+			sourceTree = "<group>";
+		};
+		527B8FEE2205671A009BCEB0 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				527B8FEF2205671A009BCEB0 /* libsqlite3.tbd */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		52306616220D23C80004C8E2 /* miniPharmacy */ = {
+		5234877F21E82403004BB1F3 /* MedicineZ */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 52306629220D23C90004C8E2 /* Build configuration list for PBXNativeTarget "miniPharmacy" */;
+			buildConfigurationList = 5234879221E82404004BB1F3 /* Build configuration list for PBXNativeTarget "MedicineZ" */;
 			buildPhases = (
-				52306613220D23C80004C8E2 /* Sources */,
-				52306614220D23C80004C8E2 /* Frameworks */,
-				52306615220D23C80004C8E2 /* Resources */,
+				5234877C21E82403004BB1F3 /* Sources */,
+				5234877D21E82403004BB1F3 /* Frameworks */,
+				5234877E21E82403004BB1F3 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = miniPharmacy;
-			productName = miniPharmacy;
-			productReference = 52306617220D23C80004C8E2 /* miniPharmacy.app */;
+			name = MedicineZ;
+			productName = MedicineZ;
+			productReference = 5234878021E82403004BB1F3 /* MedicineZ.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		5230660F220D23C80004C8E2 /* Project object */ = {
+		5234877821E82403004BB1F3 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1010;
 				LastUpgradeCheck = 1010;
 				ORGANIZATIONNAME = CAU;
 				TargetAttributes = {
-					52306616220D23C80004C8E2 = {
+					5234877F21E82403004BB1F3 = {
 						CreatedOnToolsVersion = 10.1;
+						LastSwiftMigration = 1010;
 					};
 				};
 			};
-			buildConfigurationList = 52306612220D23C80004C8E2 /* Build configuration list for PBXProject "miniPharmacy" */;
+			buildConfigurationList = 5234877B21E82403004BB1F3 /* Build configuration list for PBXProject "MedicineZ" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -107,54 +202,78 @@
 				en,
 				Base,
 			);
-			mainGroup = 5230660E220D23C80004C8E2;
-			productRefGroup = 52306618220D23C80004C8E2 /* Products */;
+			mainGroup = 5234877721E82403004BB1F3;
+			productRefGroup = 5234878121E82403004BB1F3 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				52306616220D23C80004C8E2 /* miniPharmacy */,
+				5234877F21E82403004BB1F3 /* MedicineZ */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		52306615220D23C80004C8E2 /* Resources */ = {
+		5234877E21E82403004BB1F3 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				52306625220D23C90004C8E2 /* LaunchScreen.storyboard in Resources */,
-				52306622220D23C90004C8E2 /* Assets.xcassets in Resources */,
-				52306620220D23C80004C8E2 /* Main.storyboard in Resources */,
+				5234878E21E82404004BB1F3 /* LaunchScreen.storyboard in Resources */,
+				52A807EC21EC4E3600EB99B5 /* Assets.xcassets in Resources */,
+				5234878921E82403004BB1F3 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		52306613220D23C80004C8E2 /* Sources */ = {
+		5234877C21E82403004BB1F3 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5230661D220D23C80004C8E2 /* ViewController.swift in Sources */,
-				5230661B220D23C80004C8E2 /* AppDelegate.swift in Sources */,
+				5247B32C21EC638B000161D4 /* CHTableViewControllers.swift in Sources */,
+				52F3D1C522100E8C007D2F20 /* AlarmInfoTableViewController.swift in Sources */,
+				5247B32721EC638B000161D4 /* CHPagingScrollViewController.swift in Sources */,
+				52E47353220B02AB00C8D8B7 /* DataCenter.swift in Sources */,
+				5247B32821EC638B000161D4 /* CHViews.swift in Sources */,
+				525C84B5220BE6BD00953458 /* TimeViewController.swift in Sources */,
+				527B8FED22055F38009BCEB0 /* MedicineZ-Bridging-Header.m in Sources */,
+				52F3D1BD220D64D8007D2F20 /* AlarmRepetitionTableViewController.swift in Sources */,
+				52F897F02202CC4F007E1F0D /* userInfo.swift in Sources */,
+				527B8FE8220423D1009BCEB0 /* MainTableViewController.swift in Sources */,
+				5247B32B21EC638B000161D4 /* FIlters.swift in Sources */,
+				525C84D9220C3B0600953458 /* MapViewController.swift in Sources */,
+				5234878621E82403004BB1F3 /* ViewController.swift in Sources */,
+				52F897F22202CEBA007E1F0D /* AddAlarmTableViewController.swift in Sources */,
+				5247B32921EC638B000161D4 /* CHPickerViewController.swift in Sources */,
+				5247B32A21EC638B000161D4 /* SwipeActionTableViewCell.swift in Sources */,
+				5247B32D21EC638B000161D4 /* CHModalViewController.swift in Sources */,
+				5247B32E21EC638B000161D4 /* CHControls.swift in Sources */,
+				52F3D1BF220D7BDB007D2F20 /* eatingDayInfo.swift in Sources */,
+				5247B32621EC638B000161D4 /* NavigationControllers.swift in Sources */,
+				5247B32521EC638B000161D4 /* UIViewController+Navigation.swift in Sources */,
+				525C84D7220C275F00953458 /* TableViewCell.swift in Sources */,
+				5247B32421EC638B000161D4 /* CHContentViewController.swift in Sources */,
+				5234878421E82403004BB1F3 /* AppDelegate.swift in Sources */,
+				5247B32321EC638B000161D4 /* DrawingCanvasView.swift in Sources */,
+				5247B32F21EC638B000161D4 /* RecordButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		5230661E220D23C80004C8E2 /* Main.storyboard */ = {
+		5234878721E82403004BB1F3 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				5230661F220D23C80004C8E2 /* Base */,
+				5234878821E82403004BB1F3 /* Base */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
-		52306623220D23C90004C8E2 /* LaunchScreen.storyboard */ = {
+		5234878C21E82404004BB1F3 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				52306624220D23C90004C8E2 /* Base */,
+				5234878D21E82404004BB1F3 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -162,7 +281,7 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		52306627220D23C90004C8E2 /* Debug */ = {
+		5234879021E82404004BB1F3 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -223,7 +342,7 @@
 			};
 			name = Debug;
 		};
-		52306628220D23C90004C8E2 /* Release */ = {
+		5234879121E82404004BB1F3 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -278,35 +397,42 @@
 			};
 			name = Release;
 		};
-		5230662A220D23C90004C8E2 /* Debug */ = {
+		5234879321E82404004BB1F3 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = miniPharmacy/Info.plist;
+				DEVELOPMENT_TEAM = 5WDR8V4VFG;
+				INFOPLIST_FILE = MedicineZ/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.zwooo.miniPharmacy;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Medicinea;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "MedicineZ/MedicineZ-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
-		5230662B220D23C90004C8E2 /* Release */ = {
+		5234879421E82404004BB1F3 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = miniPharmacy/Info.plist;
+				DEVELOPMENT_TEAM = 5WDR8V4VFG;
+				INFOPLIST_FILE = MedicineZ/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.zwooo.miniPharmacy;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Medicinea;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "MedicineZ/MedicineZ-Bridging-Header.h";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -315,25 +441,25 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		52306612220D23C80004C8E2 /* Build configuration list for PBXProject "miniPharmacy" */ = {
+		5234877B21E82403004BB1F3 /* Build configuration list for PBXProject "MedicineZ" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				52306627220D23C90004C8E2 /* Debug */,
-				52306628220D23C90004C8E2 /* Release */,
+				5234879021E82404004BB1F3 /* Debug */,
+				5234879121E82404004BB1F3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		52306629220D23C90004C8E2 /* Build configuration list for PBXNativeTarget "miniPharmacy" */ = {
+		5234879221E82404004BB1F3 /* Build configuration list for PBXNativeTarget "MedicineZ" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				5230662A220D23C90004C8E2 /* Debug */,
-				5230662B220D23C90004C8E2 /* Release */,
+				5234879321E82404004BB1F3 /* Debug */,
+				5234879421E82404004BB1F3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = 5230660F220D23C80004C8E2 /* Project object */;
+	rootObject = 5234877821E82403004BB1F3 /* Project object */;
 }

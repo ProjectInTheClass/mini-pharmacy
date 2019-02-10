@@ -1,8 +1,8 @@
 //
 //  ViewController.swift
-//  miniPharmacy
+//  MedicineZ
 //
-//  Created by CAU on 08/02/2019.
+//  Created by CAU on 10/01/2019.
 //  Copyright © 2019 CAU. All rights reserved.
 //
 
