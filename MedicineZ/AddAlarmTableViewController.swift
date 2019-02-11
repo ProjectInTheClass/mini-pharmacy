@@ -66,16 +66,10 @@ class AddAlarmTableViewController: UITableViewController, AddAlarmViewDelegatePr
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
     }
-    /*
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        return true
-    }
- */
+    
     @objc func dismissKeyboard() {
         view.endEditing(true)
     }
-    //@IBOutlet weak var alarmLabel: UILabel!
     @IBOutlet weak var alarmTimeSetting: UITextField!
     
     
@@ -155,14 +149,11 @@ class AddAlarmTableViewController: UITableViewController, AddAlarmViewDelegatePr
     
     @IBAction func close(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
-        //self.presentingViewController?.dismiss(animated: true, completion: nil)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setLocalNotification()
-        //alarmLabel.text = ""
-        //alarmTimeSetting.text = "알람 시간 설정"
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         view.addGestureRecognizer(tap)
         
@@ -206,12 +197,9 @@ class AddAlarmTableViewController: UITableViewController, AddAlarmViewDelegatePr
         dateFormatter.dateFormat = "a hh:mm"
         
         alarmTimeSetting.text = dateFormatter.string(from: datePicker.date)
-        //view.endEditing(true)
     }
     
-    func changeLabel(alarmLabel: String){
-        //self.alarmLabel.text = alarmLabel
-    }
+    
     func changeValue(monday: Bool, tuesday: Bool,wednesday: Bool, thursday: Bool, friday: Bool, saturday: Bool, sunday: Bool, eatingDay: String, notEatingDay: String, repetition: String){
         self.monday = monday
         self.tuesday = tuesday
@@ -336,77 +324,6 @@ class AddAlarmTableViewController: UITableViewController, AddAlarmViewDelegatePr
         }
     }
     
-//    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-//
-//    }
-    /*
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let vc = segue.destination as? TimeViewController {
-            vc.delegate = self
-        }
-    } section 1, row 3-12
- */
- 
-    // MARK: - Table view data source
-
-//    override func numberOfSections(in tableView: UITableView) -> Int {
-//        // #warning Incomplete implementation, return the number of sections
-//        return 0
-//    }
-//
-//    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        // #warning Incomplete implementation, return the number of rows
-//        return 0
-//    }
-//
-//    
-    
-    
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
 

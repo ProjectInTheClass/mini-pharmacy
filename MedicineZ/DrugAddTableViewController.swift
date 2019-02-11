@@ -299,21 +299,7 @@ class DrugAddTableViewController: UITableViewController, UISearchBarDelegate, XM
         self.tableView.reloadData()
     }
     
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//
-//        if let detailVC = segue.destination as? DrugInfoTableViewController{
-//
-//            if let drugIdx = self.tableView.indexPathForSelectedRow{
-//                if (!searchBarIsEmpty() && endTyping) {
-//                    detailVC.drugInfo = filteredDatas[drugIdx.row]
-//
-//                }else{
-//                    detailVC.drugInfo = drugItems[drugIdx.row]
-//                }
-//            }
-//        }
-//
-//    }
+
     func searchBarIsEmpty() -> Bool {
         // Returns true if the text is empty or nil
         return searchBar.text?.isEmpty ?? true

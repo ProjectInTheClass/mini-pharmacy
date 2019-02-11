@@ -13,10 +13,8 @@ class DataCenter{
 
     
     var drugList:[userInfo] = []
-    var eatingDayInfo2:[eatingDayInfo] = []
-   // self.eatingDayInfo2 = dicResponse["eatingDayInfo"]! as [AnyObject]
     
-   // var repetitionInfo:[repetitionInfo] = []
+    var eatingDayInfo2:[eatingDayInfo] = []
     
     var HomeUpdateCheck = false
     var TimeLineUpdateCheck = false
@@ -47,18 +45,4 @@ class DataCenter{
         
     }
 
-    
-    // PillList item들을 오늘의 날짜로 동기화
-//    func drugListTimeSync() {
-//        let date = Date()
-//        let dateFormatter = DateFormatter()
-//        dateFormatter.dateFormat = "yyyy-MM-dd"
-//        today = dateFormatter.string(from: date)
-//        
-//        if drugList.isEmpty == false && drugList[0].alarmLabel != today {
-//            for item in drugList {
-//                item.alarmLabel = today
-//            }
-//        }
-//    }
 }

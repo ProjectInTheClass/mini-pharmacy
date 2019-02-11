@@ -12,7 +12,6 @@
 		520FA24522103E32004CD515 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 520FA24122103E31004CD515 /* WebViewController.swift */; };
 		520FA24622103E32004CD515 /* DrugAddTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 520FA24222103E31004CD515 /* DrugAddTableViewController.swift */; };
 		5234878421E82403004BB1F3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5234878321E82403004BB1F3 /* AppDelegate.swift */; };
-		5234878621E82403004BB1F3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5234878521E82403004BB1F3 /* ViewController.swift */; };
 		5234878921E82403004BB1F3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5234878721E82403004BB1F3 /* Main.storyboard */; };
 		5234878E21E82404004BB1F3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5234878C21E82404004BB1F3 /* LaunchScreen.storyboard */; };
 		5247B32321EC638B000161D4 /* DrawingCanvasView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5247B31621EC638B000161D4 /* DrawingCanvasView.swift */; };
@@ -50,7 +49,6 @@
 		520FA24222103E31004CD515 /* DrugAddTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrugAddTableViewController.swift; sourceTree = "<group>"; };
 		5234878021E82403004BB1F3 /* MedicineZ.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MedicineZ.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5234878321E82403004BB1F3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		5234878521E82403004BB1F3 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		5234878821E82403004BB1F3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		5234878D21E82404004BB1F3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5234878F21E82404004BB1F3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -117,7 +115,6 @@
 			children = (
 				5247B31521EC638B000161D4 /* PilotPlant */,
 				5234878321E82403004BB1F3 /* AppDelegate.swift */,
-				5234878521E82403004BB1F3 /* ViewController.swift */,
 				5234878721E82403004BB1F3 /* Main.storyboard */,
 				52A807EB21EC4E3600EB99B5 /* Assets.xcassets */,
 				5234878C21E82404004BB1F3 /* LaunchScreen.storyboard */,
@@ -255,7 +252,6 @@
 				527B8FE8220423D1009BCEB0 /* MainTableViewController.swift in Sources */,
 				5247B32B21EC638B000161D4 /* FIlters.swift in Sources */,
 				525C84D9220C3B0600953458 /* MapViewController.swift in Sources */,
-				5234878621E82403004BB1F3 /* ViewController.swift in Sources */,
 				52F897F22202CEBA007E1F0D /* AddAlarmTableViewController.swift in Sources */,
 				5247B32921EC638B000161D4 /* CHPickerViewController.swift in Sources */,
 				5247B32A21EC638B000161D4 /* SwipeActionTableViewCell.swift in Sources */,
