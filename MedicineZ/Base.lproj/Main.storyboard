@@ -1367,16 +1367,16 @@
                                                         <color key="titleColor" red="0.016804177310000001" green="0.19835099580000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     </state>
                                                     <connections>
-                                                        <segue destination="mJV-Yn-Wjp" kind="show" id="CAM-Hc-lqu"/>
+                                                        <segue destination="mJV-Yn-Wjp" kind="show" id="c20-Cs-lpU"/>
                                                     </connections>
                                                 </button>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bzu-xD-gRI">
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bzu-xD-gRI">
                                                     <rect key="frame" x="263" y="8" width="44" height="44"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="44" id="eGv-6F-Ylz"/>
                                                         <constraint firstAttribute="width" constant="44" id="yay-Fv-cfz"/>
                                                     </constraints>
-                                                    <state key="normal" title="삭제">
+                                                    <state key="normal" image="negative">
                                                         <color key="titleColor" red="0.91758919729999999" green="0.098512377740000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     </state>
                                                     <connections>
@@ -3072,6 +3072,7 @@
         <image name="dry-clean" width="24" height="24"/>
         <image name="gps" width="24" height="24"/>
         <image name="map2" width="1064" height="714"/>
+        <image name="negative" width="24" height="24"/>
         <image name="password" width="764" height="1313"/>
         <image name="pharmacy" width="18.399999618530273" height="18.399999618530273"/>
         <image name="pill" width="18.399999618530273" height="18.399999618530273"/>
