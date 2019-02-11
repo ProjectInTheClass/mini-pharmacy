@@ -8,12 +8,12 @@
 import UserNotifications
 import UIKit
 
-class EditAlarmInfoTableViewController: UITableViewController, UITextFieldDelegate, UNUserNotificationCenterDelegate, EditAlarmRepetitionProtocol, EditAlarmInfoProtocol  {
+class EditAlarmInfoTableViewController: UITableViewController, UITextFieldDelegate, UNUserNotificationCenterDelegate, EditAlarmRepetitionProtocol, EditAlarmInfoProtocol {
     
     var alarmGranted: Bool = false
     var drugItems = [[String:String]]()
     var infoIndexPath = IndexPath()
-    var segment = "식전"
+    var segment = ""
     var repetition: String = ""
     var eatingDay: String = " "
     var notEatingDay: String = " "
@@ -125,11 +125,8 @@ class EditAlarmInfoTableViewController: UITableViewController, UITextFieldDelega
             
             
         }
-        self.dismiss(animated: true, completion: nil)
     }
-    
-
-    
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         setLocalNotification()
@@ -155,6 +152,7 @@ class EditAlarmInfoTableViewController: UITableViewController, UITextFieldDelega
         alarmTimeSetting.text! = DataCenter.sharedInstnce.drugList[infoIndexPath.row].alarmTimeSetting!
         repetition = DataCenter.sharedInstnce.drugList[infoIndexPath.row].repetition!
         drugItems = DataCenter.sharedInstnce.pillList[infoIndexPath.row]
+        segment = DataCenter.sharedInstnce.drugList[infoIndexPath.row].segment
         
         drugList1.text = ""
         drugList2.text = ""
@@ -166,11 +164,7 @@ class EditAlarmInfoTableViewController: UITableViewController, UITextFieldDelega
         drugList8.text = ""
         drugList9.text = ""
         drugList10.text = ""
-//        alarmRepetition.text! = repetition
-//
-//        if segment == "식전"{
-//            segmentedControl.
-//        }
+        
     }
     override func viewWillAppear(_ animated: Bool) {
         print(drugItems)

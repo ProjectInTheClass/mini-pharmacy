@@ -101,8 +101,8 @@
 				527B8FEC22055F38009BCEB0 /* MedicineZ-Bridging-Header.m */,
 				527B8FEB22055F37009BCEB0 /* MedicineZ-Bridging-Header.h */,
 				525C84D8220C3B0600953458 /* MapViewController.swift */,
-				523746642211977D00346BC5 /* Search */,
 				523746622211968B00346BC5 /* Edit */,
+				523746642211977D00346BC5 /* Search */,
 			);
 			path = MedicineZ;
 			sourceTree = "<group>";
