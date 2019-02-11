@@ -115,6 +115,7 @@ class AddAlarmTableViewController: UITableViewController, AddAlarmViewDelegatePr
             let content = UNMutableNotificationContent()
             content.title = "미니약국"
             content.body = "약 먹을 시간이에요!"
+            content.sound = UNNotificationSound.default
             
             _ = Calendar.current
             var dateComponents = DateComponents()
