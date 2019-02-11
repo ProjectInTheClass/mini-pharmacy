@@ -33,8 +33,8 @@ class AlarmInfoTableViewController: UITableViewController {
         when.text = alarmInfoWhen
         repetition.text = alarmInfoRepetition
         memo.text = alarmInfoMemo
-        eatingDay.text = "복약일 : " + alarmInfoEatingDay
-        notEatingDay.text = "휴약일 : " + alarmInfoNotEatingDay
+        eatingDay!.text = "복약일 : " + alarmInfoEatingDay
+        notEatingDay!.text = "휴약일 : " + alarmInfoNotEatingDay
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false

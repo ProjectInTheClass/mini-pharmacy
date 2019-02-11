@@ -11,8 +11,8 @@ import UIKit
 
 
 class AddAlarmTableViewController: UITableViewController, AddAlarmViewDelegateProtocol, AddAlarmViewDelegateProtocol2, UITextFieldDelegate, UNUserNotificationCenterDelegate {
-    var eatingDay: String = ""
-    var notEatingDay: String = ""
+    var eatingDay: String = " "
+    var notEatingDay: String = " "
     var monday: Bool = false
     var tuesday: Bool = false
     var wednesday: Bool = false
@@ -107,7 +107,7 @@ class AddAlarmTableViewController: UITableViewController, AddAlarmViewDelegatePr
     @IBAction func save(_ sender: Any) {
         if(alarmName.text != "" && alarmTimeSetting.text != "" && alarmRepetition.text != ""){
             DataCenter.sharedInstnce.drugList.append(userInfo(alarmName: alarmName.text!, memo: memo.text!, alarmTimeSetting: alarmTimeSetting.text!, segment: segment, repetition: repetition, eatingDay: eatingDay, notEatingDay: notEatingDay))
-            
+
             self.dismiss(animated: true, completion: nil)
             
         }else{

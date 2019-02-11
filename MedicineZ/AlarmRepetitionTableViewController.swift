@@ -79,14 +79,6 @@ class AlarmRepetitionTableViewController: UITableViewController,UITextFieldDeleg
             default:
                 break
             }
-            print("\(indexPath.row)")
-            print(monday)
-            print(tuesday)
-            print(wednesday)
-            print(thursday)
-            print(friday)
-            print(saturday)
-            print(sunday)
             
         } else {
             tableView.cellForRow(at: indexPath)?.accessoryType = UITableViewCell.AccessoryType.checkmark
@@ -108,14 +100,6 @@ class AlarmRepetitionTableViewController: UITableViewController,UITextFieldDeleg
             default:
                 break
             }
-            print("\(indexPath.row)")
-            print(monday)
-            print(tuesday)
-            print(wednesday)
-            print(thursday)
-            print(friday)
-            print(saturday)
-            print(sunday)
 
         }
 
@@ -146,11 +130,7 @@ class AlarmRepetitionTableViewController: UITableViewController,UITextFieldDeleg
             if sunday {
                 repetition += "일 "
             }
-            print(repetition)
-            //DataCenter.sharedInstnce.repetitionInfo.append(repetitionInfo(repetition: repetition))
-           // print(eatingDay)
             delegate?.changeValue(monday: monday, tuesday: tuesday, wednesday: wednesday, thursday: thursday, friday: friday, saturday: saturday, sunday: sunday, eatingDay: eatingDay.text!, notEatingDay: notEatingDay.text!, repetition: repetition)
-           // DataCenter.sharedInstnce.eatingDayInfo2.append(eatingDayInfo(eatingDay: eatingDay.text!, notEatingDay: notEatingDay.text!,monday: monday, tuesday: tuesday, wednesday: wednesday, thursday: thursday, friday: friday, saturday: saturday, sunday: sunday, repetition: repetition))
         }
     }
  

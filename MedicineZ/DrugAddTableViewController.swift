@@ -275,24 +275,24 @@ class DrugAddTableViewController: UITableViewController, UISearchBarDelegate, XM
         }
     }
     
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath == selectedIndexPath{
-            return
-        }
-        if let newCell = tableView.cellForRow(at: indexPath) {
-            if newCell.accessoryType == .none
-            {
-                newCell.accessoryType = .checkmark
+        override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+            if indexPath == selectedIndexPath{
+                return
             }
-        }
-        if let oldCell = tableView.cellForRow(at: selectedIndexPath){
-            if oldCell.accessoryType == .checkmark{
-                oldCell.accessoryType = .none
+            if let newCell = tableView.cellForRow(at: indexPath) {
+                if newCell.accessoryType == .none
+                {
+                    newCell.accessoryType = .checkmark
+                }
             }
+            if let oldCell = tableView.cellForRow(at: selectedIndexPath){
+                if oldCell.accessoryType == .checkmark{
+                    oldCell.accessoryType = .none
+                }
+            }
+            selectedIndexPath = indexPath
+            self.tableView.reloadData()
         }
-        selectedIndexPath = indexPath
-        self.tableView.reloadData()
-    }
     
     
     @objc func loadTable() {
