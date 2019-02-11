@@ -8,10 +8,10 @@
 import UserNotifications
 import UIKit
 
-class EditAlarmInfoTableViewController: UITableViewController, UITextFieldDelegate, UNUserNotificationCenterDelegate, EditAlarmRepetitionProtocol  {
+class EditAlarmInfoTableViewController: UITableViewController, UITextFieldDelegate, UNUserNotificationCenterDelegate, EditAlarmRepetitionProtocol, EditAlarmInfoProtocol  {
     
     var alarmGranted: Bool = false
-    var pillList = [[String:String]]()
+    var drugItems = [[String:String]]()
     var infoIndexPath = IndexPath()
     var segment = "식전"
     var repetition: String = ""
@@ -27,9 +27,9 @@ class EditAlarmInfoTableViewController: UITableViewController, UITextFieldDelega
 
     @IBAction func cellDelete(_ sender: Any) {
         
-        let drugLastIndex = pillList.count - 1
+        let drugLastIndex = drugItems.count - 1
         if drugLastIndex >= 0{
-            pillList.remove(at: drugLastIndex)
+            drugItems.remove(at: drugLastIndex)
         }
         drugList1.text = ""
         drugList2.text = ""
@@ -76,10 +76,14 @@ class EditAlarmInfoTableViewController: UITableViewController, UITextFieldDelega
     
     @IBAction func save(_ sender: Any) {
         if(alarmName.text != "" && alarmTimeSetting.text != "" && alarmRepetition.text != ""){
-//            DataCenter.sharedInstnce.drugList.append(userInfo(alarmName: alarmName.text!, memo: memo.text!, alarmTimeSetting: alarmTimeSetting.text!, segment: segment, repetition: repetition, eatingDay: eatingDay, notEatingDay: notEatingDay))
-//            DataCenter.sharedInstnce.pillList.append(drugItems)
-            self.dismiss(animated: true, completion: nil)
-            
+            DataCenter.sharedInstnce.drugList.remove(at: infoIndexPath.row)
+            DataCenter.sharedInstnce.drugList.insert(userInfo(alarmName: alarmName.text!, memo: memo.text!, alarmTimeSetting: alarmTimeSetting.text!, segment: segment, repetition: repetition, eatingDay: eatingDay, notEatingDay: notEatingDay), at: infoIndexPath.row)
+            DataCenter.sharedInstnce.pillList.remove(at: infoIndexPath.row)
+            DataCenter.sharedInstnce.pillList.insert(drugItems, at: infoIndexPath.row)
+            let alert = UIAlertController(title: "저장", message: "저장 완료되었습니다!", preferredStyle: .alert)
+            let cancelAction = UIAlertAction(title: "확인", style: .cancel, handler: nil)
+            alert.addAction(cancelAction)
+            self.present(alert, animated: true, completion: nil)
         }else{
             let alert = UIAlertController(title: "다시 입력", message: "필수 항목이 다 입력되지 않았어요!", preferredStyle: .alert)
             let cancelAction = UIAlertAction(title: "확인", style: .cancel, handler: nil)
@@ -149,16 +153,96 @@ class EditAlarmInfoTableViewController: UITableViewController, UITextFieldDelega
         alarmName.text! = DataCenter.sharedInstnce.drugList[infoIndexPath.row].alarmName
         memo.text! = DataCenter.sharedInstnce.drugList[infoIndexPath.row].memo
         alarmTimeSetting.text! = DataCenter.sharedInstnce.drugList[infoIndexPath.row].alarmTimeSetting!
-        alarmRepetition.text! = DataCenter.sharedInstnce.drugList[infoIndexPath.row].repetition!
-        pillList = DataCenter.sharedInstnce.pillList[infoIndexPath.row]
+        repetition = DataCenter.sharedInstnce.drugList[infoIndexPath.row].repetition!
+        drugItems = DataCenter.sharedInstnce.pillList[infoIndexPath.row]
+        
+        drugList1.text = ""
+        drugList2.text = ""
+        drugList3.text = ""
+        drugList4.text = ""
+        drugList5.text = ""
+        drugList6.text = ""
+        drugList7.text = ""
+        drugList8.text = ""
+        drugList9.text = ""
+        drugList10.text = ""
+//        alarmRepetition.text! = repetition
 //
 //        if segment == "식전"{
 //            segmentedControl.
 //        }
     }
     override func viewWillAppear(_ animated: Bool) {
-        alarmRepetition.text =  DataCenter.sharedInstnce.drugList[infoIndexPath.row].repetition
+        print(drugItems)
+        alarmRepetition.text! = repetition
+        if drugItems.count == 1{
+            drugList1.text = "💊 " + drugItems[0]["ITEM_NAME"]!
+        }else if drugItems.count == 2{
+            drugList1.text = "💊 " + drugItems[0]["ITEM_NAME"]!
+            drugList2.text = "💊 " + drugItems[1]["ITEM_NAME"]!
+        }else if drugItems.count == 3{
+            drugList1.text = "💊 " + drugItems[0]["ITEM_NAME"]!
+            drugList2.text = "💊 " + drugItems[1]["ITEM_NAME"]!
+            drugList3.text = "💊 " + drugItems[2]["ITEM_NAME"]!
+        }else if drugItems.count == 4{
+            drugList1.text = "💊 " + drugItems[0]["ITEM_NAME"]!
+            drugList2.text = "💊 " + drugItems[1]["ITEM_NAME"]!
+            drugList3.text = "💊 " + drugItems[2]["ITEM_NAME"]!
+            drugList4.text = "💊 " + drugItems[3]["ITEM_NAME"]!
+        }else if drugItems.count == 5{
+            drugList1.text = "💊 " + drugItems[0]["ITEM_NAME"]!
+            drugList2.text = "💊 " + drugItems[1]["ITEM_NAME"]!
+            drugList3.text = "💊 " + drugItems[2]["ITEM_NAME"]!
+            drugList4.text = "💊 " + drugItems[3]["ITEM_NAME"]!
+            drugList5.text = "💊 " + drugItems[4]["ITEM_NAME"]!
+        }else if drugItems.count == 6{
+            drugList1.text = "💊 " + drugItems[0]["ITEM_NAME"]!
+            drugList2.text = "💊 " + drugItems[1]["ITEM_NAME"]!
+            drugList3.text = "💊 " + drugItems[2]["ITEM_NAME"]!
+            drugList4.text = "💊 " + drugItems[3]["ITEM_NAME"]!
+            drugList5.text = "💊 " + drugItems[4]["ITEM_NAME"]!
+            drugList6.text = "💊 " + drugItems[5]["ITEM_NAME"]!
+        }else if drugItems.count == 7{
+            drugList1.text = "💊 " + drugItems[0]["ITEM_NAME"]!
+            drugList2.text = "💊 " + drugItems[1]["ITEM_NAME"]!
+            drugList3.text = "💊 " + drugItems[2]["ITEM_NAME"]!
+            drugList4.text = "💊 " + drugItems[3]["ITEM_NAME"]!
+            drugList5.text = "💊 " + drugItems[4]["ITEM_NAME"]!
+            drugList6.text = "💊 " + drugItems[5]["ITEM_NAME"]!
+            drugList7.text = "💊 " + drugItems[6]["ITEM_NAME"]!
+        }else if drugItems.count == 8{
+            drugList1.text = "💊 " + drugItems[0]["ITEM_NAME"]!
+            drugList2.text = "💊 " + drugItems[1]["ITEM_NAME"]!
+            drugList3.text = "💊 " + drugItems[2]["ITEM_NAME"]!
+            drugList4.text = "💊 " + drugItems[3]["ITEM_NAME"]!
+            drugList5.text = "💊 " + drugItems[4]["ITEM_NAME"]!
+            drugList6.text = "💊 " + drugItems[5]["ITEM_NAME"]!
+            drugList7.text = "💊 " + drugItems[6]["ITEM_NAME"]!
+            drugList8.text = "💊 " + drugItems[7]["ITEM_NAME"]!
+        }else if drugItems.count == 9{
+            drugList1.text = "💊 " + drugItems[0]["ITEM_NAME"]!
+            drugList2.text = "💊 " + drugItems[1]["ITEM_NAME"]!
+            drugList3.text = "💊 " + drugItems[2]["ITEM_NAME"]!
+            drugList4.text = "💊 " + drugItems[3]["ITEM_NAME"]!
+            drugList5.text = "💊 " + drugItems[4]["ITEM_NAME"]!
+            drugList6.text = "💊 " + drugItems[5]["ITEM_NAME"]!
+            drugList7.text = "💊 " + drugItems[6]["ITEM_NAME"]!
+            drugList8.text = "💊 " + drugItems[7]["ITEM_NAME"]!
+            drugList9.text = "💊 " + drugItems[8]["ITEM_NAME"]!
+        }else if drugItems.count == 10{
+            drugList1.text = "💊 " + drugItems[0]["ITEM_NAME"]!
+            drugList2.text = "💊 " + drugItems[1]["ITEM_NAME"]!
+            drugList3.text = "💊 " + drugItems[2]["ITEM_NAME"]!
+            drugList4.text = "💊 " + drugItems[3]["ITEM_NAME"]!
+            drugList5.text = "💊 " + drugItems[4]["ITEM_NAME"]!
+            drugList6.text = "💊 " + drugItems[5]["ITEM_NAME"]!
+            drugList7.text = "💊 " + drugItems[6]["ITEM_NAME"]!
+            drugList8.text = "💊 " + drugItems[7]["ITEM_NAME"]!
+            drugList9.text = "💊 " + drugItems[8]["ITEM_NAME"]!
+            drugList10.text = "💊 " + drugItems[9]["ITEM_NAME"]!
+        }
     }
+    
     @objc func dismissPicker() {
         view.endEditing(true)
     }
@@ -178,6 +262,9 @@ class EditAlarmInfoTableViewController: UITableViewController, UITextFieldDelega
         self.notEatingDay = notEatingDay
         self.repetition = repetition
         
+    }
+    func addDrugList(drugItem: [String:String]){
+        self.drugItems.append(drugItem)
     }
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
@@ -215,10 +302,12 @@ class EditAlarmInfoTableViewController: UITableViewController, UITextFieldDelega
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if let detailVC = segue.destination as? EditAlarmRepetitionTableViewController{
+            detailVC.delegate = self
             
-            if let drugIdx = self.tableView.indexPathForSelectedRow {
-                detailVC.alarmIndexPath = drugIdx
-            }
+        }
+        if let detailVC = segue.destination as? EditDrugAddTableViewController{
+            detailVC.delegate = self
+            
         }
     }
 }

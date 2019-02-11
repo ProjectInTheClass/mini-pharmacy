@@ -23,7 +23,6 @@ class MainTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-      print(DataCenter.sharedInstnce.pillList)
     }
     
     override func viewWillAppear(_ animated: Bool) {

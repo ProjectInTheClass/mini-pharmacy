@@ -23,7 +23,6 @@ class EditAlarmRepetitionTableViewController: UITableViewController, UITextField
     var saturday:Bool = false
     var sunday:Bool = false
     var repetition:String = ""
-    var alarmIndexPath = IndexPath()
     
     @IBOutlet weak var eatingDay: UITextField! {didSet { eatingDay.delegate = self}}
     @IBOutlet weak var notEatingDay: UITextField! {didSet { notEatingDay.delegate = self}}
@@ -109,7 +108,6 @@ class EditAlarmRepetitionTableViewController: UITableViewController, UITextField
             if sunday {
                 repetition += "일 "
             }
-            DataCenter.sharedInstnce.drugList[alarmIndexPath.row].repetition = repetition
             delegate?.changeValue(eatingDay: eatingDay.text!, notEatingDay: notEatingDay.text!, repetition: repetition)
         }
     }
