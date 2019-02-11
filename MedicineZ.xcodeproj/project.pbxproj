@@ -32,7 +32,6 @@
 		525C84D9220C3B0600953458 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525C84D8220C3B0600953458 /* MapViewController.swift */; };
 		527B8FE8220423D1009BCEB0 /* MainTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527B8FE7220423D1009BCEB0 /* MainTableViewController.swift */; };
 		527B8FED22055F38009BCEB0 /* MedicineZ-Bridging-Header.m in Sources */ = {isa = PBXBuildFile; fileRef = 527B8FEC22055F38009BCEB0 /* MedicineZ-Bridging-Header.m */; };
-		527B8FF02205671A009BCEB0 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 527B8FEF2205671A009BCEB0 /* libsqlite3.tbd */; };
 		52A807EC21EC4E3600EB99B5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 52A807EB21EC4E3600EB99B5 /* Assets.xcassets */; };
 		52E47353220B02AB00C8D8B7 /* DataCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52E47352220B02AB00C8D8B7 /* DataCenter.swift */; };
 		52F3D1BD220D64D8007D2F20 /* AlarmRepetitionTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F3D1BC220D64D8007D2F20 /* AlarmRepetitionTableViewController.swift */; };
@@ -52,6 +51,7 @@
 		5234878821E82403004BB1F3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		5234878D21E82404004BB1F3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5234878F21E82404004BB1F3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		52374655221162C200346BC5 /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
 		5247B31621EC638B000161D4 /* DrawingCanvasView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawingCanvasView.swift; sourceTree = "<group>"; };
 		5247B31721EC638B000161D4 /* CHContentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CHContentViewController.swift; sourceTree = "<group>"; };
 		5247B31821EC638B000161D4 /* UIViewController+Navigation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Navigation.swift"; sourceTree = "<group>"; };
@@ -86,7 +86,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				527B8FF02205671A009BCEB0 /* libsqlite3.tbd in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -162,6 +161,7 @@
 		527B8FEE2205671A009BCEB0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				52374655221162C200346BC5 /* UserNotifications.framework */,
 				527B8FEF2205671A009BCEB0 /* libsqlite3.tbd */,
 			);
 			name = Frameworks;

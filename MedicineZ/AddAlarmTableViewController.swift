@@ -101,7 +101,7 @@ class AddAlarmTableViewController: UITableViewController, AddAlarmViewDelegatePr
     @IBAction func save(_ sender: Any) {
         if(alarmName.text != "" && alarmTimeSetting.text != "" && alarmRepetition.text != ""){
             DataCenter.sharedInstnce.drugList.append(userInfo(alarmName: alarmName.text!, memo: memo.text!, alarmTimeSetting: alarmTimeSetting.text!, segment: segment, repetition: repetition, eatingDay: eatingDay, notEatingDay: notEatingDay))
-
+            DataCenter.sharedInstnce.pillList.append(drugItems)
             self.dismiss(animated: true, completion: nil)
             
         }else{

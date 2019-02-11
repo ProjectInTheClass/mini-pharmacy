@@ -23,7 +23,7 @@ class MainTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-      
+      print(DataCenter.sharedInstnce.pillList)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -65,7 +65,7 @@ class MainTableViewController: UITableViewController {
                 detailVC.alarmInfoMemo = DataCenter.sharedInstnce.drugList[drugIdx.row].memo
                 detailVC.alarmInfoEatingDay = DataCenter.sharedInstnce.drugList[drugIdx.row].eatingDay!
                 detailVC.alarmInfoNotEatingDay = DataCenter.sharedInstnce.drugList[drugIdx.row].notEatingDay!
-                
+                detailVC.alarmInfoPillList = DataCenter.sharedInstnce.pillList[drugIdx.row]
             }
         }
     }
@@ -78,7 +78,8 @@ class MainTableViewController: UITableViewController {
         if editingStyle == UITableViewCell.EditingStyle.delete {
             
             // remove the item from the data model
-        DataCenter.sharedInstnce.drugList.remove(at: indexPath.row) //데이터 삭제
+            DataCenter.sharedInstnce.drugList.remove(at: indexPath.row) //데이터 삭제
+            DataCenter.sharedInstnce.pillList.remove(at: indexPath.row) //약목록 삭제
             tableView.deleteRows(at: [indexPath], with: UITableView.RowAnimation.automatic) // 테이블에서 삭제
         
         }
