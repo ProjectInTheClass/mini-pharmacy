@@ -9,14 +9,10 @@
 import UIKit
 
 class AlarmInfoTableViewController: UITableViewController {
-    var alarmInfoName:String = ""
-    var alarmInfoTime:String = ""
-    var alarmInfoWhen:String = ""
-    var alarmInfoRepetition:String = ""
-    var alarmInfoMemo:String = ""
-    var alarmInfoEatingDay:String = ""
-    var alarmInfoNotEatingDay:String = ""
+    
     var alarmInfoPillList = [[String:String]]()
+    
+    var alarmInfoIndexPath = IndexPath()
 
     @IBOutlet weak var alarmName: UILabel!
     @IBOutlet weak var alarmTime: UILabel!
@@ -51,14 +47,23 @@ class AlarmInfoTableViewController: UITableViewController {
         pillList9.text = ""
         pillList10.text = ""
         
-        alarmName.text = alarmInfoName
-        alarmTime.text = alarmInfoTime
-        when.text = alarmInfoWhen
-        repetition.text = alarmInfoRepetition
-        memo.text = alarmInfoMemo
-        eatingDay!.text = "복약일 : " + alarmInfoEatingDay
-        notEatingDay!.text = "휴약일 : " + alarmInfoNotEatingDay
-        print(alarmInfoPillList)
+//        alarmName.text = alarmInfoName
+//        alarmTime.text = alarmInfoTime
+//        when.text = alarmInfoWhen
+//        repetition.text = alarmInfoRepetition
+//        memo.text = alarmInfoMemo
+//        eatingDay!.text = "복약일 : " + alarmInfoEatingDay
+//        notEatingDay!.text = "휴약일 : " + alarmInfoNotEatingDay
+//        print(alarmInfoPillList)
+        alarmName.text = DataCenter.sharedInstnce.drugList[alarmInfoIndexPath.row].alarmName
+        alarmTime.text = DataCenter.sharedInstnce.drugList[alarmInfoIndexPath.row].alarmTimeSetting
+        when.text = DataCenter.sharedInstnce.drugList[alarmInfoIndexPath.row].segment
+        repetition.text = DataCenter.sharedInstnce.drugList[alarmInfoIndexPath.row].repetition
+        memo.text = DataCenter.sharedInstnce.drugList[alarmInfoIndexPath.row].memo
+        eatingDay!.text = "복약일 : " + DataCenter.sharedInstnce.drugList[alarmInfoIndexPath.row].eatingDay!
+        notEatingDay!.text = "휴약일 : " + DataCenter.sharedInstnce.drugList[alarmInfoIndexPath.row].notEatingDay!
+        alarmInfoPillList = DataCenter.sharedInstnce.pillList[alarmInfoIndexPath.row]
+        
         
         if alarmInfoPillList.count == 1{
             pillList1.text = "💊 " + alarmInfoPillList[0]["ITEM_NAME"]!
@@ -128,6 +133,14 @@ class AlarmInfoTableViewController: UITableViewController {
         }
     }
 
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if let detailVC = segue.destination as? EditAlarmInfoTableViewController{
+           
+            detailVC.infoIndexPath = alarmInfoIndexPath
+            
+        }
+    }
 
         
 }

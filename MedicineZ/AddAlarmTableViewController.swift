@@ -38,8 +38,6 @@ class AddAlarmTableViewController: UITableViewController, AddAlarmViewDelegatePr
     @IBOutlet weak var drugList10: UILabel!
     
     @IBAction func cellDelete(_ sender: Any) {
-        print(drugItems)
-        
         let drugLastIndex = drugItems.count - 1
         if drugLastIndex >= 0{
         drugItems.remove(at: drugLastIndex)
@@ -71,6 +69,19 @@ class AddAlarmTableViewController: UITableViewController, AddAlarmViewDelegatePr
         view.endEditing(true)
     }
     @IBOutlet weak var alarmTimeSetting: UITextField!
+    @IBOutlet weak var alarmTimeSetting2: UITextField!
+    @IBOutlet weak var alarmTimeSetting3: UITextField!
+    @IBOutlet weak var firstButton: UIButton!
+    @IBOutlet weak var secondButton: UIButton!
+    @IBAction func firstButton(_ sender: Any) {
+        alarmTimeSetting2.isHidden = false
+        firstButton.isHidden = true
+        secondButton.isHidden = false
+    }
+    @IBAction func secondButton(_ sender: Any) {
+        alarmTimeSetting3.isHidden = false
+        secondButton.isHidden = true
+    }
     
     
     private var datePicker: UIDatePicker?
@@ -112,37 +123,52 @@ class AddAlarmTableViewController: UITableViewController, AddAlarmViewDelegatePr
         }
         
         if alarmGranted == true {
-            let content = UNMutableNotificationContent()
-            content.title = "미니약국"
-            content.body = "약 먹을 시간이에요!"
-            content.sound = UNNotificationSound.default
+//            let content = UNMutableNotificationContent()
+//            content.title = "미니약국"
+//            content.body = "약 먹을 시간이에요!"
+//            content.sound = UNNotificationSound.default
+//
+//            _ = Calendar.current
+//            var dateComponents = DateComponents()
+//
+//            var string = self.alarmTimeSetting.text!
+//            let startHour = string.index(string.startIndex, offsetBy: 3)
+//            let endHour = string.index(string.startIndex, offsetBy: 4)
+//            let subHour = String(string[startHour...endHour])
+//            let startMin = string.index(string.startIndex, offsetBy: 6)
+//            let endMin = string.index(string.startIndex, offsetBy: 7)
+//            let subMin = String(string[startMin...endMin])
+//            dateComponents.hour = Int(subHour)
+//            dateComponents.minute = Int(subMin)
+//
+//            if String(string[string.startIndex]) == "P" {
+//                dateComponents.hour = dateComponents.hour! + 12
+//            }
+//
+//
+//            let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
+//            let request = UNNotificationRequest(identifier: "TRAINING_NOTIFICATION", content: content, trigger: trigger)
+//            let center = UNUserNotificationCenter.current()
+//            center.add(request) { (error) in
+//                print(error?.localizedDescription ?? "")
+//            }
             
-            _ = Calendar.current
-            var dateComponents = DateComponents()
+            alarm()
             
-            var string = self.alarmTimeSetting.text!
-            let startHour = string.index(string.startIndex, offsetBy: 3)
-            let endHour = string.index(string.startIndex, offsetBy: 4)
-            let subHour = String(string[startHour...endHour])
-            let startMin = string.index(string.startIndex, offsetBy: 6)
-            let endMin = string.index(string.startIndex, offsetBy: 7)
-            let subMin = String(string[startMin...endMin])
-            dateComponents.hour = Int(subHour)
-            dateComponents.minute = Int(subMin)
-            
-            if String(string[string.startIndex]) == "P" {
-                dateComponents.hour = dateComponents.hour! + 12
-            }
-            
-            
-            let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
-            let request = UNNotificationRequest(identifier: "TRAINING_NOTIFICATION", content: content, trigger: trigger)
-            let center = UNUserNotificationCenter.current()
-            center.add(request) { (error) in
-                print(error?.localizedDescription ?? "")
-            }
-            
-            
+            //            let notification = UNMutableNotificationContent()
+            //            let notificationTrigger = UNCalendarNotificationTrigger(dateMatching: dayComponent, repeats: true)
+            //            let lnMessageId: String = messageDict["Id"] as! String
+            //            let dayRequest = UNNotificationRequest(identifier: lnMessageId , content: content, trigger: trigger)
+            //            UNUserNotificationCenter.current().add(dayRequest, withCompletionHandler: {(_ error: Error?) -> Void in
+            //                if error == nil
+            //                {
+            //                    //print("success")
+            //                }
+            //                else
+            //                {
+            //                    //print("UNUserNotificationCenter Error : \(String(describing: error?.localizedDescription))")
+            //                }
+            //            })
         
       }
         self.dismiss(animated: true, completion: nil)
@@ -325,6 +351,38 @@ class AddAlarmTableViewController: UITableViewController, AddAlarmViewDelegatePr
         }
     }
     
+    func alarm() {
+        let content = UNMutableNotificationContent()
+        content.title = "미니약국"
+        content.body = "약 먹을 시간이에요!"
+        content.sound = UNNotificationSound.default
+        
+        _ = Calendar.current
+        var dateComponents = DateComponents()
+        
+        var string = self.alarmTimeSetting.text!
+        let startHour = string.index(string.startIndex, offsetBy: 3)
+        let endHour = string.index(string.startIndex, offsetBy: 4)
+        let subHour = String(string[startHour...endHour])
+        let startMin = string.index(string.startIndex, offsetBy: 6)
+        let endMin = string.index(string.startIndex, offsetBy: 7)
+        let subMin = String(string[startMin...endMin])
+        dateComponents.hour = Int(subHour)
+        dateComponents.minute = Int(subMin)
+        
+        if String(string[string.startIndex]) == "P" {
+            dateComponents.hour = dateComponents.hour! + 12
+        }
+        
+        let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
+        //        let lnMessageId: String = messageDict[i] as! String
+        let lnMessageId: String = alarmName.text!
+        let request = UNNotificationRequest(identifier: lnMessageId, content: content, trigger: trigger)
+        let center = UNUserNotificationCenter.current()
+        center.add(request) { (error) in
+            print(error?.localizedDescription ?? "")
+        }
+    }
 
 }
 

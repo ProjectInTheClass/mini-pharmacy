@@ -58,14 +58,7 @@ class MainTableViewController: UITableViewController {
         if let detailVC = segue.destination as? AlarmInfoTableViewController{
             
             if let drugIdx = self.tableView.indexPathForSelectedRow {
-                detailVC.alarmInfoName = DataCenter.sharedInstnce.drugList[drugIdx.row].alarmName
-                detailVC.alarmInfoTime = DataCenter.sharedInstnce.drugList[drugIdx.row].alarmTimeSetting!
-                detailVC.alarmInfoWhen = DataCenter.sharedInstnce.drugList[drugIdx.row].segment
-                detailVC.alarmInfoRepetition = DataCenter.sharedInstnce.drugList[drugIdx.row].repetition!
-                detailVC.alarmInfoMemo = DataCenter.sharedInstnce.drugList[drugIdx.row].memo
-                detailVC.alarmInfoEatingDay = DataCenter.sharedInstnce.drugList[drugIdx.row].eatingDay!
-                detailVC.alarmInfoNotEatingDay = DataCenter.sharedInstnce.drugList[drugIdx.row].notEatingDay!
-                detailVC.alarmInfoPillList = DataCenter.sharedInstnce.pillList[drugIdx.row]
+                detailVC.alarmInfoIndexPath = drugIdx
             }
         }
     }
