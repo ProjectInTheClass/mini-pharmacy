@@ -17,7 +17,6 @@
 		5237465B22116CF900346BC5 /* EditAlarmInfoTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5237465A22116CF900346BC5 /* EditAlarmInfoTableViewController.swift */; };
 		5237465D221185D900346BC5 /* EditAlarmRepetitionTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5237465C221185D900346BC5 /* EditAlarmRepetitionTableViewController.swift */; };
 		5237465F2211944300346BC5 /* EditDrugAddTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5237465E2211944300346BC5 /* EditDrugAddTableViewController.swift */; };
-		525C84B5220BE6BD00953458 /* TimeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525C84B4220BE6BD00953458 /* TimeViewController.swift */; };
 		525C84D7220C275F00953458 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525C84D6220C275F00953458 /* TableViewCell.swift */; };
 		525C84D9220C3B0600953458 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525C84D8220C3B0600953458 /* MapViewController.swift */; };
 		527B8FE8220423D1009BCEB0 /* MainTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527B8FE7220423D1009BCEB0 /* MainTableViewController.swift */; };
@@ -45,7 +44,6 @@
 		5237465A22116CF900346BC5 /* EditAlarmInfoTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditAlarmInfoTableViewController.swift; sourceTree = "<group>"; };
 		5237465C221185D900346BC5 /* EditAlarmRepetitionTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditAlarmRepetitionTableViewController.swift; sourceTree = "<group>"; };
 		5237465E2211944300346BC5 /* EditDrugAddTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditDrugAddTableViewController.swift; sourceTree = "<group>"; };
-		525C84B4220BE6BD00953458 /* TimeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeViewController.swift; sourceTree = "<group>"; };
 		525C84D6220C275F00953458 /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
 		525C84D8220C3B0600953458 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		527B8FE7220423D1009BCEB0 /* MainTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTableViewController.swift; sourceTree = "<group>"; };
@@ -97,27 +95,66 @@
 				52A807EB21EC4E3600EB99B5 /* Assets.xcassets */,
 				5234878C21E82404004BB1F3 /* LaunchScreen.storyboard */,
 				5234878F21E82404004BB1F3 /* Info.plist */,
-				52F897EF2202CC4F007E1F0D /* userInfo.swift */,
-				52F897F12202CEBA007E1F0D /* AddAlarmTableViewController.swift */,
-				527B8FE7220423D1009BCEB0 /* MainTableViewController.swift */,
-				525C84D6220C275F00953458 /* TableViewCell.swift */,
+				52374665221197A100346BC5 /* Data */,
+				52374663221196F500346BC5 /* Add */,
+				52374666221197B000346BC5 /* Main */,
 				527B8FEC22055F38009BCEB0 /* MedicineZ-Bridging-Header.m */,
 				527B8FEB22055F37009BCEB0 /* MedicineZ-Bridging-Header.h */,
-				52E47352220B02AB00C8D8B7 /* DataCenter.swift */,
-				525C84B4220BE6BD00953458 /* TimeViewController.swift */,
 				525C84D8220C3B0600953458 /* MapViewController.swift */,
-				52F3D1BC220D64D8007D2F20 /* AlarmRepetitionTableViewController.swift */,
-				52F3D1BE220D7BDB007D2F20 /* eatingDayInfo.swift */,
-				52F3D1C422100E8C007D2F20 /* AlarmInfoTableViewController.swift */,
-				520FA24222103E31004CD515 /* DrugAddTableViewController.swift */,
-				520FA24022103E31004CD515 /* DrugInfoTableViewController.swift */,
-				520FA23F22103E31004CD515 /* SearchTableViewController.swift */,
-				520FA24122103E31004CD515 /* WebViewController.swift */,
+				523746642211977D00346BC5 /* Search */,
+				523746622211968B00346BC5 /* Edit */,
+			);
+			path = MedicineZ;
+			sourceTree = "<group>";
+		};
+		523746622211968B00346BC5 /* Edit */ = {
+			isa = PBXGroup;
+			children = (
 				5237465A22116CF900346BC5 /* EditAlarmInfoTableViewController.swift */,
 				5237465C221185D900346BC5 /* EditAlarmRepetitionTableViewController.swift */,
 				5237465E2211944300346BC5 /* EditDrugAddTableViewController.swift */,
 			);
-			path = MedicineZ;
+			path = Edit;
+			sourceTree = "<group>";
+		};
+		52374663221196F500346BC5 /* Add */ = {
+			isa = PBXGroup;
+			children = (
+				52F897F12202CEBA007E1F0D /* AddAlarmTableViewController.swift */,
+				52F3D1BC220D64D8007D2F20 /* AlarmRepetitionTableViewController.swift */,
+				520FA24222103E31004CD515 /* DrugAddTableViewController.swift */,
+			);
+			path = Add;
+			sourceTree = "<group>";
+		};
+		523746642211977D00346BC5 /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				520FA24022103E31004CD515 /* DrugInfoTableViewController.swift */,
+				520FA23F22103E31004CD515 /* SearchTableViewController.swift */,
+				520FA24122103E31004CD515 /* WebViewController.swift */,
+			);
+			path = Search;
+			sourceTree = "<group>";
+		};
+		52374665221197A100346BC5 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				52F897EF2202CC4F007E1F0D /* userInfo.swift */,
+				52E47352220B02AB00C8D8B7 /* DataCenter.swift */,
+				52F3D1BE220D7BDB007D2F20 /* eatingDayInfo.swift */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		52374666221197B000346BC5 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				527B8FE7220423D1009BCEB0 /* MainTableViewController.swift */,
+				525C84D6220C275F00953458 /* TableViewCell.swift */,
+				52F3D1C422100E8C007D2F20 /* AlarmInfoTableViewController.swift */,
+			);
+			path = Main;
 			sourceTree = "<group>";
 		};
 		527B8FEE2205671A009BCEB0 /* Frameworks */ = {
@@ -203,7 +240,6 @@
 			files = (
 				52F3D1C522100E8C007D2F20 /* AlarmInfoTableViewController.swift in Sources */,
 				52E47353220B02AB00C8D8B7 /* DataCenter.swift in Sources */,
-				525C84B5220BE6BD00953458 /* TimeViewController.swift in Sources */,
 				520FA24622103E32004CD515 /* DrugAddTableViewController.swift in Sources */,
 				527B8FED22055F38009BCEB0 /* MedicineZ-Bridging-Header.m in Sources */,
 				52F3D1BD220D64D8007D2F20 /* AlarmRepetitionTableViewController.swift in Sources */,
