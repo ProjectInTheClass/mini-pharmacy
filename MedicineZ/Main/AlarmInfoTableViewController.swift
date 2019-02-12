@@ -234,7 +234,7 @@ class AlarmInfoTableViewController: UITableViewController {
         if let detailVC = segue.destination as? EditAlarmInfoTableViewController{
            
             detailVC.infoIndexPath = alarmInfoIndexPath
-            
+            detailVC.accessibilityViewIsModal = true
         }
     }
 

@@ -17,14 +17,48 @@ class EditAlarmInfoTableViewController: UITableViewController, UITextFieldDelega
     var repetition: String = ""
     var eatingDay: String = " "
     var notEatingDay: String = " "
-    
+    var buttonIndex:Int = 1
+
     @IBOutlet weak var alarmName: UITextField!
     @IBOutlet weak var memo: UITextField!
     @IBOutlet weak var alarmTimeSetting: UITextField!
-    @IBOutlet weak var alarmRepetition: UILabel!
-
+    @IBOutlet weak var alarmTimeSetting2: UITextField!
+    @IBOutlet weak var alarmTimeSetting3: UITextField!
+    @IBOutlet weak var alarmRepetition: UIButton!
+    
+    @IBOutlet weak var firstButton: UIButton!
+    @IBOutlet weak var secondButton: UIButton!
+    @IBAction func firstButton(_ sender: Any) {
+        if alarmTimeSetting.text! != "" {
+            alarmTimeSetting2.isHidden = false
+            firstButton.isHidden = true
+            secondButton.isHidden = false
+            firstButton.isEnabled = false
+            buttonIndex += 1
+        } else {
+            let alert = UIAlertController(title: "이런!", message: "첫 번째 시간을 채워주세요!", preferredStyle: .alert)
+            let cancelAction = UIAlertAction(title: "확인", style: .cancel, handler: nil)
+            alert.addAction(cancelAction)
+            self.present(alert, animated: true, completion: nil)
+        }
+    }
+    @IBAction func secondButton(_ sender: Any) {
+        if alarmTimeSetting2.text! != "" {
+            alarmTimeSetting3.isHidden = false
+            secondButton.isHidden = true
+            buttonIndex += 1
+        } else {
+            let alert = UIAlertController(title: "이런!", message: "두 번째 시간을 채워주세요!", preferredStyle: .alert)
+            let cancelAction = UIAlertAction(title: "확인", style: .cancel, handler: nil)
+            alert.addAction(cancelAction)
+            self.present(alert, animated: true, completion: nil)
+        }
+    }
+    
     private var datePicker: UIDatePicker?
-
+    private var datePicker2: UIDatePicker?
+    private var datePicker3: UIDatePicker?
+    
     @IBAction func cellDelete(_ sender: Any) {
         
         let drugLastIndex = drugItems.count - 1
@@ -75,9 +109,9 @@ class EditAlarmInfoTableViewController: UITableViewController, UITextFieldDelega
     @IBOutlet weak var drugList10: UILabel!
     
     @IBAction func save(_ sender: Any) {
-        if(alarmName.text != "" && alarmTimeSetting.text != "" && alarmRepetition.text != ""){
+        if(alarmName.text != "" && alarmTimeSetting.text != "" && alarmRepetition.titleLabel?.text != ""){
             DataCenter.sharedInstnce.drugList.remove(at: infoIndexPath.row)
-            DataCenter.sharedInstnce.drugList.insert(userInfo(alarmName: alarmName.text!, memo: memo.text!, alarmTimeSetting: alarmTimeSetting.text!, segment: segment, repetition: repetition, eatingDay: eatingDay, notEatingDay: notEatingDay), at: infoIndexPath.row)
+            DataCenter.sharedInstnce.drugList.insert(userInfo(alarmName: alarmName.text!, memo: memo.text!, alarmTimeSetting: alarmTimeSetting.text!, alarmTimeSetting2: alarmTimeSetting2.text!, alarmTimeSetting3: alarmTimeSetting3.text!, segment: segment, repetition: repetition, eatingDay: eatingDay, notEatingDay: notEatingDay), at: infoIndexPath.row)
             DataCenter.sharedInstnce.pillList.remove(at: infoIndexPath.row)
             DataCenter.sharedInstnce.pillList.insert(drugItems, at: infoIndexPath.row)
             let alert = UIAlertController(title: "저장", message: "저장 완료되었습니다!", preferredStyle: .alert)
@@ -122,11 +156,15 @@ class EditAlarmInfoTableViewController: UITableViewController, UITextFieldDelega
                 print(error?.localizedDescription ?? "")
             }
             
-            
+            self.dismiss(animated: true, completion: nil)
             
         }
     }
         
+ 
+//    @IBAction func close(_ sender: Any) {
+//        self.dismiss(animated: true, completion: nil)
+//    }
     override func viewDidLoad() {
         super.viewDidLoad()
         setLocalNotification()
@@ -135,21 +173,32 @@ class EditAlarmInfoTableViewController: UITableViewController, UITextFieldDelega
         
         let toolBar = UIToolbar().ToolbarPiker(mySelect: #selector(AddAlarmTableViewController.dismissPicker))
         alarmTimeSetting.inputAccessoryView = toolBar
-        
+        alarmTimeSetting2.inputAccessoryView = toolBar
+        alarmTimeSetting3.inputAccessoryView = toolBar
         
         //date picker 띄우기
         datePicker = UIDatePicker()
         datePicker?.datePickerMode = .time
         datePicker?.addTarget(self, action: #selector(AddAlarmTableViewController.dateChanged(datePicker:)), for: .valueChanged)
+        datePicker2 = UIDatePicker()
+        datePicker2?.datePickerMode = .time
+        datePicker2?.addTarget(self, action: #selector(AddAlarmTableViewController.dateChanged2(datePicker2:)), for: .valueChanged)
+        datePicker3 = UIDatePicker()
+        datePicker3?.datePickerMode = .time
+        datePicker3?.addTarget(self, action: #selector(AddAlarmTableViewController.dateChanged3(datePicker3:)), for: .valueChanged)
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(AddAlarmTableViewController.viewTabbed(gestureRecognizer:)))
         view.addGestureRecognizer(tapGesture)
         
         alarmTimeSetting.inputView = datePicker
+        alarmTimeSetting2.inputView = datePicker2
+        alarmTimeSetting3.inputView = datePicker3
         
         alarmName.text! = DataCenter.sharedInstnce.drugList[infoIndexPath.row].alarmName
         memo.text! = DataCenter.sharedInstnce.drugList[infoIndexPath.row].memo
         alarmTimeSetting.text! = DataCenter.sharedInstnce.drugList[infoIndexPath.row].alarmTimeSetting!
+        alarmTimeSetting2.text! = DataCenter.sharedInstnce.drugList[infoIndexPath.row].alarmTimeSetting2!
+        alarmTimeSetting3.text! = DataCenter.sharedInstnce.drugList[infoIndexPath.row].alarmTimeSetting3!
         repetition = DataCenter.sharedInstnce.drugList[infoIndexPath.row].repetition!
         drugItems = DataCenter.sharedInstnce.pillList[infoIndexPath.row]
         segment = DataCenter.sharedInstnce.drugList[infoIndexPath.row].segment
@@ -165,10 +214,28 @@ class EditAlarmInfoTableViewController: UITableViewController, UITextFieldDelega
         drugList9.text = ""
         drugList10.text = ""
         
+        if alarmTimeSetting2.text != ""{
+            alarmTimeSetting2.isHidden = false
+            firstButton.isHidden = true
+            firstButton.isEnabled = false
+            secondButton.isHidden = false
+            secondButton.isEnabled = true
+            alarmTimeSetting3.isHidden = true
+            buttonIndex += 1
+
+        }
+        if alarmTimeSetting2.text != "" && alarmTimeSetting3.text != ""{
+            alarmTimeSetting3.isHidden = false
+            secondButton.isHidden = true
+            buttonIndex += 1
+
+        }
+        
     }
     override func viewWillAppear(_ animated: Bool) {
         print(drugItems)
-        alarmRepetition.text! = repetition
+        alarmRepetition.titleLabel?.adjustsFontSizeToFitWidth = true
+        alarmRepetition.titleLabel?.text = repetition
         if drugItems.count == 1{
             drugList1.text = "💊 " + drugItems[0]["ITEM_NAME"]!
         }else if drugItems.count == 2{
@@ -251,6 +318,19 @@ class EditAlarmInfoTableViewController: UITableViewController, UITextFieldDelega
         
         alarmTimeSetting.text = dateFormatter.string(from: datePicker.date)
     }
+    @objc func dateChanged2(datePicker2: UIDatePicker) {
+        let dateFormatter2 = DateFormatter()
+        dateFormatter2.dateFormat = "a hh:mm"
+        
+        alarmTimeSetting2.text = dateFormatter2.string(from: datePicker2.date)
+    }
+    @objc func dateChanged3(datePicker3: UIDatePicker) {
+        let dateFormatter3 = DateFormatter()
+        dateFormatter3.dateFormat = "a hh:mm"
+        
+        alarmTimeSetting3.text = dateFormatter3.string(from: datePicker3.date)
+    }
+    
     func changeValue(eatingDay: String, notEatingDay: String, repetition: String){
         self.eatingDay = eatingDay
         self.notEatingDay = notEatingDay

@@ -22,6 +22,7 @@ class AddAlarmTableViewController: UITableViewController, AddAlarmViewDelegatePr
     var sunday: Bool = false
     var repetition: String = ""
     var drugItems = [[String:String]]()
+    var buttonIndex:Int = 1
 
     var alarmGranted: Bool = false
 
@@ -55,7 +56,7 @@ class AddAlarmTableViewController: UITableViewController, AddAlarmViewDelegatePr
         self.viewWillAppear(true)
     }
     
-    @IBOutlet weak var alarmRepetition: UILabel!
+    @IBOutlet weak var alarmRepetition: UIButton!
     
     var segment:String = "식전"
 
@@ -74,18 +75,36 @@ class AddAlarmTableViewController: UITableViewController, AddAlarmViewDelegatePr
     @IBOutlet weak var firstButton: UIButton!
     @IBOutlet weak var secondButton: UIButton!
     @IBAction func firstButton(_ sender: Any) {
-        alarmTimeSetting2.isHidden = false
-        firstButton.isHidden = true
-        secondButton.isHidden = false
+        if alarmTimeSetting.text! != "" {
+            alarmTimeSetting2.isHidden = false
+            firstButton.isHidden = true
+            secondButton.isHidden = false
+            firstButton.isEnabled = false
+            buttonIndex += 1
+        } else {
+            let alert = UIAlertController(title: "이런!", message: "첫 번째 시간을 채워주세요!", preferredStyle: .alert)
+            let cancelAction = UIAlertAction(title: "확인", style: .cancel, handler: nil)
+            alert.addAction(cancelAction)
+            self.present(alert, animated: true, completion: nil)
+        }
     }
     @IBAction func secondButton(_ sender: Any) {
-        alarmTimeSetting3.isHidden = false
-        secondButton.isHidden = true
+        if alarmTimeSetting2.text! != "" {
+            alarmTimeSetting3.isHidden = false
+            secondButton.isHidden = true
+            buttonIndex += 1
+        } else {
+            let alert = UIAlertController(title: "이런!", message: "두 번째 시간을 채워주세요!", preferredStyle: .alert)
+            let cancelAction = UIAlertAction(title: "확인", style: .cancel, handler: nil)
+            alert.addAction(cancelAction)
+            self.present(alert, animated: true, completion: nil)
+        }
     }
     
     
     private var datePicker: UIDatePicker?
-    
+    private var datePicker2: UIDatePicker?
+    private var datePicker3: UIDatePicker?
     
     
     @IBOutlet weak var segmentedControl: UISegmentedControl!
@@ -110,8 +129,8 @@ class AddAlarmTableViewController: UITableViewController, AddAlarmViewDelegatePr
     
     
     @IBAction func save(_ sender: Any) {
-        if(alarmName.text != "" && alarmTimeSetting.text != "" && alarmRepetition.text != ""){
-            DataCenter.sharedInstnce.drugList.append(userInfo(alarmName: alarmName.text!, memo: memo.text!, alarmTimeSetting: alarmTimeSetting.text!, segment: segment, repetition: repetition, eatingDay: eatingDay, notEatingDay: notEatingDay))
+        if(alarmName.text != "" && alarmTimeSetting.text != "" && alarmRepetition.titleLabel?.text != "선택"){
+            DataCenter.sharedInstnce.drugList.append(userInfo(alarmName: alarmName.text!, memo: memo.text!, alarmTimeSetting: alarmTimeSetting.text!, alarmTimeSetting2: alarmTimeSetting2.text!, alarmTimeSetting3: alarmTimeSetting3.text!, segment: segment, repetition: repetition, eatingDay: eatingDay, notEatingDay: notEatingDay))
             DataCenter.sharedInstnce.pillList.append(drugItems)
             self.dismiss(animated: true, completion: nil)
             
@@ -186,18 +205,27 @@ class AddAlarmTableViewController: UITableViewController, AddAlarmViewDelegatePr
         
         let toolBar = UIToolbar().ToolbarPiker(mySelect: #selector(AddAlarmTableViewController.dismissPicker))
         alarmTimeSetting.inputAccessoryView = toolBar
-        
+        alarmTimeSetting2.inputAccessoryView = toolBar
+        alarmTimeSetting3.inputAccessoryView = toolBar
         
         //date picker 띄우기
         datePicker = UIDatePicker()
         datePicker?.datePickerMode = .time
         datePicker?.addTarget(self, action: #selector(AddAlarmTableViewController.dateChanged(datePicker:)), for: .valueChanged)
+        datePicker2 = UIDatePicker()
+        datePicker2?.datePickerMode = .time
+        datePicker2?.addTarget(self, action: #selector(AddAlarmTableViewController.dateChanged2(datePicker2:)), for: .valueChanged)
+        datePicker3 = UIDatePicker()
+        datePicker3?.datePickerMode = .time
+        datePicker3?.addTarget(self, action: #selector(AddAlarmTableViewController.dateChanged3(datePicker3:)), for: .valueChanged)
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(AddAlarmTableViewController.viewTabbed(gestureRecognizer:)))
         view.addGestureRecognizer(tapGesture)
         
         alarmTimeSetting.inputView = datePicker
-        alarmRepetition.text = repetition
+        alarmTimeSetting2.inputView = datePicker2
+        alarmTimeSetting3.inputView = datePicker3
+        alarmRepetition.titleLabel?.text = repetition
         
         drugList1.text = ""
         drugList2.text = ""
@@ -225,7 +253,18 @@ class AddAlarmTableViewController: UITableViewController, AddAlarmViewDelegatePr
         
         alarmTimeSetting.text = dateFormatter.string(from: datePicker.date)
     }
-    
+    @objc func dateChanged2(datePicker2: UIDatePicker) {
+        let dateFormatter2 = DateFormatter()
+        dateFormatter2.dateFormat = "a hh:mm"
+        
+        alarmTimeSetting2.text = dateFormatter2.string(from: datePicker2.date)
+    }
+    @objc func dateChanged3(datePicker3: UIDatePicker) {
+        let dateFormatter3 = DateFormatter()
+        dateFormatter3.dateFormat = "a hh:mm"
+        
+        alarmTimeSetting3.text = dateFormatter3.string(from: datePicker3.date)
+    }
     
     func changeValue(monday: Bool, tuesday: Bool,wednesday: Bool, thursday: Bool, friday: Bool, saturday: Bool, sunday: Bool, eatingDay: String, notEatingDay: String, repetition: String){
         self.monday = monday
@@ -255,7 +294,9 @@ class AddAlarmTableViewController: UITableViewController, AddAlarmViewDelegatePr
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        alarmRepetition.text = repetition
+        alarmRepetition.titleLabel?.adjustsFontSizeToFitWidth = true
+
+        alarmRepetition.titleLabel?.text = repetition
         if drugItems.count == 1{
             drugList1.text = "💊 " + drugItems[0]["ITEM_NAME"]!
         }else if drugItems.count == 2{
@@ -373,7 +414,6 @@ class AddAlarmTableViewController: UITableViewController, AddAlarmViewDelegatePr
         if String(string[string.startIndex]) == "P" {
             dateComponents.hour = dateComponents.hour! + 12
         }
-        
         let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
         //        let lnMessageId: String = messageDict[i] as! String
         let lnMessageId: String = alarmName.text!

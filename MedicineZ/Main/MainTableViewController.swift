@@ -46,7 +46,7 @@ class MainTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath) as! TableViewCell
         cell.alarmName?.text = DataCenter.sharedInstnce.drugList[indexPath.row].alarmName
-        cell.alarmTimeSetting?.text = DataCenter.sharedInstnce.drugList[indexPath.row].alarmTimeSetting
+        cell.alarmTimeSetting?.text = DataCenter.sharedInstnce.drugList[indexPath.row].alarmTimeSetting! + "  " + DataCenter.sharedInstnce.drugList[indexPath.row].alarmTimeSetting2! + "  " + DataCenter.sharedInstnce.drugList[indexPath.row].alarmTimeSetting3!
         cell.repetition?.text = DataCenter.sharedInstnce.drugList[indexPath.row].repetition
         cell.segment?.text = DataCenter.sharedInstnce.drugList[indexPath.row].segment
             return cell
