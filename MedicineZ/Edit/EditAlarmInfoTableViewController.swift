@@ -105,13 +105,22 @@ class EditAlarmInfoTableViewController: UITableViewController, UITextFieldDelega
     @IBOutlet weak var drugList8: UILabel!
     @IBOutlet weak var drugList9: UILabel!
     @IBOutlet weak var drugList10: UILabel!
-    
+    var alarmIdentifier = [String]()
+
     @IBAction func save(_ sender: Any) {
         if(alarmName.text != "" && alarmTimeSetting.text != "" && alarmRepetition.titleLabel?.text != ""){
+            if alarmGranted == true {
+                alarm()
+            }
             DataCenter.sharedInstnce.drugList.remove(at: infoIndexPath.row)
             DataCenter.sharedInstnce.drugList.insert(userInfo(alarmName: alarmName.text!, memo: memo.text!, alarmTimeSetting: alarmTimeSetting.text!, alarmTimeSetting2: alarmTimeSetting2.text!, alarmTimeSetting3: alarmTimeSetting3.text!, segment: segment, repetition: repetition), at: infoIndexPath.row)
             DataCenter.sharedInstnce.pillList.remove(at: infoIndexPath.row)
             DataCenter.sharedInstnce.pillList.insert(drugItems, at: infoIndexPath.row)
+            for i in 0..<DataCenter.sharedInstnce.alarmIdentifierList[infoIndexPath.row].count{
+                UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: ["\(DataCenter.sharedInstnce.alarmIdentifierList[infoIndexPath.row][i])"])
+            }
+            DataCenter.sharedInstnce.alarmIdentifierList.remove(at: infoIndexPath.row)
+            DataCenter.sharedInstnce.alarmIdentifierList.insert(alarmIdentifier, at: infoIndexPath.row)
             
         }else{
             let alert = UIAlertController(title: "다시 입력", message: "필수 항목이 다 입력되지 않았어요!", preferredStyle: .alert)
@@ -120,40 +129,11 @@ class EditAlarmInfoTableViewController: UITableViewController, UITextFieldDelega
             self.present(alert, animated: true, completion: nil)
         }
         
-        if alarmGranted == true {
-            let content = UNMutableNotificationContent()
-            content.title = "미니약국"
-            content.body = "약 먹을 시간이에요!"
-            content.sound = UNNotificationSound.default
+        
             
-            _ = Calendar.current
-            var dateComponents = DateComponents()
+        self.dismiss(animated: true, completion: nil)
             
-            var string = self.alarmTimeSetting.text!
-            let startHour = string.index(string.startIndex, offsetBy: 3)
-            let endHour = string.index(string.startIndex, offsetBy: 4)
-            let subHour = String(string[startHour...endHour])
-            let startMin = string.index(string.startIndex, offsetBy: 6)
-            let endMin = string.index(string.startIndex, offsetBy: 7)
-            let subMin = String(string[startMin...endMin])
-            dateComponents.hour = Int(subHour)
-            dateComponents.minute = Int(subMin)
-            
-            if String(string[string.startIndex]) == "P" {
-                dateComponents.hour = dateComponents.hour! + 12
-            }
-            
-            
-            let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
-            let request = UNNotificationRequest(identifier: "TRAINING_NOTIFICATION", content: content, trigger: trigger)
-            let center = UNUserNotificationCenter.current()
-            center.add(request) { (error) in
-                print(error?.localizedDescription ?? "")
-            }
-            
-            self.dismiss(animated: true, completion: nil)
-            
-        }
+        
     }
         
  
@@ -356,15 +336,6 @@ class EditAlarmInfoTableViewController: UITableViewController, UITextFieldDelega
                 }
             }
             
-            UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: ["TRAINING_NOTIFICATION"])
-        } else {
-            if let notifications = UIApplication.shared.scheduledLocalNotifications {
-                for notification in notifications {
-                    if notification.userInfo?["identifier"] as? String == "TRAINING_NOTIFICATION" {
-                        UIApplication.shared.cancelLocalNotification(notification)
-                    }
-                }
-            }
         }
     }
     
@@ -378,6 +349,212 @@ class EditAlarmInfoTableViewController: UITableViewController, UITextFieldDelega
             detailVC.delegate = self
             
         }
+    }
+    func alarm() {
+        if buttonIndex > 0 {
+            
+            
+            _ = Calendar.current
+            var dateComponents = DateComponents()
+            
+            var string = self.alarmTimeSetting.text!
+            let startHour = string.index(string.startIndex, offsetBy: 3)
+            let endHour = string.index(string.startIndex, offsetBy: 4)
+            let subHour = String(string[startHour...endHour])
+            let startMin = string.index(string.startIndex, offsetBy: 6)
+            let endMin = string.index(string.startIndex, offsetBy: 7)
+            let subMin = String(string[startMin...endMin])
+            dateComponents.hour = Int(subHour)
+            dateComponents.minute = Int(subMin)
+            
+            if String(string[string.startIndex]) == "P" {
+                dateComponents.hour = dateComponents.hour! + 12
+            }
+            if repetition == "매일" {
+                var lnMessageId: String = alarmName.text! + "1"
+                alarmTrigger(dateMatcing: dateComponents, lnMessageId: lnMessageId)
+            }
+            if repetition != "매일" && repetition.contains("일") {
+                dateComponents.weekday = 1
+                var lnMessageId: String = alarmName.text! + "1"
+                alarmTrigger(dateMatcing: dateComponents, lnMessageId: lnMessageId)
+            }
+            if repetition != "매일" && repetition.contains("월") {
+                dateComponents.weekday = 2
+                var lnMessageId: String = alarmName.text! + "1"
+                alarmTrigger(dateMatcing: dateComponents, lnMessageId: lnMessageId)
+            }
+            if repetition != "매일" && repetition.contains("화") {
+                dateComponents.weekday = 3
+                var lnMessageId: String = alarmName.text! + "1"
+                alarmTrigger(dateMatcing: dateComponents, lnMessageId: lnMessageId)
+            }
+            if repetition != "매일" && repetition.contains("수") {
+                dateComponents.weekday = 4
+                var lnMessageId: String = alarmName.text! + "1"
+                alarmTrigger(dateMatcing: dateComponents, lnMessageId: lnMessageId)
+            }
+            if repetition != "매일" && repetition.contains("목") {
+                dateComponents.weekday = 5
+                var lnMessageId: String = alarmName.text! + "1"
+                alarmTrigger(dateMatcing: dateComponents, lnMessageId: lnMessageId)
+            }
+            if repetition != "매일" && repetition.contains("금") {
+                dateComponents.weekday = 6
+                var lnMessageId: String = alarmName.text! + "1"
+                alarmTrigger(dateMatcing: dateComponents, lnMessageId: lnMessageId)
+            }
+            if repetition != "매일" && repetition.contains("토") {
+                dateComponents.weekday = 7
+                var lnMessageId: String = alarmName.text! + "1"
+                alarmTrigger(dateMatcing: dateComponents, lnMessageId: lnMessageId)
+            }
+        }
+        if buttonIndex > 1 {
+            
+            
+            _ = Calendar.current
+            var dateComponents2 = DateComponents()
+            
+            var string2 = self.alarmTimeSetting2.text!
+            let startHour = string2.index(string2.startIndex, offsetBy: 3)
+            let endHour = string2.index(string2.startIndex, offsetBy: 4)
+            let subHour = String(string2[startHour...endHour])
+            let startMin = string2.index(string2.startIndex, offsetBy: 6)
+            let endMin = string2.index(string2.startIndex, offsetBy: 7)
+            let subMin = String(string2[startMin...endMin])
+            dateComponents2.hour = Int(subHour)
+            dateComponents2.minute = Int(subMin)
+            
+            if String(string2[string2.startIndex]) == "P" {
+                dateComponents2.hour = dateComponents2.hour! + 12
+            }
+            if repetition == "매일" {
+                var lnMessageId: String = alarmName.text! + "2"
+                alarmTrigger(dateMatcing: dateComponents2, lnMessageId: lnMessageId)
+            }
+            if repetition != "매일" && repetition.contains("일") {
+                dateComponents2.weekday = 1
+                var lnMessageId: String = alarmName.text! + "2"
+                alarmTrigger(dateMatcing: dateComponents2, lnMessageId: lnMessageId)
+            }
+            if repetition != "매일" && repetition.contains("월") {
+                dateComponents2.weekday = 2
+                var lnMessageId: String = alarmName.text! + "2"
+                alarmTrigger(dateMatcing: dateComponents2, lnMessageId: lnMessageId)
+            }
+            if repetition != "매일" && repetition.contains("화") {
+                dateComponents2.weekday = 3
+                var lnMessageId: String = alarmName.text! + "2"
+                alarmTrigger(dateMatcing: dateComponents2, lnMessageId: lnMessageId)
+            }
+            if repetition != "매일" && repetition.contains("수") {
+                dateComponents2.weekday = 4
+                var lnMessageId: String = alarmName.text! + "2"
+                alarmTrigger(dateMatcing: dateComponents2, lnMessageId: lnMessageId)
+            }
+            if repetition != "매일" && repetition.contains("목") {
+                dateComponents2.weekday = 5
+                var lnMessageId: String = alarmName.text! + "2"
+                alarmTrigger(dateMatcing: dateComponents2, lnMessageId: lnMessageId)
+            }
+            if repetition != "매일" && repetition.contains("금") {
+                dateComponents2.weekday = 6
+                var lnMessageId: String = alarmName.text! + "2"
+                alarmTrigger(dateMatcing: dateComponents2, lnMessageId: lnMessageId)
+            }
+            if repetition != "매일" && repetition.contains("토") {
+                dateComponents2.weekday = 7
+                var lnMessageId: String = alarmName.text! + "2"
+                alarmTrigger(dateMatcing: dateComponents2, lnMessageId: lnMessageId)
+            }
+        }
+        if buttonIndex > 2 {
+            
+            
+            _ = Calendar.current
+            var dateComponents3 = DateComponents()
+            
+            var string3 = self.alarmTimeSetting3.text!
+            let startHour = string3.index(string3.startIndex, offsetBy: 3)
+            let endHour = string3.index(string3.startIndex, offsetBy: 4)
+            let subHour = String(string3[startHour...endHour])
+            let startMin = string3.index(string3.startIndex, offsetBy: 6)
+            let endMin = string3.index(string3.startIndex, offsetBy: 7)
+            let subMin = String(string3[startMin...endMin])
+            dateComponents3.hour = Int(subHour)
+            dateComponents3.minute = Int(subMin)
+            
+            if String(string3[string3.startIndex]) == "P" {
+                dateComponents3.hour = dateComponents3.hour! + 12
+            }
+            
+            if repetition == "매일" {
+                var lnMessageId: String = alarmName.text! + "3"
+                alarmTrigger(dateMatcing: dateComponents3, lnMessageId: lnMessageId)
+            }
+            if repetition != "매일" && repetition.contains("일") {
+                dateComponents3.weekday = 1
+                var lnMessageId: String = alarmName.text! + "3"
+                alarmTrigger(dateMatcing: dateComponents3, lnMessageId: lnMessageId)
+            }
+            if repetition != "매일" && repetition.contains("월") {
+                dateComponents3.weekday = 2
+                var lnMessageId: String = alarmName.text! + "3"
+                alarmTrigger(dateMatcing: dateComponents3, lnMessageId: lnMessageId)
+            }
+            if repetition != "매일" && repetition.contains("화") {
+                dateComponents3.weekday = 3
+                var lnMessageId: String = alarmName.text! + "3"
+                alarmTrigger(dateMatcing: dateComponents3, lnMessageId: lnMessageId)
+            }
+            if repetition != "매일" && repetition.contains("수") {
+                dateComponents3.weekday = 4
+                var lnMessageId: String = alarmName.text! + "3"
+                alarmTrigger(dateMatcing: dateComponents3, lnMessageId: lnMessageId)
+            }
+            if repetition != "매일" && repetition.contains("목") {
+                dateComponents3.weekday = 5
+                var lnMessageId: String = alarmName.text! + "3"
+                alarmTrigger(dateMatcing: dateComponents3, lnMessageId: lnMessageId)
+            }
+            if repetition.count != 14 && repetition.contains("금") {
+                dateComponents3.weekday = 6
+                var lnMessageId: String = alarmName.text! + "3"
+                alarmTrigger(dateMatcing: dateComponents3, lnMessageId: lnMessageId)
+            }
+            if repetition != "매일" && repetition.contains("토") {
+                dateComponents3.weekday = 7
+                var lnMessageId: String = alarmName.text! + "3"
+                alarmTrigger(dateMatcing: dateComponents3, lnMessageId: lnMessageId)
+            }
+            
+        }
+        
+    }
+    
+    func alarmTrigger(dateMatcing: DateComponents, lnMessageId: String) {
+        let content = UNMutableNotificationContent()
+        content.title = "미니약국"
+        content.body = "약 먹을 시간이에요!"
+        content.sound = UNNotificationSound.default
+        guard let matching = dateMatcing.weekday else {
+            let matching = 8
+            return
+        }
+        let lnM = lnMessageId + String(dateMatcing.weekday!)
+        let trigger = UNCalendarNotificationTrigger(dateMatching: dateMatcing, repeats: true)
+        let request = UNNotificationRequest(identifier: lnM, content: content, trigger: trigger)
+        let center = UNUserNotificationCenter.current()
+        center.add(request) { (error) in
+            print(error?.localizedDescription ?? "")
+        }
+        alarmIdentifier.append(lnM)
+        center.getPendingNotificationRequests(completionHandler: { requests in
+            for request in requests {
+                print(request)
+            }
+        })
     }
 }
 

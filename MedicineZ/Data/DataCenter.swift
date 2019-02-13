@@ -15,7 +15,8 @@ class DataCenter{
     var drugList:[userInfo] = []
     var pillList = [[[String:String]]]()
     var eatingDayInfo2:[eatingDayInfo] = []
-    
+    var alarmIdentifierList: [[String]] = []
+
     
     var HomeUpdateCheck = false
     var TimeLineUpdateCheck = false
@@ -27,6 +28,8 @@ class DataCenter{
         UserDefaults.standard.setValue(encodeDate, forKey: "drugList")
         let encodeDate2 = NSKeyedArchiver.archivedData(withRootObject: pillList)
         UserDefaults.standard.setValue(encodeDate2, forKey: "pillList")
+        let encodeDate3 = NSKeyedArchiver.archivedData(withRootObject: alarmIdentifierList)
+        UserDefaults.standard.setValue(encodeDate3, forKey: "alarmIdentifierList")
 
         
     }
@@ -39,6 +42,8 @@ class DataCenter{
         self.drugList = NSKeyedUnarchiver.unarchiveObject(with: encodeDate) as! [userInfo]
         guard let encodeDate2 = UserDefaults.standard.value(forKeyPath: "pillList") as? Data else { return }
         self.pillList = NSKeyedUnarchiver.unarchiveObject(with: encodeDate2) as! [[[String:String]]]
+        guard let encodeDate3 = UserDefaults.standard.value(forKeyPath: "alarmIdentifierList") as? Data else { return }
+        self.alarmIdentifierList = NSKeyedUnarchiver.unarchiveObject(with: encodeDate3) as! [[String]]
         
     }
     

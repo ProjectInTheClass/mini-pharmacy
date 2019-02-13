@@ -11,11 +11,11 @@ import UIKit
 class DrugInfoTableViewController: UITableViewController, XMLParserDelegate {
     var drugInfo = [String:String]()
 
-    var drugItems = [[String : String]]()
     
     @IBOutlet weak var drugName: UILabel!
     @IBOutlet weak var entpName: UILabel!
     @IBOutlet weak var classify: UILabel!
+    @IBOutlet weak var manual: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,7 +23,13 @@ class DrugInfoTableViewController: UITableViewController, XMLParserDelegate {
         drugName.text = drugInfo["ITEM_NAME"]
         entpName.text = drugInfo["ENTP_NAME"]
         classify.text = drugInfo["CLASS_NO"]
-    
+        if drugInfo["INSERT_FILE"] == "http://www.health.kr/images/insert_pdf/"{
+            manual.text = "약 설명서가 등록되어 있지 않았어요!"
+            manual.textColor = UIColor.red
+        }else{
+            manual.text = "약 설명서가 등록되어 있어요!"
+            manual.textColor = UIColor.blue
+        }
         
     }
 
@@ -37,16 +43,11 @@ class DrugInfoTableViewController: UITableViewController, XMLParserDelegate {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        switch section {
-        case 0:
-            return drugInfo.count
-        case 1:
-            return drugItems.count
-        default:
-            return 0
-        }
+       
+        return drugInfo.count
+       
     }
-    
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 
         if let detailVC = segue.destination as? WebViewController{

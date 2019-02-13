@@ -5,7 +5,7 @@
 //  Created by CAU on 01/02/2019.
 //  Copyright © 2019 CAU. All rights reserved.
 //
-
+import UserNotifications
 import UIKit
 
 class MainTableViewController: UITableViewController {
@@ -70,9 +70,28 @@ class MainTableViewController: UITableViewController {
         if editingStyle == UITableViewCell.EditingStyle.delete {
             
             // remove the item from the data model
+            let center = UNUserNotificationCenter.current()
+            center.getPendingNotificationRequests(completionHandler: { requests in
+                for request in requests {
+                    print(request)
+                }
+                
+            })
+            print(DataCenter.sharedInstnce.alarmIdentifierList[indexPath.row])
+            for i in 0..<DataCenter.sharedInstnce.alarmIdentifierList[indexPath.row].count{
+                UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: ["\(DataCenter.sharedInstnce.alarmIdentifierList[indexPath.row][i])"])
+            } // Notification 삭제
+            center.getPendingNotificationRequests(completionHandler: { requests in
+                for request in requests {
+                    print(request)
+                }
+            })
             DataCenter.sharedInstnce.drugList.remove(at: indexPath.row) //데이터 삭제
             DataCenter.sharedInstnce.pillList.remove(at: indexPath.row) //약목록 삭제
+            DataCenter.sharedInstnce.alarmIdentifierList.remove(at: indexPath.row)
+            
             tableView.deleteRows(at: [indexPath], with: UITableView.RowAnimation.automatic) // 테이블에서 삭제
+
         
         }
         
