@@ -7,12 +7,13 @@
 //
 
 import Foundation
+
 class Pharmacy: Codable {
     var dutyAddr : String?
     var dutyMapimg : String?
     var dutyName : String?
     var dutyTel1 : String?
-    var dutyTime1c : String?
+    var dutyTime1c : Int?
     var dutyTime1s : Int?
     var dutyTime2c : Int?
     var dutyTime2s : Int?
@@ -29,7 +30,7 @@ class Pharmacy: Codable {
     var dutyTime8c : Int?
     var dutyTime8s : Int?
     var hpid : String?
-    var postCdn1 : String?
+    var postCdn1 : Int?
     var postCdn2 : String?
     var rnum : Int?
     var wgs84Lat : String?

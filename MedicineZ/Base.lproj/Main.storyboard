@@ -1395,6 +1395,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="myMap" destination="OqI-YM-LoQ" id="HYe-PD-o4P"/>
+                        <outlet property="searchBar" destination="V53-aZ-u07" id="LK4-sf-NaI"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vNj-Jv-evn" userLabel="First Responder" sceneMemberID="firstResponder"/>
