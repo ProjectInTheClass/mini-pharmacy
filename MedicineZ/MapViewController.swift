@@ -42,7 +42,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     var dutyTime8c = "" // 공휴일 닫는 시간
     var dutyTime8s = "" // 공휴일 여는 시간
     
-    let totalEnteries = 2350
+    let totalEnteries = 231
     var limit = 20
     var index = 1
     
@@ -50,7 +50,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     
     func requestStoreInfo(i:Int) {
         // OPEN API 주소
-        let url = "http://apis.data.go.kr/B552657/ErmctInsttInfoInqireService/getParmacyFullDown?ServiceKey=RwTAsfYxRQL6Cc%2B0YC0SV91hEUl1mZRg8lbvZY%2FxV01GRy12jjqZ87mLC%2FkzFUNjiayFkHNwji7zyXljh2Ng%2FA%3D%3D&numOfRows=30&pageNo="
+        let url = "http://apis.data.go.kr/B552657/ErmctInsttInfoInqireService/getParmacyFullDown?ServiceKey=RwTAsfYxRQL6Cc%2B0YC0SV91hEUl1mZRg8lbvZY%2FxV01GRy12jjqZ87mLC%2FkzFUNjiayFkHNwji7zyXljh2Ng%2FA%3D%3D&numOfRows=100&pageNo="
         
         var requestURL: String = url + String(i)
         guard let xmlParser = XMLParser(contentsOf: URL(string: url)!) else { return }
@@ -185,9 +185,9 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     override func viewDidLoad() {
         super.viewDidLoad()
         //파싱
-        requestStoreInfo(i: index)
-        index += 1
-        
+        for i in 1...5{
+        requestStoreInfo(i: i)
+        }
         // Do any additional setup after loading the view.
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest //배터리로 동작할 때 권장되는 가장 높은 수준의 정확도
