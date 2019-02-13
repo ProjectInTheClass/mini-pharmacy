@@ -24,7 +24,6 @@
 		527B8FED22055F38009BCEB0 /* MedicineZ-Bridging-Header.m in Sources */ = {isa = PBXBuildFile; fileRef = 527B8FEC22055F38009BCEB0 /* MedicineZ-Bridging-Header.m */; };
 		52E47353220B02AB00C8D8B7 /* DataCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52E47352220B02AB00C8D8B7 /* DataCenter.swift */; };
 		52F3D1BD220D64D8007D2F20 /* AlarmRepetitionTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F3D1BC220D64D8007D2F20 /* AlarmRepetitionTableViewController.swift */; };
-		52F3D1BF220D7BDB007D2F20 /* eatingDayInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F3D1BE220D7BDB007D2F20 /* eatingDayInfo.swift */; };
 		52F3D1C522100E8C007D2F20 /* AlarmInfoTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F3D1C422100E8C007D2F20 /* AlarmInfoTableViewController.swift */; };
 		52F5197D2212F4CA00F8CD40 /* pharmacy.json in Resources */ = {isa = PBXBuildFile; fileRef = 52F5197C2212F4CA00F8CD40 /* pharmacy.json */; };
 		52F519822212FBBE00F8CD40 /* OTPViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F519812212FBBE00F8CD40 /* OTPViewController.swift */; };
@@ -57,7 +56,6 @@
 		527B8FEF2205671A009BCEB0 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		52E47352220B02AB00C8D8B7 /* DataCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataCenter.swift; sourceTree = "<group>"; };
 		52F3D1BC220D64D8007D2F20 /* AlarmRepetitionTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmRepetitionTableViewController.swift; sourceTree = "<group>"; };
-		52F3D1BE220D7BDB007D2F20 /* eatingDayInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = eatingDayInfo.swift; sourceTree = "<group>"; };
 		52F3D1C422100E8C007D2F20 /* AlarmInfoTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmInfoTableViewController.swift; sourceTree = "<group>"; };
 		52F5197C2212F4CA00F8CD40 /* pharmacy.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = pharmacy.json; sourceTree = "<group>"; };
 		52F519812212FBBE00F8CD40 /* OTPViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTPViewController.swift; sourceTree = "<group>"; };
@@ -113,7 +111,6 @@
 				523746622211968B00346BC5 /* Edit */,
 				523746642211977D00346BC5 /* Search */,
 				52F5197E2212FB3200F8CD40 /* Setting */,
-				52F519892213FEEE00F8CD40 /* Pharmacy.swift */,
 			);
 			path = MedicineZ;
 			sourceTree = "<group>";
@@ -153,7 +150,7 @@
 			children = (
 				52F897EF2202CC4F007E1F0D /* userInfo.swift */,
 				52E47352220B02AB00C8D8B7 /* DataCenter.swift */,
-				52F3D1BE220D7BDB007D2F20 /* eatingDayInfo.swift */,
+				52F519892213FEEE00F8CD40 /* Pharmacy.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -273,7 +270,6 @@
 				5237465B22116CF900346BC5 /* EditAlarmInfoTableViewController.swift in Sources */,
 				52F519822212FBBE00F8CD40 /* OTPViewController.swift in Sources */,
 				52F897F22202CEBA007E1F0D /* AddAlarmTableViewController.swift in Sources */,
-				52F3D1BF220D7BDB007D2F20 /* eatingDayInfo.swift in Sources */,
 				520FA24322103E32004CD515 /* SearchTableViewController.swift in Sources */,
 				520FA24522103E32004CD515 /* WebViewController.swift in Sources */,
 				525C84D7220C275F00953458 /* TableViewCell.swift in Sources */,

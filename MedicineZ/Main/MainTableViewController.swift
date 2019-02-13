@@ -10,7 +10,7 @@ import UIKit
 
 class MainTableViewController: UITableViewController {
     
-     var alarmItems = [[String:String]]()
+    var alarmItems = [[String:String]]()
     var alarmItem = [String: String]()
     var repetition = ""
     var alarmName = ""
@@ -18,17 +18,33 @@ class MainTableViewController: UITableViewController {
     var alarmTime = ""
     var alarmRepetition = ""
     var when = ""
-    
-
+    var alarmGranted:Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setLocalNotification()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         tableView.reloadData()//데이터 계속 리로드해주는 거
        
+    }
+    func setLocalNotification() {
+        
+        if #available(iOS 10.0, *) {
+            let center = UNUserNotificationCenter.current()
+            let options: UNAuthorizationOptions = [.alert, .sound];
+            
+            center.requestAuthorization(options: options) {
+                (granted, error) in
+                if granted {
+                    self.alarmGranted = true
+                    UserDefaults.standard.set(self.alarmGranted, forKey: "alarmGranted")
+                }
+            }
+        }
+        
     }
     
     // MARK: - Table view data source

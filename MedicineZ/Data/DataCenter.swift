@@ -10,32 +10,18 @@ import Foundation
 
 class DataCenter{
     static let sharedInstnce = DataCenter()
-
-    
     var drugList:[userInfo] = []
     var pillList = [[[String:String]]]()
-    var eatingDayInfo2:[eatingDayInfo] = []
     var alarmIdentifierList: [[String]] = []
-
-    
-    var HomeUpdateCheck = false
-    var TimeLineUpdateCheck = false
-    var today = ""
     
     func save() {
-
         let encodeDate = NSKeyedArchiver.archivedData(withRootObject: drugList)
         UserDefaults.standard.setValue(encodeDate, forKey: "drugList")
         let encodeDate2 = NSKeyedArchiver.archivedData(withRootObject: pillList)
         UserDefaults.standard.setValue(encodeDate2, forKey: "pillList")
         let encodeDate3 = NSKeyedArchiver.archivedData(withRootObject: alarmIdentifierList)
         UserDefaults.standard.setValue(encodeDate3, forKey: "alarmIdentifierList")
-
-        
     }
-    func save2() {
-        let encodeDate2 = NSKeyedArchiver.archivedData(withRootObject: eatingDayInfo2)
-        UserDefaults.standard.setValue(encodeDate2, forKey: "eatingDayInfo")    }
     
     func load() {
         guard let encodeDate = UserDefaults.standard.value(forKeyPath: "drugList") as? Data else { return }
@@ -44,13 +30,7 @@ class DataCenter{
         self.pillList = NSKeyedUnarchiver.unarchiveObject(with: encodeDate2) as! [[[String:String]]]
         guard let encodeDate3 = UserDefaults.standard.value(forKeyPath: "alarmIdentifierList") as? Data else { return }
         self.alarmIdentifierList = NSKeyedUnarchiver.unarchiveObject(with: encodeDate3) as! [[String]]
-        
     }
     
-    func load2() {
-        guard let encodeDate2 = UserDefaults.standard.value(forKeyPath: "eatingDayInfo") as? Data else { return }
-        self.eatingDayInfo2 = NSKeyedUnarchiver.unarchiveObject(with: encodeDate2) as! [eatingDayInfo]
-        
-    }
 
 }
