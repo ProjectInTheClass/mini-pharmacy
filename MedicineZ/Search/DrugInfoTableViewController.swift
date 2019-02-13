@@ -28,7 +28,7 @@ class DrugInfoTableViewController: UITableViewController, XMLParserDelegate {
             manual.textColor = UIColor.red
         }else{
             manual.text = "약 설명서가 등록되어 있어요!"
-            manual.textColor = UIColor.blue
+            manual.textColor = UIColor(red:0.21, green:0.68, blue:0.91, alpha:1.0)
         }
         
     }
