@@ -82,7 +82,7 @@ class AddAlarmTableViewController: UITableViewController, AddAlarmViewDelegatePr
             firstButton.isEnabled = false
             buttonIndex += 1
         } else {
-            let alert = UIAlertController(title: "이런!", message: "첫 번째 시간을 채워주세요!", preferredStyle: .alert)
+            let alert = UIAlertController(title: "잠깐!", message: "첫 번째 시간을 채워주세요!", preferredStyle: .alert)
             let cancelAction = UIAlertAction(title: "확인", style: .cancel, handler: nil)
             alert.addAction(cancelAction)
             self.present(alert, animated: true, completion: nil)
@@ -94,7 +94,7 @@ class AddAlarmTableViewController: UITableViewController, AddAlarmViewDelegatePr
             secondButton.isHidden = true
             buttonIndex += 1
         } else {
-            let alert = UIAlertController(title: "이런!", message: "두 번째 시간을 채워주세요!", preferredStyle: .alert)
+            let alert = UIAlertController(title: "잠깐!", message: "두 번째 시간을 채워주세요!", preferredStyle: .alert)
             let cancelAction = UIAlertAction(title: "확인", style: .cancel, handler: nil)
             alert.addAction(cancelAction)
             self.present(alert, animated: true, completion: nil)
