@@ -131,9 +131,9 @@ class AddAlarmTableViewController: UITableViewController, AddAlarmViewDelegatePr
     @IBAction func save(_ sender: Any) {
         if(alarmName.text != "" && alarmTimeSetting.text != "" && alarmRepetition.titleLabel?.text != "선택" && alarmGranted == true){
             alarm()
-            DataCenter.sharedInstnce.drugList.append(userInfo(alarmName: alarmName.text!, memo: memo.text!, alarmTimeSetting: alarmTimeSetting.text!, alarmTimeSetting2: alarmTimeSetting2.text!, alarmTimeSetting3: alarmTimeSetting3.text!, segment: segment, repetition: repetition))
-            DataCenter.sharedInstnce.pillList.append(drugItems)
-            DataCenter.sharedInstnce.alarmIdentifierList.append(alarmIdentifier)
+            DataCenter.sharedInstance.drugList.append(userInfo(alarmName: alarmName.text!, memo: memo.text!, alarmTimeSetting: alarmTimeSetting.text!, alarmTimeSetting2: alarmTimeSetting2.text!, alarmTimeSetting3: alarmTimeSetting3.text!, segment: segment, repetition: repetition))
+            DataCenter.sharedInstance.pillList.append(drugItems)
+            DataCenter.sharedInstance.alarmIdentifierList.append(alarmIdentifier)
             self.dismiss(animated: true, completion: nil)
         }else if(alarmName.text != "" && alarmTimeSetting.text != "" && alarmRepetition.titleLabel?.text != "선택" && alarmGranted == false){
             let alert = UIAlertController(title: "알람 설정", message: "알람을 허용하지 않았어요!", preferredStyle: .alert)
@@ -344,7 +344,7 @@ class AddAlarmTableViewController: UITableViewController, AddAlarmViewDelegatePr
             dateComponents.minute = Int(subMin)
             
             if subHour == "12" && String(string[string.startIndex]) == "A" {
-                dateComponents.hour = dateComponents.hour! + 12
+                dateComponents.hour = dateComponents.hour! - 12
             } else if subHour != "12" && String(string[string.startIndex]) == "P" {
                 dateComponents.hour = dateComponents.hour! + 12
             }
@@ -421,7 +421,9 @@ class AddAlarmTableViewController: UITableViewController, AddAlarmViewDelegatePr
             dateComponents2.hour = Int(subHour)
             dateComponents2.minute = Int(subMin)
             
-            if String(string2[string2.startIndex]) == "P" {
+            if subHour == "12" && String(string2[string2.startIndex]) == "A" {
+                dateComponents2.hour = dateComponents2.hour! - 12
+            } else if subHour != "12" && String(string2[string2.startIndex]) == "P" {
                 dateComponents2.hour = dateComponents2.hour! + 12
             }
             if repetition == "매일" {
@@ -496,7 +498,9 @@ class AddAlarmTableViewController: UITableViewController, AddAlarmViewDelegatePr
             dateComponents3.hour = Int(subHour)
             dateComponents3.minute = Int(subMin)
             
-            if String(string3[string3.startIndex]) == "P" {
+            if subHour == "12" && String(string3[string3.startIndex]) == "A" {
+                dateComponents3.hour = dateComponents3.hour! - 12
+            } else if subHour != "12" && String(string3[string3.startIndex]) == "P" {
                 dateComponents3.hour = dateComponents3.hour! + 12
             }
             
