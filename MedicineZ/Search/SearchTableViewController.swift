@@ -30,7 +30,7 @@ class SearchTableViewController: UITableViewController, XMLParserDelegate, UISea
     var itemIndex:Int = 1
     
     
-    let totalEnteries = 2750
+    let totalEnteries = 2670
     var limit = 20
     var index = 1
     

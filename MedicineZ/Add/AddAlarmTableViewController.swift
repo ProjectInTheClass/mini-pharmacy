@@ -11,8 +11,6 @@ import UIKit
 
 
 class AddAlarmTableViewController: UITableViewController, AddAlarmViewDelegateProtocol, AddAlarmViewDelegateProtocol2, UITextFieldDelegate, UNUserNotificationCenterDelegate {
-    var eatingDay: String = " "
-    var notEatingDay: String = " "
     var monday: Bool = false
     var tuesday: Bool = false
     var wednesday: Bool = false
@@ -72,6 +70,7 @@ class AddAlarmTableViewController: UITableViewController, AddAlarmViewDelegatePr
     @IBOutlet weak var alarmTimeSetting: UITextField!
     @IBOutlet weak var alarmTimeSetting2: UITextField!
     @IBOutlet weak var alarmTimeSetting3: UITextField!
+    
     @IBOutlet weak var firstButton: UIButton!
     @IBOutlet weak var secondButton: UIButton!
     @IBAction func firstButton(_ sender: Any) {
@@ -130,7 +129,7 @@ class AddAlarmTableViewController: UITableViewController, AddAlarmViewDelegatePr
     
     @IBAction func save(_ sender: Any) {
         if(alarmName.text != "" && alarmTimeSetting.text != "" && alarmRepetition.titleLabel?.text != "선택"){
-            DataCenter.sharedInstnce.drugList.append(userInfo(alarmName: alarmName.text!, memo: memo.text!, alarmTimeSetting: alarmTimeSetting.text!, alarmTimeSetting2: alarmTimeSetting2.text!, alarmTimeSetting3: alarmTimeSetting3.text!, segment: segment, repetition: repetition, eatingDay: eatingDay, notEatingDay: notEatingDay))
+            DataCenter.sharedInstnce.drugList.append(userInfo(alarmName: alarmName.text!, memo: memo.text!, alarmTimeSetting: alarmTimeSetting.text!, alarmTimeSetting2: alarmTimeSetting2.text!, alarmTimeSetting3: alarmTimeSetting3.text!, segment: segment, repetition: repetition))
             DataCenter.sharedInstnce.pillList.append(drugItems)
             self.dismiss(animated: true, completion: nil)
             
@@ -142,52 +141,11 @@ class AddAlarmTableViewController: UITableViewController, AddAlarmViewDelegatePr
         }
         
         if alarmGranted == true {
-//            let content = UNMutableNotificationContent()
-//            content.title = "미니약국"
-//            content.body = "약 먹을 시간이에요!"
-//            content.sound = UNNotificationSound.default
-//
-//            _ = Calendar.current
-//            var dateComponents = DateComponents()
-//
-//            var string = self.alarmTimeSetting.text!
-//            let startHour = string.index(string.startIndex, offsetBy: 3)
-//            let endHour = string.index(string.startIndex, offsetBy: 4)
-//            let subHour = String(string[startHour...endHour])
-//            let startMin = string.index(string.startIndex, offsetBy: 6)
-//            let endMin = string.index(string.startIndex, offsetBy: 7)
-//            let subMin = String(string[startMin...endMin])
-//            dateComponents.hour = Int(subHour)
-//            dateComponents.minute = Int(subMin)
-//
-//            if String(string[string.startIndex]) == "P" {
-//                dateComponents.hour = dateComponents.hour! + 12
-//            }
-//
-//
-//            let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
-//            let request = UNNotificationRequest(identifier: "TRAINING_NOTIFICATION", content: content, trigger: trigger)
-//            let center = UNUserNotificationCenter.current()
-//            center.add(request) { (error) in
-//                print(error?.localizedDescription ?? "")
-//            }
+
             
             alarm()
             
-            //            let notification = UNMutableNotificationContent()
-            //            let notificationTrigger = UNCalendarNotificationTrigger(dateMatching: dayComponent, repeats: true)
-            //            let lnMessageId: String = messageDict["Id"] as! String
-            //            let dayRequest = UNNotificationRequest(identifier: lnMessageId , content: content, trigger: trigger)
-            //            UNUserNotificationCenter.current().add(dayRequest, withCompletionHandler: {(_ error: Error?) -> Void in
-            //                if error == nil
-            //                {
-            //                    //print("success")
-            //                }
-            //                else
-            //                {
-            //                    //print("UNUserNotificationCenter Error : \(String(describing: error?.localizedDescription))")
-            //                }
-            //            })
+            
         
       }
         self.dismiss(animated: true, completion: nil)
@@ -266,7 +224,7 @@ class AddAlarmTableViewController: UITableViewController, AddAlarmViewDelegatePr
         alarmTimeSetting3.text = dateFormatter3.string(from: datePicker3.date)
     }
     
-    func changeValue(monday: Bool, tuesday: Bool,wednesday: Bool, thursday: Bool, friday: Bool, saturday: Bool, sunday: Bool, eatingDay: String, notEatingDay: String, repetition: String){
+    func changeValue(monday: Bool, tuesday: Bool,wednesday: Bool, thursday: Bool, friday: Bool, saturday: Bool, sunday: Bool, repetition: String){
         self.monday = monday
         self.tuesday = tuesday
         self.wednesday = wednesday
@@ -274,8 +232,6 @@ class AddAlarmTableViewController: UITableViewController, AddAlarmViewDelegatePr
         self.friday = friday
         self.saturday = saturday
         self.sunday = sunday
-        self.eatingDay = eatingDay
-        self.notEatingDay = notEatingDay
         self.repetition = repetition
         
     }
@@ -380,7 +336,21 @@ class AddAlarmTableViewController: UITableViewController, AddAlarmViewDelegatePr
                 }
             }
             
-            UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: ["TRAINING_NOTIFICATION"])
+            
+
+            center.getPendingNotificationRequests(completionHandler: { requests in
+                for request in requests {
+                    print(request)
+                }
+            })
+            
+            center.removePendingNotificationRequests(withIdentifiers: ["TRAINING_NOTIFICATION"])
+            
+            center.getPendingNotificationRequests(completionHandler: { requests in
+                for request in requests {
+                    print(request)
+                }
+            })
         } else {
             if let notifications = UIApplication.shared.scheduledLocalNotifications {
                 for notification in notifications {
@@ -401,6 +371,11 @@ class AddAlarmTableViewController: UITableViewController, AddAlarmViewDelegatePr
         _ = Calendar.current
         var dateComponents = DateComponents()
         
+        let selectedDate = datePicker?.date // 정확한 시각 + (24*60*60)*2 (7*24*60*60)*3 일주일의 초
+        
+        
+        
+        
         var string = self.alarmTimeSetting.text!
         let startHour = string.index(string.startIndex, offsetBy: 3)
         let endHour = string.index(string.startIndex, offsetBy: 4)
@@ -410,6 +385,7 @@ class AddAlarmTableViewController: UITableViewController, AddAlarmViewDelegatePr
         let subMin = String(string[startMin...endMin])
         dateComponents.hour = Int(subHour)
         dateComponents.minute = Int(subMin)
+        
         
         if String(string[string.startIndex]) == "P" {
             dateComponents.hour = dateComponents.hour! + 12

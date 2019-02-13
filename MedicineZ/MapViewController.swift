@@ -1,4 +1,3 @@
-
 //
 //  MapViewController.swift
 //  MedicineZ
@@ -13,131 +12,181 @@ import CoreLocation
 
 class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate, XMLParserDelegate {
     
-    var xmlParser = XMLParser()
     
-    var currentElement = ""                // 현재 Element
-    var storeItems = [[String : String]]() // 약국 item Dictional Array
-    var storeItem = [String: String]()     // 약국 item Dictionary
-    var blank: Bool = false
     
-    var dutyName = "" // 약국 이름
-    var dutyAddr = "" // 약국 주소
-    var dutyTel1 = "" // 약국 전화번호
-    var wgs84Lat = "" // 약국 위도
-    var wgs84Lon = "" // 약국 경도
-    var dutyTime1c = "" // 평일 닫는 시간
-    var dutyTime1s = "" // 평일 여는 시간
-    //    var dutyTime2c = "" // 화요일 닫는 시간
-    //    var dutyTime2s = "" // 화요일 여는 시간
-    //    var dutyTime3c = "" // 수요일 닫는 시간
-    //    var dutyTime3s = "" // 수요일 여는 시간
-    //    var dutyTime4c = "" // 목요일 닫는 시간
-    //    var dutyTime4s = "" // 목요일 여는 시간
-    //    var dutyTime5c = "" // 금요일 닫는 시간
-    //    var dutyTime5s = "" // 금요일 여는 시간
-    var dutyTime6c = "" // 토요일 닫는 시간
-    var dutyTime6s = "" // 토요일 여는 시간
-    var dutyTime7c = "" // 일요일 닫는 시간
-    var dutyTime7s = "" // 일요일 여는 시간
-    var dutyTime8c = "" // 공휴일 닫는 시간
-    var dutyTime8s = "" // 공휴일 여는 시간
+    var pharmacy = [Pharmacy]()
     
-    let totalEnteries = 231
-    var limit = 20
-    var index = 1
     
-    //23051개의 데이터
     
-    func requestStoreInfo(i:Int) {
-        // OPEN API 주소
-        let url = "http://apis.data.go.kr/B552657/ErmctInsttInfoInqireService/getParmacyFullDown?ServiceKey=RwTAsfYxRQL6Cc%2B0YC0SV91hEUl1mZRg8lbvZY%2FxV01GRy12jjqZ87mLC%2FkzFUNjiayFkHNwji7zyXljh2Ng%2FA%3D%3D&numOfRows=100&pageNo="
-        
-        var requestURL: String = url + String(i)
-        guard let xmlParser = XMLParser(contentsOf: URL(string: url)!) else { return }
-        
-        xmlParser.delegate = self;
-        xmlParser.parse()
-    }
-    
-    // XMLParserDelegate 함수
-    // XML 파서가 시작 테그를 만나면 호출됨
-    public func parser(_ parser: XMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String] = [:])
-    {
-        currentElement = elementName
-        //        if (elementName == "item") {
-        //            storeItem = [String : String]()
-        //            dutyName = ""
-        //            dutyAddr = ""
-        //            dutyTel1 = ""
-        //            wgs84Lat = ""
-        //            wgs84Lon = ""
-        //            dutyTime1c = ""
-        //            dutyTime1s = ""
-        //            dutyTime6c = ""
-        //            dutyTime6s = ""
-        //            dutyTime7c = ""
-        //            dutyTime7s = ""
-        //            dutyTime8c = ""
-        //            dutyTime8s = ""
-        //        }
-        blank = true
-    }
-    
-    // XML 파서가 종료 테그를 만나면 호출됨
-    public func parser(_ parser: XMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?)
-    {
-        if (elementName == "item") {
-            storeItem["dutyName"] = dutyName;
-            storeItem["dutyAddr"] = dutyAddr;
-            storeItem["dutyTel1"] = dutyTel1;
-            storeItem["wgs84Lat"] = wgs84Lat;
-            storeItem["wgs84Lon"] = wgs84Lon;
-            storeItem["dutyTime1c"] = dutyTime1c;
-            storeItem["dutyTime1s"] = dutyTime1s;
-            storeItem["dutyTime6c"] = dutyTime6c;
-            storeItem["dutyTime6s"] = dutyTime6s;
-            storeItem["dutyTime7c"] = dutyTime7c;
-            storeItem["dutyTime7s"] = dutyTime7s;
-            storeItem["dutyTime8c"] = dutyTime8c;
-            storeItem["dutyTime8s"] = dutyTime8s;
+    func getJsonFromDirectory() {
+        let path = Bundle.main.path(forResource: "pharmacy", ofType: "json")
+        let url = URL(fileURLWithPath: path!)
+        do {
+            let data = try Data(contentsOf: url)
+            let jlist = try JSONDecoder().decode([Pharmacy].self, from: data)
+            pharmacy = jlist
+            print(pharmacy[0].dutyName!)
             
-            storeItems.append(storeItem)
+        } catch let err{
+            print(err)
         }
-        
-        blank = false
+        //        if let path = Bundle.main.path(forResource: "pharmacy", ofType : "json"){
+        //            do {
+        //                let data = try Data(contentsOf: URL(fileURLWithPath: path))
+        //                let jList = try JSONDecoder().decode([Pharmacy].self, from: data)
+        //                pharmacy = jList
+        //                print(pharmacy)
+        //
+        //            } catch let error {
+        //                print("parse error: \(error.localizedDescription)")
+        //            }
+        //        } else {
+        //            print("Invalid filename/path.")
+        //        }
     }
     
-    // 현재 테그에 담겨있는 문자열 전달
-    public func parser(_ parser: XMLParser, foundCharacters string: String)
-    {
-        if (blank == true && currentElement == "dutyName") {
-            dutyName = string
-        } else if (blank == true && currentElement == "dutyAddr") {
-            dutyAddr = string
-        } else if (blank == true && currentElement == "dutyTel1"){
-            dutyTel1 = string
-        } else if (blank == true && currentElement == "wgs84Lat"){
-            wgs84Lat = string
-        } else if (blank == true && currentElement == "wgs84Lon"){
-            wgs84Lon = string
-        } else if (blank == true && currentElement == "dutyTime1c"){
-            dutyTime1c = string
-        } else if (blank == true && currentElement == "dutyTime1s"){
-            dutyTime1s = string
-        } else if (blank == true && currentElement == "dutyTime6c"){
-            dutyTime6c = string
-        } else if (blank == true && currentElement == "dutyTime6s"){
-            dutyTime6s = string
-        } else if (blank == true && currentElement == "dutyTime7c"){
-            dutyTime7c = string
-        } else if (blank == true && currentElement == "dutyTime7s"){
-            dutyTime7s = string
-        } else if (blank == true && currentElement == "dutyTime8c"){
-            dutyTime8c = string
-        } else if (blank == true && currentElement == "dutyTime8s"){
-            dutyTime8s = string
-        }
-    }
+    
+    //    static func readJSONFromFile (fileName: String) -> Any? {
+    //        var json: Any?
+    //        var pharmacy = [Pharmacy]()
+    //        if let path = Bundle.main.path(forResource: "pharmacy", ofType: "json") {
+    //            do {
+    //                let fileUrl = URL(fileURLWithPath: path)
+    //                //getting data from JSON file using the file URL
+    //                let data = try Data(contentsOf: fileUrl, options: .mappedIfSafe)
+    //                json = try? JSONSerialization.jsonObject(with: data)
+    //                pharmacy = json as! [Pharmacy]
+    //            } catch {
+    //                print("error")
+    //            }
+    //        }
+    //        return json
+    //    }
+    //    var xmlParser = XMLParser()
+    //
+    //    var currentElement = ""                // 현재 Element
+    //    var storeItems = [[String : String]]() // 약국 item Dictional Array
+    //    var storeItem = [String: String]()     // 약국 item Dictionary
+    //    var blank: Bool = false
+    //
+    //    var dutyName = "" // 약국 이름
+    //    var dutyAddr = "" // 약국 주소
+    //    var dutyTel1 = "" // 약국 전화번호
+    //    var wgs84Lat = "" // 약국 위도
+    //    var wgs84Lon = "" // 약국 경도
+    //    var dutyTime1c = "" // 평일 닫는 시간
+    //    var dutyTime1s = "" // 평일 여는 시간
+    //    //    var dutyTime2c = "" // 화요일 닫는 시간
+    //    //    var dutyTime2s = "" // 화요일 여는 시간
+    //    //    var dutyTime3c = "" // 수요일 닫는 시간
+    //    //    var dutyTime3s = "" // 수요일 여는 시간
+    //    //    var dutyTime4c = "" // 목요일 닫는 시간
+    //    //    var dutyTime4s = "" // 목요일 여는 시간
+    //    //    var dutyTime5c = "" // 금요일 닫는 시간
+    //    //    var dutyTime5s = "" // 금요일 여는 시간
+    //    var dutyTime6c = "" // 토요일 닫는 시간
+    //    var dutyTime6s = "" // 토요일 여는 시간
+    //    var dutyTime7c = "" // 일요일 닫는 시간
+    //    var dutyTime7s = "" // 일요일 여는 시간
+    //    var dutyTime8c = "" // 공휴일 닫는 시간
+    //    var dutyTime8s = "" // 공휴일 여는 시간
+    //
+    //    let totalEnteries = 231
+    //    var limit = 20
+    //    var index = 1
+    //
+    //    //23051개의 데이터
+    //
+    //    func requestStoreInfo(i:Int) {
+    //        // OPEN API 주소
+    //        let url = "http://apis.data.go.kr/B552657/ErmctInsttInfoInqireService/getParmacyFullDown?ServiceKey=RwTAsfYxRQL6Cc%2B0YC0SV91hEUl1mZRg8lbvZY%2FxV01GRy12jjqZ87mLC%2FkzFUNjiayFkHNwji7zyXljh2Ng%2FA%3D%3D&numOfRows=100&pageNo="
+    //
+    //        var requestURL: String = url + String(i)
+    //        guard let xmlParser = XMLParser(contentsOf: URL(string: url)!) else { return }
+    //
+    //        xmlParser.delegate = self;
+    //        xmlParser.parse()
+    //    }
+    //
+    //    // XMLParserDelegate 함수
+    //    // XML 파서가 시작 테그를 만나면 호출됨
+    //    public func parser(_ parser: XMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String] = [:])
+    //    {
+    //        currentElement = elementName
+    //        //        if (elementName == "item") {
+    //        //            storeItem = [String : String]()
+    //        //            dutyName = ""
+    //        //            dutyAddr = ""
+    //        //            dutyTel1 = ""
+    //        //            wgs84Lat = ""
+    //        //            wgs84Lon = ""
+    //        //            dutyTime1c = ""
+    //        //            dutyTime1s = ""
+    //        //            dutyTime6c = ""
+    //        //            dutyTime6s = ""
+    //        //            dutyTime7c = ""
+    //        //            dutyTime7s = ""
+    //        //            dutyTime8c = ""
+    //        //            dutyTime8s = ""
+    //        //        }
+    //        blank = true
+    //    }
+    //
+    //    // XML 파서가 종료 테그를 만나면 호출됨
+    //    public func parser(_ parser: XMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?)
+    //    {
+    //        if (elementName == "item") {
+    //            storeItem["dutyName"] = dutyName;
+    //            storeItem["dutyAddr"] = dutyAddr;
+    //            storeItem["dutyTel1"] = dutyTel1;
+    //            storeItem["wgs84Lat"] = wgs84Lat;
+    //            storeItem["wgs84Lon"] = wgs84Lon;
+    //            storeItem["dutyTime1c"] = dutyTime1c;
+    //            storeItem["dutyTime1s"] = dutyTime1s;
+    //            storeItem["dutyTime6c"] = dutyTime6c;
+    //            storeItem["dutyTime6s"] = dutyTime6s;
+    //            storeItem["dutyTime7c"] = dutyTime7c;
+    //            storeItem["dutyTime7s"] = dutyTime7s;
+    //            storeItem["dutyTime8c"] = dutyTime8c;
+    //            storeItem["dutyTime8s"] = dutyTime8s;
+    //
+    //            storeItems.append(storeItem)
+    //        }
+    //
+    //        blank = false
+    //    }
+    //
+    //    // 현재 테그에 담겨있는 문자열 전달
+    //    public func parser(_ parser: XMLParser, foundCharacters string: String)
+    //    {
+    //        if (blank == true && currentElement == "dutyName") {
+    //            dutyName = string
+    //        } else if (blank == true && currentElement == "dutyAddr") {
+    //            dutyAddr = string
+    //        } else if (blank == true && currentElement == "dutyTel1"){
+    //            dutyTel1 = string
+    //        } else if (blank == true && currentElement == "wgs84Lat"){
+    //            wgs84Lat = string
+    //        } else if (blank == true && currentElement == "wgs84Lon"){
+    //            wgs84Lon = string
+    //        } else if (blank == true && currentElement == "dutyTime1c"){
+    //            dutyTime1c = string
+    //        } else if (blank == true && currentElement == "dutyTime1s"){
+    //            dutyTime1s = string
+    //        } else if (blank == true && currentElement == "dutyTime6c"){
+    //            dutyTime6c = string
+    //        } else if (blank == true && currentElement == "dutyTime6s"){
+    //            dutyTime6s = string
+    //        } else if (blank == true && currentElement == "dutyTime7c"){
+    //            dutyTime7c = string
+    //        } else if (blank == true && currentElement == "dutyTime7s"){
+    //            dutyTime7s = string
+    //        } else if (blank == true && currentElement == "dutyTime8c"){
+    //            dutyTime8c = string
+    //        } else if (blank == true && currentElement == "dutyTime8s"){
+    //            dutyTime8s = string
+    //        }
+    //    }
     
     
     
@@ -177,6 +226,29 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     var geocoder = CLGeocoder()
     
     
+    //json data
+    //    do {
+    //    if let file  = Bundle.main.url(forResource: "pharmacy", withExtension: "json"){
+    //    let data  = try Data(contentsOf: file)
+    //    let json = try JSONSerialization.jsonObject(with: data, options: [])
+    //
+    //    if let objects = json as? [Any]{
+    //    for object in objects {
+    //    dbData.append(<JsonFileInputClass>.dataFormJSONObject(json: object as! [String : AnyObject])!)
+    //    }
+    //    } else{
+    //    print("JSON is invalid")
+    //    }
+    //    }else{
+    //    print("no file")
+    //    }
+    //    }  catch {
+    //    print(error.localizedDescription)
+    //
+    //    }
+    
+    
+    
     @IBOutlet weak var myMap: MKMapView!
     
     var startLocation: CLLocation!
@@ -184,10 +256,15 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
+        
+        getJsonFromDirectory()
+        //print(pharmacy[0].dutyName)
         //파싱
-        for i in 1...5{
-        requestStoreInfo(i: i)
-        }
+        //        for i in 1...5{
+        //        requestStoreInfo(i: i)
+        //        }
         // Do any additional setup after loading the view.
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest //배터리로 동작할 때 권장되는 가장 높은 수준의 정확도
@@ -300,10 +377,15 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        for i in 0..<storeItems.count {
+        getJsonFromDirectory()
+        //        print(pharmacyInfo[0].dutyName)
+        
+        // MapViewController.readJSONFromFile (fileName: "pharmacy")
+        
+        for i in 0..<pharmacy.count {
             let annotation = MKPointAnnotation()
-            annotation.title = storeItems[i]["dutyName"]
-            annotation.coordinate = CLLocationCoordinate2D(latitude: Double(storeItems[i]["wgs84Lat"]!)!, longitude: Double(storeItems[i]["wgs84Lon"]!)!)
+            annotation.title = pharmacy[i].dutyName
+            annotation.coordinate = CLLocationCoordinate2D(latitude: Double(pharmacy[i].wgs84Lat!) ?? 0, longitude: pharmacy[i].wgs84Lon ?? 0)
             myMap.isZoomEnabled = true // 줌 가능
             myMap.isScrollEnabled = true // 스크롤 가능
             //let cood = myMap.centerCoordinate // 중앙 좌표 얻기

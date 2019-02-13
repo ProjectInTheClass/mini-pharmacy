@@ -18,11 +18,9 @@ class userInfo:NSObject, NSCoding {
     var alarmTimeSetting3:String?
     var segment:String
     var repetition:String?
-    var eatingDay:String?
-    var notEatingDay:String?
     
     
-    init(alarmName: String, memo: String, alarmTimeSetting: String, alarmTimeSetting2: String, alarmTimeSetting3: String, segment: String, repetition:String, eatingDay: String, notEatingDay: String) {
+    init(alarmName: String, memo: String, alarmTimeSetting: String, alarmTimeSetting2: String, alarmTimeSetting3: String, segment: String, repetition:String) {
         self.alarmName = alarmName
         self.memo = memo
         self.alarmTimeSetting = alarmTimeSetting
@@ -30,8 +28,6 @@ class userInfo:NSObject, NSCoding {
         self.alarmTimeSetting3 = alarmTimeSetting3
         self.segment = segment
         self.repetition = repetition
-        self.eatingDay = eatingDay
-        self.notEatingDay = notEatingDay
       
     }
     required init?(coder aDecoder: NSCoder) {
@@ -42,8 +38,6 @@ class userInfo:NSObject, NSCoding {
         self.alarmTimeSetting3 = aDecoder.decodeObject(forKey: "time3") as? String
         self.segment = aDecoder.decodeObject(forKey: "segment") as! String
         self.repetition = aDecoder.decodeObject(forKey: "repeat") as? String
-        self.eatingDay = aDecoder.decodeObject(forKey: "eating") as? String
-        self.notEatingDay = aDecoder.decodeObject(forKey: "notEating") as? String
  
 
     }
@@ -55,7 +49,5 @@ class userInfo:NSObject, NSCoding {
         aCoder.encode(self.alarmTimeSetting3, forKey: "time3")
         aCoder.encode(self.segment, forKey: "segment")
         aCoder.encode(self.repetition, forKey: "repeat")
-        aCoder.encode(self.eatingDay, forKey: "eating")
-        aCoder.encode(self.notEatingDay, forKey: "notEating")
     }
 }

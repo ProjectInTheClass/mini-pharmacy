@@ -16,6 +16,7 @@ class DataCenter{
     var pillList = [[[String:String]]]()
     var eatingDayInfo2:[eatingDayInfo] = []
     
+    
     var HomeUpdateCheck = false
     var TimeLineUpdateCheck = false
     var today = ""

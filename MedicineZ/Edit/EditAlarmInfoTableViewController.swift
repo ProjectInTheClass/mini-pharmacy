@@ -9,14 +9,11 @@ import UserNotifications
 import UIKit
 
 class EditAlarmInfoTableViewController: UITableViewController, UITextFieldDelegate, UNUserNotificationCenterDelegate, EditAlarmRepetitionProtocol, EditAlarmInfoProtocol {
-    
     var alarmGranted: Bool = false
     var drugItems = [[String:String]]()
     var infoIndexPath = IndexPath()
     var segment = ""
     var repetition: String = ""
-    var eatingDay: String = " "
-    var notEatingDay: String = " "
     var buttonIndex:Int = 1
 
     @IBOutlet weak var alarmName: UITextField!
@@ -24,6 +21,7 @@ class EditAlarmInfoTableViewController: UITableViewController, UITextFieldDelega
     @IBOutlet weak var alarmTimeSetting: UITextField!
     @IBOutlet weak var alarmTimeSetting2: UITextField!
     @IBOutlet weak var alarmTimeSetting3: UITextField!
+    
     @IBOutlet weak var alarmRepetition: UIButton!
     
     @IBOutlet weak var firstButton: UIButton!
@@ -111,13 +109,10 @@ class EditAlarmInfoTableViewController: UITableViewController, UITextFieldDelega
     @IBAction func save(_ sender: Any) {
         if(alarmName.text != "" && alarmTimeSetting.text != "" && alarmRepetition.titleLabel?.text != ""){
             DataCenter.sharedInstnce.drugList.remove(at: infoIndexPath.row)
-            DataCenter.sharedInstnce.drugList.insert(userInfo(alarmName: alarmName.text!, memo: memo.text!, alarmTimeSetting: alarmTimeSetting.text!, alarmTimeSetting2: alarmTimeSetting2.text!, alarmTimeSetting3: alarmTimeSetting3.text!, segment: segment, repetition: repetition, eatingDay: eatingDay, notEatingDay: notEatingDay), at: infoIndexPath.row)
+            DataCenter.sharedInstnce.drugList.insert(userInfo(alarmName: alarmName.text!, memo: memo.text!, alarmTimeSetting: alarmTimeSetting.text!, alarmTimeSetting2: alarmTimeSetting2.text!, alarmTimeSetting3: alarmTimeSetting3.text!, segment: segment, repetition: repetition), at: infoIndexPath.row)
             DataCenter.sharedInstnce.pillList.remove(at: infoIndexPath.row)
             DataCenter.sharedInstnce.pillList.insert(drugItems, at: infoIndexPath.row)
-            let alert = UIAlertController(title: "저장", message: "저장 완료되었습니다!", preferredStyle: .alert)
-            let cancelAction = UIAlertAction(title: "확인", style: .cancel, handler: nil)
-            alert.addAction(cancelAction)
-            self.present(alert, animated: true, completion: nil)
+            
         }else{
             let alert = UIAlertController(title: "다시 입력", message: "필수 항목이 다 입력되지 않았어요!", preferredStyle: .alert)
             let cancelAction = UIAlertAction(title: "확인", style: .cancel, handler: nil)
@@ -162,11 +157,12 @@ class EditAlarmInfoTableViewController: UITableViewController, UITextFieldDelega
     }
         
  
-//    @IBAction func close(_ sender: Any) {
-//        self.dismiss(animated: true, completion: nil)
-//    }
+    @IBAction func close(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
+       
         setLocalNotification()
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         view.addGestureRecognizer(tap)
@@ -202,6 +198,7 @@ class EditAlarmInfoTableViewController: UITableViewController, UITextFieldDelega
         repetition = DataCenter.sharedInstnce.drugList[infoIndexPath.row].repetition!
         drugItems = DataCenter.sharedInstnce.pillList[infoIndexPath.row]
         segment = DataCenter.sharedInstnce.drugList[infoIndexPath.row].segment
+        alarmRepetition.titleLabel?.text! = repetition
         
         drugList1.text = ""
         drugList2.text = ""
@@ -230,11 +227,11 @@ class EditAlarmInfoTableViewController: UITableViewController, UITextFieldDelega
             buttonIndex += 1
 
         }
-        
+        alarmRepetition.setTitle(repetition, for: .normal)
+
     }
     override func viewWillAppear(_ animated: Bool) {
-        print(drugItems)
-        alarmRepetition.titleLabel?.adjustsFontSizeToFitWidth = true
+//        alarmRepetition.titleLabel?.adjustsFontSizeToFitWidth = true
         alarmRepetition.titleLabel?.text = repetition
         if drugItems.count == 1{
             drugList1.text = "💊 " + drugItems[0]["ITEM_NAME"]!
@@ -331,9 +328,7 @@ class EditAlarmInfoTableViewController: UITableViewController, UITextFieldDelega
         alarmTimeSetting3.text = dateFormatter3.string(from: datePicker3.date)
     }
     
-    func changeValue(eatingDay: String, notEatingDay: String, repetition: String){
-        self.eatingDay = eatingDay
-        self.notEatingDay = notEatingDay
+    func changeValue(repetition: String){
         self.repetition = repetition
         
     }

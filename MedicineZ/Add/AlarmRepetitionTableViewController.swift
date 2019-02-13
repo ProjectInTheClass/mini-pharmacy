@@ -8,7 +8,7 @@
 
 import UIKit
 protocol AddAlarmViewDelegateProtocol {
-    func changeValue(monday: Bool, tuesday: Bool,wednesday: Bool, thursday: Bool, friday: Bool, saturday: Bool, sunday: Bool, eatingDay: String, notEatingDay: String, repetition: String)
+    func changeValue(monday: Bool, tuesday: Bool,wednesday: Bool, thursday: Bool, friday: Bool, saturday: Bool, sunday: Bool, repetition: String)
     
 }
 
@@ -22,11 +22,10 @@ class AlarmRepetitionTableViewController: UITableViewController,UITextFieldDeleg
     var friday:Bool = false
     var saturday:Bool = false
     var sunday:Bool = false
+    var everyday:Bool = false
     var repetition:String = ""
  
-    
-    @IBOutlet weak var eatingDay: UITextField! {didSet { eatingDay.delegate = self}}
-    @IBOutlet weak var notEatingDay: UITextField! {didSet { notEatingDay.delegate = self}}
+
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
     }
@@ -55,6 +54,8 @@ class AlarmRepetitionTableViewController: UITableViewController,UITextFieldDeleg
                 saturday = false
             case 6:
                 sunday = false
+            case 7:
+                everyday = false
             default:
                 break
             }
@@ -76,6 +77,8 @@ class AlarmRepetitionTableViewController: UITableViewController,UITextFieldDeleg
                 saturday = true
             case 6:
                 sunday = true
+            case 7:
+                everyday = true
             default:
                 break
             }
@@ -88,28 +91,36 @@ class AlarmRepetitionTableViewController: UITableViewController,UITextFieldDeleg
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         if self.navigationController?.topViewController != self {
-            if monday {
-                repetition = "월 "
+            if everyday{
+                repetition = "매일"
+                delegate?.changeValue(monday: monday, tuesday: tuesday, wednesday: wednesday, thursday: thursday, friday: friday, saturday: saturday, sunday: sunday, repetition: repetition)
+            }else if monday && tuesday && wednesday && thursday && friday && saturday && sunday{
+                repetition = "매일"
+                delegate?.changeValue(monday: monday, tuesday: tuesday, wednesday: wednesday, thursday: thursday, friday: friday, saturday: saturday, sunday: sunday, repetition: repetition)
+            }else{
+                if monday {
+                    repetition = "월 "
+                }
+                if tuesday {
+                    repetition += "화 "
+                }
+                if wednesday {
+                    repetition += "수 "
+                }
+                if thursday {
+                    repetition += "목 "
+                }
+                if friday {
+                    repetition += "금 "
+                }
+                if saturday {
+                    repetition += "토 "
+                }
+                if sunday {
+                    repetition += "일 "
+                }
+                delegate?.changeValue(monday: monday, tuesday: tuesday, wednesday: wednesday, thursday: thursday, friday: friday, saturday: saturday, sunday: sunday, repetition: repetition)
             }
-            if tuesday {
-                repetition += "화 "
-            }
-            if wednesday {
-                repetition += "수 "
-            }
-            if thursday {
-                repetition += "목 "
-            }
-            if friday {
-                repetition += "금 "
-            }
-            if saturday {
-                repetition += "토 "
-            }
-            if sunday {
-                repetition += "일 "
-            }
-            delegate?.changeValue(monday: monday, tuesday: tuesday, wednesday: wednesday, thursday: thursday, friday: friday, saturday: saturday, sunday: sunday, eatingDay: eatingDay.text!, notEatingDay: notEatingDay.text!, repetition: repetition)
         }
     }
  

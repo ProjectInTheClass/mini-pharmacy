@@ -29,6 +29,7 @@
 		52F5197D2212F4CA00F8CD40 /* pharmacy.json in Resources */ = {isa = PBXBuildFile; fileRef = 52F5197C2212F4CA00F8CD40 /* pharmacy.json */; };
 		52F519822212FBBE00F8CD40 /* OTPViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F519812212FBBE00F8CD40 /* OTPViewController.swift */; };
 		52F51986221305A700F8CD40 /* SoundSettingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F51985221305A700F8CD40 /* SoundSettingTableViewController.swift */; };
+		52F5198A2213FEEE00F8CD40 /* Pharmacy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F519892213FEEE00F8CD40 /* Pharmacy.swift */; };
 		52F897F02202CC4F007E1F0D /* userInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F897EF2202CC4F007E1F0D /* userInfo.swift */; };
 		52F897F22202CEBA007E1F0D /* AddAlarmTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F897F12202CEBA007E1F0D /* AddAlarmTableViewController.swift */; };
 /* End PBXBuildFile section */
@@ -61,6 +62,7 @@
 		52F5197C2212F4CA00F8CD40 /* pharmacy.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = pharmacy.json; sourceTree = "<group>"; };
 		52F519812212FBBE00F8CD40 /* OTPViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTPViewController.swift; sourceTree = "<group>"; };
 		52F51985221305A700F8CD40 /* SoundSettingTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundSettingTableViewController.swift; sourceTree = "<group>"; };
+		52F519892213FEEE00F8CD40 /* Pharmacy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pharmacy.swift; sourceTree = "<group>"; };
 		52F897EF2202CC4F007E1F0D /* userInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = userInfo.swift; sourceTree = "<group>"; };
 		52F897F12202CEBA007E1F0D /* AddAlarmTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAlarmTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -111,6 +113,7 @@
 				523746622211968B00346BC5 /* Edit */,
 				523746642211977D00346BC5 /* Search */,
 				52F5197E2212FB3200F8CD40 /* Setting */,
+				52F519892213FEEE00F8CD40 /* Pharmacy.swift */,
 			);
 			path = MedicineZ;
 			sourceTree = "<group>";
@@ -275,6 +278,7 @@
 				520FA24522103E32004CD515 /* WebViewController.swift in Sources */,
 				525C84D7220C275F00953458 /* TableViewCell.swift in Sources */,
 				5234878421E82403004BB1F3 /* AppDelegate.swift in Sources */,
+				52F5198A2213FEEE00F8CD40 /* Pharmacy.swift in Sources */,
 				520FA24422103E32004CD515 /* DrugInfoTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

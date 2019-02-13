@@ -19,8 +19,6 @@ class AlarmInfoTableViewController: UITableViewController {
     @IBOutlet weak var when: UILabel!
     @IBOutlet weak var repetition: UILabel!
     @IBOutlet weak var memo: UILabel!
-    @IBOutlet weak var eatingDay: UILabel!
-    @IBOutlet weak var notEatingDay: UILabel!
     
     @IBOutlet weak var pillList1: UILabel!
     @IBOutlet weak var pillList2: UILabel!
@@ -47,21 +45,11 @@ class AlarmInfoTableViewController: UITableViewController {
         pillList9.text = ""
         pillList10.text = ""
         
-//        alarmName.text = alarmInfoName
-//        alarmTime.text = alarmInfoTime
-//        when.text = alarmInfoWhen
-//        repetition.text = alarmInfoRepetition
-//        memo.text = alarmInfoMemo
-//        eatingDay!.text = "복약일 : " + alarmInfoEatingDay
-//        notEatingDay!.text = "휴약일 : " + alarmInfoNotEatingDay
-//        print(alarmInfoPillList)
         alarmName.text = DataCenter.sharedInstnce.drugList[alarmInfoIndexPath.row].alarmName
         alarmTime.text = DataCenter.sharedInstnce.drugList[alarmInfoIndexPath.row].alarmTimeSetting
         when.text = DataCenter.sharedInstnce.drugList[alarmInfoIndexPath.row].segment
         repetition.text = DataCenter.sharedInstnce.drugList[alarmInfoIndexPath.row].repetition
         memo.text = DataCenter.sharedInstnce.drugList[alarmInfoIndexPath.row].memo
-        eatingDay!.text = "복약일 : " + DataCenter.sharedInstnce.drugList[alarmInfoIndexPath.row].eatingDay!
-        notEatingDay!.text = "휴약일 : " + DataCenter.sharedInstnce.drugList[alarmInfoIndexPath.row].notEatingDay!
         alarmInfoPillList = DataCenter.sharedInstnce.pillList[alarmInfoIndexPath.row]
         
         
@@ -144,21 +132,11 @@ class AlarmInfoTableViewController: UITableViewController {
         pillList9.text = ""
         pillList10.text = ""
         
-        //        alarmName.text = alarmInfoName
-        //        alarmTime.text = alarmInfoTime
-        //        when.text = alarmInfoWhen
-        //        repetition.text = alarmInfoRepetition
-        //        memo.text = alarmInfoMemo
-        //        eatingDay!.text = "복약일 : " + alarmInfoEatingDay
-        //        notEatingDay!.text = "휴약일 : " + alarmInfoNotEatingDay
-        //        print(alarmInfoPillList)
         alarmName.text = DataCenter.sharedInstnce.drugList[alarmInfoIndexPath.row].alarmName
         alarmTime.text = DataCenter.sharedInstnce.drugList[alarmInfoIndexPath.row].alarmTimeSetting
         when.text = DataCenter.sharedInstnce.drugList[alarmInfoIndexPath.row].segment
         repetition.text = DataCenter.sharedInstnce.drugList[alarmInfoIndexPath.row].repetition
         memo.text = DataCenter.sharedInstnce.drugList[alarmInfoIndexPath.row].memo
-        eatingDay!.text = "복약일 : " + DataCenter.sharedInstnce.drugList[alarmInfoIndexPath.row].eatingDay!
-        notEatingDay!.text = "휴약일 : " + DataCenter.sharedInstnce.drugList[alarmInfoIndexPath.row].notEatingDay!
         alarmInfoPillList = DataCenter.sharedInstnce.pillList[alarmInfoIndexPath.row]
         
         
@@ -230,15 +208,16 @@ class AlarmInfoTableViewController: UITableViewController {
         }
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+
+        if let detailVC = segue.destination as? UINavigationController{
+            if let targetVC = detailVC.topViewController as? EditAlarmInfoTableViewController{
+                targetVC.infoIndexPath = alarmInfoIndexPath
+                
+            }
         
-        if let detailVC = segue.destination as? EditAlarmInfoTableViewController{
-           
-            detailVC.infoIndexPath = alarmInfoIndexPath
-            detailVC.accessibilityViewIsModal = true
         }
     }
 
-        
 }
 
 
