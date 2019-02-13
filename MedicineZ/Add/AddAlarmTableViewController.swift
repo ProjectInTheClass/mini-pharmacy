@@ -343,12 +343,31 @@ class AddAlarmTableViewController: UITableViewController, AddAlarmViewDelegatePr
             dateComponents.hour = Int(subHour)
             dateComponents.minute = Int(subMin)
             
-            if String(string[string.startIndex]) == "P" {
+            if subHour == "12" && String(string[string.startIndex]) == "A" {
+                dateComponents.hour = dateComponents.hour! + 12
+            } else if subHour != "12" && String(string[string.startIndex]) == "P" {
                 dateComponents.hour = dateComponents.hour! + 12
             }
+            
             if repetition == "매일" {
                 var lnMessageId: String = alarmName.text! + "1"
-                alarmTrigger(dateMatcing: dateComponents, lnMessageId: lnMessageId)
+                let content = UNMutableNotificationContent()
+                content.title = "미니약국"
+                content.body = "약 먹을 시간이에요!"
+                content.sound = UNNotificationSound.default
+                let lnM = lnMessageId
+                let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
+                let request = UNNotificationRequest(identifier: lnM, content: content, trigger: trigger)
+                let center = UNUserNotificationCenter.current()
+                center.add(request) { (error) in
+                    print(error?.localizedDescription ?? "")
+                }
+                alarmIdentifier.append(lnM)
+                center.getPendingNotificationRequests(completionHandler: { requests in
+                    for request in requests {
+                        print(request)
+                    }
+                })
             }
             if repetition != "매일" && repetition.contains("일") {
                 dateComponents.weekday = 1
@@ -407,7 +426,23 @@ class AddAlarmTableViewController: UITableViewController, AddAlarmViewDelegatePr
             }
             if repetition == "매일" {
                 var lnMessageId: String = alarmName.text! + "2"
-                alarmTrigger(dateMatcing: dateComponents2, lnMessageId: lnMessageId)
+                let content = UNMutableNotificationContent()
+                content.title = "미니약국"
+                content.body = "약 먹을 시간이에요!"
+                content.sound = UNNotificationSound.default
+                let lnM = lnMessageId
+                let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents2, repeats: true)
+                let request = UNNotificationRequest(identifier: lnM, content: content, trigger: trigger)
+                let center = UNUserNotificationCenter.current()
+                center.add(request) { (error) in
+                    print(error?.localizedDescription ?? "")
+                }
+                alarmIdentifier.append(lnM)
+                center.getPendingNotificationRequests(completionHandler: { requests in
+                    for request in requests {
+                        print(request)
+                    }
+                })
             }
             if repetition != "매일" && repetition.contains("일") {
                 dateComponents2.weekday = 1
@@ -467,7 +502,23 @@ class AddAlarmTableViewController: UITableViewController, AddAlarmViewDelegatePr
             
             if repetition == "매일" {
                 var lnMessageId: String = alarmName.text! + "3"
-                alarmTrigger(dateMatcing: dateComponents3, lnMessageId: lnMessageId)
+                let content = UNMutableNotificationContent()
+                content.title = "미니약국"
+                content.body = "약 먹을 시간이에요!"
+                content.sound = UNNotificationSound.default
+                let lnM = lnMessageId
+                let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents3, repeats: true)
+                let request = UNNotificationRequest(identifier: lnM, content: content, trigger: trigger)
+                let center = UNUserNotificationCenter.current()
+                center.add(request) { (error) in
+                    print(error?.localizedDescription ?? "")
+                }
+                alarmIdentifier.append(lnM)
+                center.getPendingNotificationRequests(completionHandler: { requests in
+                    for request in requests {
+                        print(request)
+                    }
+                })
             }
             if repetition != "매일" && repetition.contains("일") {
                 dateComponents3.weekday = 1
