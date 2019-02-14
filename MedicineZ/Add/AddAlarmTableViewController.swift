@@ -22,8 +22,6 @@ class AddAlarmTableViewController: UITableViewController, AddAlarmViewDelegatePr
     var drugItems = [[String:String]]()
     var buttonIndex:Int = 1
 
-//    var alarmGranted: Bool = false
-    var alarmGranted = UserDefaults.standard.bool(forKey: "alarmGranted")
     var alarmIdentifier = [String]()
 
     var drugListName = [String]()
@@ -130,17 +128,12 @@ class AddAlarmTableViewController: UITableViewController, AddAlarmViewDelegatePr
     
     
     @IBAction func save(_ sender: Any) {
-        if(alarmName.text != "" && alarmTimeSetting.text != "" && alarmRepetition.titleLabel?.text != "선택" && alarmGranted == true){
+        if(alarmName.text != "" && alarmTimeSetting.text != "" && alarmRepetition.titleLabel?.text != "선택"){
             alarm()
             DataCenter.sharedInstance.drugList.append(userInfo(alarmName: alarmName.text!, memo: memo.text!, alarmTimeSetting: alarmTimeSetting.text!, alarmTimeSetting2: alarmTimeSetting2.text!, alarmTimeSetting3: alarmTimeSetting3.text!, segment: segment, repetition: repetition))
             DataCenter.sharedInstance.pillList.append(drugItems)
             DataCenter.sharedInstance.alarmIdentifierList.append(alarmIdentifier)
             self.dismiss(animated: true, completion: nil)
-        }else if(alarmName.text != "" && alarmTimeSetting.text != "" && alarmRepetition.titleLabel?.text != "선택" && alarmGranted == false){
-            let alert = UIAlertController(title: "알람 설정", message: "알람을 허용하지 않았어요!", preferredStyle: .alert)
-            let cancelAction = UIAlertAction(title: "확인", style: .cancel, handler: nil)
-            alert.addAction(cancelAction)
-            self.present(alert, animated: true, completion: nil)
         }else{
             let alert = UIAlertController(title: "다시 입력", message: "필수 항목이 다 입력되지 않았어요!", preferredStyle: .alert)
             let cancelAction = UIAlertAction(title: "확인", style: .cancel, handler: nil)
@@ -157,8 +150,7 @@ class AddAlarmTableViewController: UITableViewController, AddAlarmViewDelegatePr
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let alarmGranted1 = UserDefaults.standard.bool(forKey: "alarmGranted")
-        alarmGranted = alarmGranted1
+       
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         view.addGestureRecognizer(tap)
         
@@ -252,8 +244,6 @@ class AddAlarmTableViewController: UITableViewController, AddAlarmViewDelegatePr
     
     override func viewWillAppear(_ animated: Bool) {
         alarmRepetition.titleLabel?.adjustsFontSizeToFitWidth = true
-        let alarmGranted1 = UserDefaults.standard.bool(forKey: "alarmGranted")
-        alarmGranted = alarmGranted1
         alarmRepetition.setTitle(repetition, for: .normal)
         if drugItems.count == 1{
             drugList1.text = "💊 " + drugItems[0]["ITEM_NAME"]!

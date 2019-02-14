@@ -40,7 +40,7 @@ class MainTableViewController: UITableViewController {
                 (granted, error) in
                 if granted {
                     self.alarmGranted = true
-                    UserDefaults.standard.set(self.alarmGranted, forKey: "alarmGranted")
+                    UserDefaults.standard.set(self.alarmGranted, forKey: "switchState")
                 }
             }
         }

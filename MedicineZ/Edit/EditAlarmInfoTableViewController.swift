@@ -9,7 +9,7 @@ import UserNotifications
 import UIKit
 
 class EditAlarmInfoTableViewController: UITableViewController, UITextFieldDelegate, UNUserNotificationCenterDelegate, EditAlarmRepetitionProtocol, EditAlarmInfoProtocol {
-    var alarmGranted: Bool = false
+    var alarmGranted: Bool = UserDefaults.standard.bool(forKey: "switchState")
     var drugItems = [[String:String]]()
     var infoIndexPath = IndexPath()
     var segment = ""
