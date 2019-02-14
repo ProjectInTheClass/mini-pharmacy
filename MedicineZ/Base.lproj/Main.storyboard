@@ -3450,8 +3450,23 @@
                                             </label>
                                         </subviews>
                                     </stackView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kxc-ak-afc">
+                                        <rect key="frame" x="316" y="23" width="44" height="44"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="44" id="bvb-XK-Xbv"/>
+                                            <constraint firstAttribute="height" constant="44" id="oGE-id-jUL"/>
+                                        </constraints>
+                                        <state key="normal" title="Button" image="auricular-phone-symbol-in-a-circle-2"/>
+                                        <connections>
+                                            <action selector="call:" destination="1Hk-6b-o3s" eventType="touchUpInside" id="2Ie-Oh-idR"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="kxc-ak-afc" secondAttribute="trailing" constant="15" id="0JX-lK-5WS"/>
+                                    <constraint firstItem="kxc-ak-afc" firstAttribute="top" secondItem="pwF-3H-QYe" secondAttribute="top" constant="23" id="pg3-z7-rw2"/>
+                                </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -3464,14 +3479,9 @@
                         <viewLayoutGuide key="safeArea" id="lpi-io-vJ7"/>
                     </view>
                     <navigationItem key="navigationItem" title="약국 상세정보" id="GhD-I9-tKf">
-                        <barButtonItem key="leftBarButtonItem" title="닫기" id="jTp-BF-kle">
+                        <barButtonItem key="leftBarButtonItem" title="닫기" id="DGO-rp-ukR">
                             <connections>
-                                <action selector="close:" destination="1Hk-6b-o3s" id="wYF-c7-86l"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Item" id="5jr-JI-iBw">
-                            <connections>
-                                <action selector="call:" destination="1Hk-6b-o3s" id="Ka7-YN-RMu"/>
+                                <action selector="close:" destination="1Hk-6b-o3s" id="Mf9-SO-Vk2"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -3490,6 +3500,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="auricular-phone-symbol-in-a-circle-2" width="384" height="384"/>
         <image name="gps" width="24" height="24"/>
         <image name="negative" width="24" height="24"/>
         <image name="pharmacy" width="18.399999618530273" height="18.399999618530273"/>
