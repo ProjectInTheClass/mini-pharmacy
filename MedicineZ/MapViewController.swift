@@ -60,7 +60,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     override func viewDidLoad() {
         super.viewDidLoad()
         searchBar.delegate = self
-        searchBar.placeholder = "검색할 위치나 약국의 이름을 입력하세요."
+        searchBar.placeholder = "검색할 지역의 이름을 입력하세요."
         
         getJsonFromDirectory()
         //print(pharmacy[0].dutyName)
@@ -338,7 +338,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         }
         
         searchPharmacy(name: searchName)
-        //  _ = searchBar.resignFirstResponder()
+          _ = searchBar.resignFirstResponder()
         
     }
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar, didUpdateLocations locations: [CLLocation], latitude latitudeValue: CLLocationDegrees, longitude longitudeValue: CLLocationDegrees, delta span: Double) {
@@ -360,7 +360,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         //        myMap.setRegion(pRegion, animated: true)
         //filteredDatas = [[String:String]]()
         // tableView.reloadData()
-        //  _ = searchBar.resignFirstResponder()
+          _ = searchBar.resignFirstResponder()
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {

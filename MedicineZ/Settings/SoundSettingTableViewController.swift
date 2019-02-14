@@ -53,7 +53,7 @@ class SoundSettingTableViewController: UITableViewController, UNUserNotification
         if #available(iOS 10.0, *) {
             let center = UNUserNotificationCenter.current()
             let options: UNAuthorizationOptions = [.alert, .sound];
-            
+            let granted = alarmSwitch.isOn
             center.requestAuthorization(options: options) {
                 (granted, error) in
                 if granted {
