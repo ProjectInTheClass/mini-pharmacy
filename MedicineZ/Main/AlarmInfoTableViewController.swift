@@ -45,12 +45,13 @@ class AlarmInfoTableViewController: UITableViewController {
         pillList9.text = ""
         pillList10.text = ""
         
-        alarmName.text = DataCenter.sharedInstnce.drugList[alarmInfoIndexPath.row].alarmName
-        alarmTime.text = DataCenter.sharedInstnce.drugList[alarmInfoIndexPath.row].alarmTimeSetting
-        when.text = DataCenter.sharedInstnce.drugList[alarmInfoIndexPath.row].segment
-        repetition.text = DataCenter.sharedInstnce.drugList[alarmInfoIndexPath.row].repetition
-        memo.text = DataCenter.sharedInstnce.drugList[alarmInfoIndexPath.row].memo
-        alarmInfoPillList = DataCenter.sharedInstnce.pillList[alarmInfoIndexPath.row]
+        alarmName.text = DataCenter.sharedInstance.drugList[alarmInfoIndexPath.row].alarmName
+        alarmTime.text = DataCenter.sharedInstance.drugList[alarmInfoIndexPath.row].alarmTimeSetting
+        when.text = DataCenter.sharedInstance.drugList[alarmInfoIndexPath.row].segment
+        repetition.text = DataCenter.sharedInstance.drugList[alarmInfoIndexPath.row].repetition
+        memo.text = DataCenter.sharedInstance.drugList[alarmInfoIndexPath.row].memo
+        memo.adjustsFontSizeToFitWidth = true
+        alarmInfoPillList = DataCenter.sharedInstance.pillList[alarmInfoIndexPath.row]
         
         
         if alarmInfoPillList.count == 1{
@@ -132,12 +133,12 @@ class AlarmInfoTableViewController: UITableViewController {
         pillList9.text = ""
         pillList10.text = ""
         
-        alarmName.text = DataCenter.sharedInstnce.drugList[alarmInfoIndexPath.row].alarmName
-        alarmTime.text = DataCenter.sharedInstnce.drugList[alarmInfoIndexPath.row].alarmTimeSetting
-        when.text = DataCenter.sharedInstnce.drugList[alarmInfoIndexPath.row].segment
-        repetition.text = DataCenter.sharedInstnce.drugList[alarmInfoIndexPath.row].repetition
-        memo.text = DataCenter.sharedInstnce.drugList[alarmInfoIndexPath.row].memo
-        alarmInfoPillList = DataCenter.sharedInstnce.pillList[alarmInfoIndexPath.row]
+        alarmName.text = DataCenter.sharedInstance.drugList[alarmInfoIndexPath.row].alarmName
+        alarmTime.text = DataCenter.sharedInstance.drugList[alarmInfoIndexPath.row].alarmTimeSetting! + " " + DataCenter.sharedInstance.drugList[alarmInfoIndexPath.row].alarmTimeSetting2! + " " + DataCenter.sharedInstance.drugList[alarmInfoIndexPath.row].alarmTimeSetting3!
+        when.text = DataCenter.sharedInstance.drugList[alarmInfoIndexPath.row].segment
+        repetition.text = DataCenter.sharedInstance.drugList[alarmInfoIndexPath.row].repetition
+        memo.text = DataCenter.sharedInstance.drugList[alarmInfoIndexPath.row].memo
+        alarmInfoPillList = DataCenter.sharedInstance.pillList[alarmInfoIndexPath.row]
         
         
         if alarmInfoPillList.count == 1{

@@ -9,7 +9,7 @@
 import Foundation
 
 class DataCenter{
-    static let sharedInstnce = DataCenter()
+    static let sharedInstance = DataCenter()
     var drugList:[userInfo] = []
     var pillList = [[[String:String]]]()
     var alarmIdentifierList: [[String]] = []

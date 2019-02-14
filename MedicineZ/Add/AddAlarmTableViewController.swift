@@ -18,7 +18,7 @@ class AddAlarmTableViewController: UITableViewController, AddAlarmViewDelegatePr
     var friday: Bool = false
     var saturday: Bool = false
     var sunday: Bool = false
-    var repetition: String = ""
+    var repetition: String = "선택"
     var drugItems = [[String:String]]()
     var buttonIndex:Int = 1
 
@@ -83,7 +83,7 @@ class AddAlarmTableViewController: UITableViewController, AddAlarmViewDelegatePr
             firstButton.isEnabled = false
             buttonIndex += 1
         } else {
-            let alert = UIAlertController(title: "이런!", message: "첫 번째 시간을 채워주세요!", preferredStyle: .alert)
+            let alert = UIAlertController(title: "잠깐!", message: "첫 번째 시간을 채워주세요!", preferredStyle: .alert)
             let cancelAction = UIAlertAction(title: "확인", style: .cancel, handler: nil)
             alert.addAction(cancelAction)
             self.present(alert, animated: true, completion: nil)
@@ -95,7 +95,7 @@ class AddAlarmTableViewController: UITableViewController, AddAlarmViewDelegatePr
             secondButton.isHidden = true
             buttonIndex += 1
         } else {
-            let alert = UIAlertController(title: "이런!", message: "두 번째 시간을 채워주세요!", preferredStyle: .alert)
+            let alert = UIAlertController(title: "잠깐!", message: "두 번째 시간을 채워주세요!", preferredStyle: .alert)
             let cancelAction = UIAlertAction(title: "확인", style: .cancel, handler: nil)
             alert.addAction(cancelAction)
             self.present(alert, animated: true, completion: nil)
@@ -132,9 +132,9 @@ class AddAlarmTableViewController: UITableViewController, AddAlarmViewDelegatePr
     @IBAction func save(_ sender: Any) {
         if(alarmName.text != "" && alarmTimeSetting.text != "" && alarmRepetition.titleLabel?.text != "선택" && alarmGranted == true){
             alarm()
-            DataCenter.sharedInstnce.drugList.append(userInfo(alarmName: alarmName.text!, memo: memo.text!, alarmTimeSetting: alarmTimeSetting.text!, alarmTimeSetting2: alarmTimeSetting2.text!, alarmTimeSetting3: alarmTimeSetting3.text!, segment: segment, repetition: repetition))
-            DataCenter.sharedInstnce.pillList.append(drugItems)
-            DataCenter.sharedInstnce.alarmIdentifierList.append(alarmIdentifier)
+            DataCenter.sharedInstance.drugList.append(userInfo(alarmName: alarmName.text!, memo: memo.text!, alarmTimeSetting: alarmTimeSetting.text!, alarmTimeSetting2: alarmTimeSetting2.text!, alarmTimeSetting3: alarmTimeSetting3.text!, segment: segment, repetition: repetition))
+            DataCenter.sharedInstance.pillList.append(drugItems)
+            DataCenter.sharedInstance.alarmIdentifierList.append(alarmIdentifier)
             self.dismiss(animated: true, completion: nil)
         }else if(alarmName.text != "" && alarmTimeSetting.text != "" && alarmRepetition.titleLabel?.text != "선택" && alarmGranted == false){
             let alert = UIAlertController(title: "알람 설정", message: "알람을 허용하지 않았어요!", preferredStyle: .alert)
@@ -184,8 +184,8 @@ class AddAlarmTableViewController: UITableViewController, AddAlarmViewDelegatePr
         alarmTimeSetting.inputView = datePicker
         alarmTimeSetting2.inputView = datePicker2
         alarmTimeSetting3.inputView = datePicker3
-        alarmRepetition.titleLabel?.text = repetition
-        
+        alarmRepetition.setTitle(repetition, for: .normal)
+
         drugList1.text = ""
         drugList2.text = ""
         drugList3.text = ""
@@ -254,7 +254,7 @@ class AddAlarmTableViewController: UITableViewController, AddAlarmViewDelegatePr
         alarmRepetition.titleLabel?.adjustsFontSizeToFitWidth = true
         let alarmGranted1 = UserDefaults.standard.bool(forKey: "alarmGranted")
         alarmGranted = alarmGranted1
-        alarmRepetition.titleLabel?.text = repetition
+        alarmRepetition.setTitle(repetition, for: .normal)
         if drugItems.count == 1{
             drugList1.text = "💊 " + drugItems[0]["ITEM_NAME"]!
         }else if drugItems.count == 2{

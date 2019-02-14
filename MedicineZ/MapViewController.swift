@@ -1,3 +1,4 @@
+
 //
 //  MapViewController.swift
 //  MedicineZ
@@ -10,12 +11,15 @@ import UIKit
 import MapKit
 import CoreLocation
 
-class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate, XMLParserDelegate {
+class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate, UISearchBarDelegate {
     
     
+    @IBOutlet weak var searchBar: UISearchBar!
     
     var pharmacy = [Pharmacy]()
-    
+    var endTyping:Bool = false
+    var searchName = ""
+
     
     
     func getJsonFromDirectory() {
@@ -30,189 +34,9 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         } catch let err{
             print(err)
         }
-        //        if let path = Bundle.main.path(forResource: "pharmacy", ofType : "json"){
-        //            do {
-        //                let data = try Data(contentsOf: URL(fileURLWithPath: path))
-        //                let jList = try JSONDecoder().decode([Pharmacy].self, from: data)
-        //                pharmacy = jList
-        //                print(pharmacy)
-        //
-        //            } catch let error {
-        //                print("parse error: \(error.localizedDescription)")
-        //            }
-        //        } else {
-        //            print("Invalid filename/path.")
-        //        }
+        
     }
     
-    
-    //    static func readJSONFromFile (fileName: String) -> Any? {
-    //        var json: Any?
-    //        var pharmacy = [Pharmacy]()
-    //        if let path = Bundle.main.path(forResource: "pharmacy", ofType: "json") {
-    //            do {
-    //                let fileUrl = URL(fileURLWithPath: path)
-    //                //getting data from JSON file using the file URL
-    //                let data = try Data(contentsOf: fileUrl, options: .mappedIfSafe)
-    //                json = try? JSONSerialization.jsonObject(with: data)
-    //                pharmacy = json as! [Pharmacy]
-    //            } catch {
-    //                print("error")
-    //            }
-    //        }
-    //        return json
-    //    }
-    //    var xmlParser = XMLParser()
-    //
-    //    var currentElement = ""                // 현재 Element
-    //    var storeItems = [[String : String]]() // 약국 item Dictional Array
-    //    var storeItem = [String: String]()     // 약국 item Dictionary
-    //    var blank: Bool = false
-    //
-    //    var dutyName = "" // 약국 이름
-    //    var dutyAddr = "" // 약국 주소
-    //    var dutyTel1 = "" // 약국 전화번호
-    //    var wgs84Lat = "" // 약국 위도
-    //    var wgs84Lon = "" // 약국 경도
-    //    var dutyTime1c = "" // 평일 닫는 시간
-    //    var dutyTime1s = "" // 평일 여는 시간
-    //    //    var dutyTime2c = "" // 화요일 닫는 시간
-    //    //    var dutyTime2s = "" // 화요일 여는 시간
-    //    //    var dutyTime3c = "" // 수요일 닫는 시간
-    //    //    var dutyTime3s = "" // 수요일 여는 시간
-    //    //    var dutyTime4c = "" // 목요일 닫는 시간
-    //    //    var dutyTime4s = "" // 목요일 여는 시간
-    //    //    var dutyTime5c = "" // 금요일 닫는 시간
-    //    //    var dutyTime5s = "" // 금요일 여는 시간
-    //    var dutyTime6c = "" // 토요일 닫는 시간
-    //    var dutyTime6s = "" // 토요일 여는 시간
-    //    var dutyTime7c = "" // 일요일 닫는 시간
-    //    var dutyTime7s = "" // 일요일 여는 시간
-    //    var dutyTime8c = "" // 공휴일 닫는 시간
-    //    var dutyTime8s = "" // 공휴일 여는 시간
-    //
-    //    let totalEnteries = 231
-    //    var limit = 20
-    //    var index = 1
-    //
-    //    //23051개의 데이터
-    //
-    //    func requestStoreInfo(i:Int) {
-    //        // OPEN API 주소
-    //        let url = "http://apis.data.go.kr/B552657/ErmctInsttInfoInqireService/getParmacyFullDown?ServiceKey=RwTAsfYxRQL6Cc%2B0YC0SV91hEUl1mZRg8lbvZY%2FxV01GRy12jjqZ87mLC%2FkzFUNjiayFkHNwji7zyXljh2Ng%2FA%3D%3D&numOfRows=100&pageNo="
-    //
-    //        var requestURL: String = url + String(i)
-    //        guard let xmlParser = XMLParser(contentsOf: URL(string: url)!) else { return }
-    //
-    //        xmlParser.delegate = self;
-    //        xmlParser.parse()
-    //    }
-    //
-    //    // XMLParserDelegate 함수
-    //    // XML 파서가 시작 테그를 만나면 호출됨
-    //    public func parser(_ parser: XMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String] = [:])
-    //    {
-    //        currentElement = elementName
-    //        //        if (elementName == "item") {
-    //        //            storeItem = [String : String]()
-    //        //            dutyName = ""
-    //        //            dutyAddr = ""
-    //        //            dutyTel1 = ""
-    //        //            wgs84Lat = ""
-    //        //            wgs84Lon = ""
-    //        //            dutyTime1c = ""
-    //        //            dutyTime1s = ""
-    //        //            dutyTime6c = ""
-    //        //            dutyTime6s = ""
-    //        //            dutyTime7c = ""
-    //        //            dutyTime7s = ""
-    //        //            dutyTime8c = ""
-    //        //            dutyTime8s = ""
-    //        //        }
-    //        blank = true
-    //    }
-    //
-    //    // XML 파서가 종료 테그를 만나면 호출됨
-    //    public func parser(_ parser: XMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?)
-    //    {
-    //        if (elementName == "item") {
-    //            storeItem["dutyName"] = dutyName;
-    //            storeItem["dutyAddr"] = dutyAddr;
-    //            storeItem["dutyTel1"] = dutyTel1;
-    //            storeItem["wgs84Lat"] = wgs84Lat;
-    //            storeItem["wgs84Lon"] = wgs84Lon;
-    //            storeItem["dutyTime1c"] = dutyTime1c;
-    //            storeItem["dutyTime1s"] = dutyTime1s;
-    //            storeItem["dutyTime6c"] = dutyTime6c;
-    //            storeItem["dutyTime6s"] = dutyTime6s;
-    //            storeItem["dutyTime7c"] = dutyTime7c;
-    //            storeItem["dutyTime7s"] = dutyTime7s;
-    //            storeItem["dutyTime8c"] = dutyTime8c;
-    //            storeItem["dutyTime8s"] = dutyTime8s;
-    //
-    //            storeItems.append(storeItem)
-    //        }
-    //
-    //        blank = false
-    //    }
-    //
-    //    // 현재 테그에 담겨있는 문자열 전달
-    //    public func parser(_ parser: XMLParser, foundCharacters string: String)
-    //    {
-    //        if (blank == true && currentElement == "dutyName") {
-    //            dutyName = string
-    //        } else if (blank == true && currentElement == "dutyAddr") {
-    //            dutyAddr = string
-    //        } else if (blank == true && currentElement == "dutyTel1"){
-    //            dutyTel1 = string
-    //        } else if (blank == true && currentElement == "wgs84Lat"){
-    //            wgs84Lat = string
-    //        } else if (blank == true && currentElement == "wgs84Lon"){
-    //            wgs84Lon = string
-    //        } else if (blank == true && currentElement == "dutyTime1c"){
-    //            dutyTime1c = string
-    //        } else if (blank == true && currentElement == "dutyTime1s"){
-    //            dutyTime1s = string
-    //        } else if (blank == true && currentElement == "dutyTime6c"){
-    //            dutyTime6c = string
-    //        } else if (blank == true && currentElement == "dutyTime6s"){
-    //            dutyTime6s = string
-    //        } else if (blank == true && currentElement == "dutyTime7c"){
-    //            dutyTime7c = string
-    //        } else if (blank == true && currentElement == "dutyTime7s"){
-    //            dutyTime7s = string
-    //        } else if (blank == true && currentElement == "dutyTime8c"){
-    //            dutyTime8c = string
-    //        } else if (blank == true && currentElement == "dutyTime8s"){
-    //            dutyTime8s = string
-    //        }
-    //    }
-    
-    
-    
-    // MARK: - Table view data source
-    
-    //    override func numberOfSections(in tableView: UITableView) -> Int {
-    //        // #warning Incomplete implementation, return the number of sections
-    //        return 1
-    //    }
-    //
-    //    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    //        // #warning Incomplete implementation, return the number of rows
-    //        return self.storeItems.count
-    //    }
-    //
-    //
-    //
-    //    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    //        let cell = tableView.dequeueReusableCell(withIdentifier: "storeCell", for: indexPath)
-    //
-    //        // Configure the cell...
-    //        cell.textLabel?.text = storeItems[indexPath.row]["dutyName"]
-    //        cell.detailTextLabel?.text = storeItems[indexPath.row]["dutyAddr"]
-    //
-    //        return cell
-    //    }
     
     /*지도*/
     
@@ -224,28 +48,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     var initialLocation = CLLocation()
     let locationManager = CLLocationManager()
     var geocoder = CLGeocoder()
-    
-    
-    //json data
-    //    do {
-    //    if let file  = Bundle.main.url(forResource: "pharmacy", withExtension: "json"){
-    //    let data  = try Data(contentsOf: file)
-    //    let json = try JSONSerialization.jsonObject(with: data, options: [])
-    //
-    //    if let objects = json as? [Any]{
-    //    for object in objects {
-    //    dbData.append(<JsonFileInputClass>.dataFormJSONObject(json: object as! [String : AnyObject])!)
-    //    }
-    //    } else{
-    //    print("JSON is invalid")
-    //    }
-    //    }else{
-    //    print("no file")
-    //    }
-    //    }  catch {
-    //    print(error.localizedDescription)
-    //
-    //    }
+    var coor = CLLocationCoordinate2D()
     
     
     
@@ -256,16 +59,14 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
+        searchBar.delegate = self
+        searchBar.placeholder = "검색할 위치나 약국의 이름을 입력하세요."
         
         getJsonFromDirectory()
         //print(pharmacy[0].dutyName)
-        //파싱
-        //        for i in 1...5{
-        //        requestStoreInfo(i: i)
-        //        }
+        
         // Do any additional setup after loading the view.
+        myMap.delegate = self
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest //배터리로 동작할 때 권장되는 가장 높은 수준의 정확도
         locationManager.requestWhenInUseAuthorization() // 위치 접근 허가 요청(어플리케이션이 포그라운드에 있을때만)
@@ -275,34 +76,43 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         
         locationManager.distanceFilter = 100 // 위치가 100미터 바뀔 때마다 애플리케이션이 알림 받음.
         
+        //guard let newCoords = locationManager.location?.coordinate else {return}
+        
+        //let region = MKCoordinateRegion(center: newCoords, latitudinalMeters: 500, longitudinalMeters: 500)
+        //myMap.setRegion(region, animated: true)
+        
+        //coor = newCoords
+        for i in 0..<pharmacy.count {
+            let annotation = MKPointAnnotation()
+            annotation.title = pharmacy[i].dutyName
+            annotation.subtitle = pharmacy[i].dutyTel1! // + "영업시간 : " + String(pharmacy[i].dutyTime1s ?? 0)
+            annotation.coordinate = CLLocationCoordinate2D(latitude: Double(pharmacy[i].wgs84Lat!) ?? 0, longitude: pharmacy[i].wgs84Lon ?? 0)
+            myMap.isZoomEnabled = true // 줌 가능
+            myMap.isScrollEnabled = true // 스크롤 가능
+            //let cood = myMap.centerCoordinate // 중앙 좌표 얻기
+            myMap.addAnnotation(annotation)
+        }
         
         
-        //        for (latitude2, longitude2) in locations {
-        //            let findLocation = CLLocation(latitude: latitude2, longitude: longitude2)
-        //            let geocoder = CLGeocoder()
-        //            let locale = Locale(identifier: "Ko-kr") //원하는 언어의 나라 코드 넣어주기
-        //            geocoder.reverseGeocodeLocation(findLocation, preferredLocale: locale, completionHandler: {(placemarks, error) in
-        //                if let address:[CLPlacemark] = placemarks {
-        //                    if let name: String = address.last?.name {print(name)} //전체 주소
-        //                }
-        //            })
-        //        }
+        
+        
     }
     
-    //    func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
-    //
-    //        var annotationView = myMap.dequeueReusableAnnotationView(withIdentifier: "Museum")
-    //
-    //        if annotationView == nil{
-    //            annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: "Museum")
-    //            annotationView?.image = UIImage(named: "gps")
-    //            annotationView?.canShowCallout = false
-    //
-    //        }else{
-    //            annotationView!.annotation = annotation
-    //        }
-    //        return annotationView
-    //    }
+    
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        for i in 0..<pharmacy.count {
+            let pin = MKPinAnnotationView(annotation: annotation, reuseIdentifier: "\(pharmacy[i].rnum)")
+            if annotation.isEqual(myMap.userLocation) {
+                return nil
+            }
+            
+            pin.canShowCallout = true
+            pin.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
+            return pin
+        }
+        return annotation as! MKAnnotationView
+        
+    }
     
     
     func goLocation(latitude latitudeValue: CLLocationDegrees, longitude longitudeValue: CLLocationDegrees, delta span: Double) -> CLLocationCoordinate2D {
@@ -313,14 +123,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         return pLocation
         
     }
-    /* 위도와 경도로 원하는 핀 설치하기 */
-    func setAnnotation(latitude latitudeValue: CLLocationDegrees, longitude longitudeValue: CLLocationDegrees, delta span :Double, title strTitle: String, subtitle strSubtitle:String) {
-        let annotation = MKPointAnnotation()
-        annotation.coordinate = goLocation(latitude: latitudeValue, longitude: longitudeValue, delta: span)
-        annotation.title = strTitle
-        annotation.subtitle = strSubtitle
-        myMap.addAnnotation(annotation)
-    }
+    
     //CLLocationManagerDelegate 델리게이트 함수 시작
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let latestLocation : AnyObject = locations[locations.count - 1]
@@ -330,22 +133,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         if startLocation == nil {
             startLocation = latestLocation as? CLLocation
         }
-        let distanceBetween : CLLocationDistance = latestLocation.distance(from: startLocation) //두 CLLocation 지점간의 거리
-        /*
-         /*위치 정보 추출해 텍스트로 표시하기 */
-         //위도와 경도값으로 주소 찾기
-         CLGeocoder().reverseGeocodeLocation(pLocation!, completionHandler: {
-         (placemarks, error) -> Void in
-         let pm = placemarks!.first
-         let country = pm!.country
-         var address:String = country!
-         //            if pm!.locality != nil {
-         //                address += " "
-         //                address += pm!.thoroughfare!
-         //            }
-         
-         })
-         */
+        //        let distanceBetween : CLLocationDistance = latestLocation.distance(from: startLocation) //두 CLLocation 지점간의 거리
         locationManager.stopUpdatingLocation() //위치 업데이트 중지
     }
     
@@ -355,21 +143,11 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         //애플리케이션의 위치 추적 허가 상태가 변경될 경우 호출
-        
         locationManager.requestWhenInUseAuthorization() // 위치 접근 허가 요청(어플리케이션이 포그라운드에 있을때만)
     }
-    
     //CLLocationManagerDelegate 델리게이트 함수 끝
     
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destination.
-     // Pass the selected object to the new view controller.
-     }
-     */
+    
     /* 현재 위치 표시 */
     
     @IBAction func sgChangeLocation(_ sender: UIBarButtonItem) {
@@ -377,49 +155,233 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        getJsonFromDirectory()
+        //  getJsonFromDirectory()
         //        print(pharmacyInfo[0].dutyName)
         
-        // MapViewController.readJSONFromFile (fileName: "pharmacy")
         
-        for i in 0..<pharmacy.count {
-            let annotation = MKPointAnnotation()
-            annotation.title = pharmacy[i].dutyName
-            annotation.coordinate = CLLocationCoordinate2D(latitude: Double(pharmacy[i].wgs84Lat!) ?? 0, longitude: pharmacy[i].wgs84Lon ?? 0)
-            myMap.isZoomEnabled = true // 줌 가능
-            myMap.isScrollEnabled = true // 스크롤 가능
-            //let cood = myMap.centerCoordinate // 중앙 좌표 얻기
-            myMap.addAnnotation(annotation)
-        }
+        
     }
     
     //콜아웃(어노테이션 정보)에 버튼 추가 및 tag이용해 어떤 버튼 눌렸는지 알기
-    func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
-        var annotationView = myMap.dequeueReusableAnnotationView(withIdentifier: "Museum")
+    //2/14 10시에 주석처리함.
+    //    func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
+    //        for i in 0..<pharmacy.count {
+    //        var annotationView = myMap.dequeueReusableAnnotationView(withIdentifier: String(pharmacy[i].rnum!))
+    //            if annotation.isEqual(myMap.userLocation) {
+    //                return nil
+    //            }
+    //
+    //        if annotationView == nil{
+    //            annotationView = MKPinAnnotationView.init(annotation: annotation, reuseIdentifier: String(pharmacy[i].rnum!))
+    //            annotationView?.canShowCallout = true
+    //
+    //            let p = annotation as! Pharmacy
+    //            //add a button on the callout
+    //            let btn = UIButton(type: .infoDark) as UIButton
+    //            annotationView!.rightCalloutAccessoryView = btn
+    //
+    ////            let btn = UIButton(type: UIButton.ButtonType.infoLight)
+    ////            annotationView?.rightCalloutAccessoryView = btn
+    ////            btn.tag = 1
+    ////            let btn2 = UIButton(type: UIButton.ButtonType.infoLight)
+    ////            annotationView?.leftCalloutAccessoryView = btn2
+    ////            btn2.tag = 2
+    //
+    //
+    //        }else{
+    //            annotationView!.annotation = annotation
+    //        }
+    //            return annotationView
+    //        }
+    //        return annotation as! MKAnnotationView
+    //
+    //    }
+    
+    
+    //when the button is tapped we want to perform a segue
+    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+        let annView = view.annotation
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let detailVC = storyboard.instantiateViewController(withIdentifier: "Detail") as! PharmacyDetailsViewController
         
-        if annotationView == nil{
-            annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: "Museum")
-            annotationView?.canShowCallout = true
+        detailVC.name = (annView?.title!)!
+        detailVC.number = ((annView?.subtitle!)!)
+        let cal = Calendar(identifier: .gregorian)
+        let now = Date()
+        let comps = cal.dateComponents([.weekday], from: now)
+        
+        for i in 0..<pharmacy.count {
+            if detailVC.number == pharmacy[i].dutyTel1 {
+                detailVC.address = pharmacy[i].dutyAddr!
+                detailVC.holidayStart = String(pharmacy[i].dutyTime8s ?? 0)
+                detailVC.holidayClose = String(pharmacy[i].dutyTime8c ?? 0)
+            switch comps.weekday! {
+            case 1:
+                detailVC.startTime = pharmacy[i].dutyTime7s
+                detailVC.closeTime = pharmacy[i].dutyTime7c
+            case 2:
+                detailVC.startTime = String(pharmacy[i].dutyTime1s!)
+                detailVC.closeTime = String(pharmacy[i].dutyTime1c!)
+            case 3:
+                detailVC.startTime = String(pharmacy[i].dutyTime2s!)
+                detailVC.closeTime = String(pharmacy[i].dutyTime2c!)
+            case 4:
+                detailVC.startTime = String(pharmacy[i].dutyTime3s!)
+                detailVC.closeTime = String(pharmacy[i].dutyTime3c!)
+            case 5:
+                detailVC.startTime = String(pharmacy[i].dutyTime4s!)
+                detailVC.closeTime = String(pharmacy[i].dutyTime4c!)
+            case 6:
+                detailVC.startTime = String(pharmacy[i].dutyTime5s!)
+                detailVC.closeTime = String(pharmacy[i].dutyTime5c!)
+            case 7:
+                detailVC.startTime = String(pharmacy[i].dutyTime6s!)
+                detailVC.closeTime = String(pharmacy[i].dutyTime6c!)
+            default:
+                detailVC.startTime = String(pharmacy[i].dutyTime1s!)
+                detailVC.closeTime = String(pharmacy[i].dutyTime1c!)
+                
+              }
+                
+            }
             
-            let btn = UIButton(type: UIButton.ButtonType.infoLight)
-            annotationView?.rightCalloutAccessoryView = btn
-            btn.tag = 1
-            let btn2 = UIButton(type: UIButton.ButtonType.infoLight)
-            annotationView?.leftCalloutAccessoryView = btn2
-            btn2.tag = 2
-            
-            
-        }else{
-            annotationView!.annotation = annotation
         }
-        return annotationView
+        
+        let navBarOnModal = UINavigationController(rootViewController: detailVC)
+        navBarOnModal.modalPresentationStyle = .overCurrentContext
+        navBarOnModal.view.backgroundColor = UIColor.clear
+        navBarOnModal.navigationBar.barTintColor = UIColor(displayP3Red: 195/255, green: 225/255, blue: 249/255, alpha: 1.0)
+        self.present(navBarOnModal, animated: false, completion: nil)
+        //        self.navigationController?.pushViewController(detailVC, animated: true)
+    }
+    //검색기능
+    func searchPharmacy(name: String) {
+        for i in 0..<pharmacy.count {
+            if pharmacy[i].dutyName == name {
+                
+                goLocation(latitude: Double(pharmacy[i].wgs84Lat!) ?? 0, longitude: pharmacy[i].wgs84Lon ?? 0, delta: 0.01)
+                
+            } else {
+                
+            }
+        }
+    }
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        searchBar.showsSearchResultsButton = true
+        searchBar.showsCancelButton = true
+    }
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        endTyping = true
+    }
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        endTyping = true
+        searchBar.resignFirstResponder()
+        
+        let geocoder = CLGeocoder()
+        geocoder.geocodeAddressString(searchBar.text!) {
+            (placemarks:[CLPlacemark]?, error:Error?) in
+            if error == nil {
+                let placemark = placemarks?.first
+                let anno = MKPointAnnotation()
+                anno.coordinate = (placemark?.location?.coordinate)!
+                
+                let span = MKCoordinateSpan(latitudeDelta: 0.03,longitudeDelta: 0.03)
+                let region = MKCoordinateRegion(center: anno.coordinate, span: span)
+                
+                self.myMap.setRegion(region, animated: true)
+            } else {
+                print(error?.localizedDescription ?? "error")
+            }
+            
+            //        //Ignoring user
+            //        UIApplication.shared.beginIgnoringInteractionEvents()
+            //
+            //        //Activity Indicator
+            //        let activityIndicator = UIActivityIndicatorView()
+            //        activityIndicator.style = UIActivityIndicatorView.Style.gray
+            //        activityIndicator.center = self.view.center
+            //        activityIndicator.hidesWhenStopped = true
+            //        activityIndicator.startAnimating()
+            //
+            //        self.view.addSubview(activityIndicator)
+            //        searchBar.resignFirstResponder()
+            //
+            //        //Create the search request
+            //        let searchRequest = MKLocalSearch.Request()
+            //        searchRequest.naturalLanguageQuery = searchBar.text
+            //
+            //        let activeSearch = MKLocalSearch(request: searchRequest)
+            //        activeSearch.start{ (response, error) in
+            //
+            //            activityIndicator.stopAnimating()
+            //            UIApplication.shared.endIgnoringInteractionEvents()
+            //
+            //            if response == nil {
+            //                print("ERROR")
+            //            }
+            //            else {
+            //                //Remove annotations
+            ////                let annotations = self.myMap.annotaions
+            ////                self.myMap.removeAnnotations(annotations)
+            //
+            //                //Getting data
+            //                let latitude2 = response?.boundingRegion.center.latitude
+            //                let longitude2 = response?.boundingRegion.center.longitude
+            //
+            //                //Zooming in on annotation
+            //                let coordinate:CLLocationCoordinate2D = CLLocationCoordinate2DMake(latitude2!, longitude2!)
+            //                let span = MKCoordinateSpan(latitudeDelta: 0.1,longitudeDelta: 0.1)
+            //                self.goLocation(latitude: latitude2!, longitude: longitude2!, delta: 0.01)
+            //                self.locationManager.stopUpdatingLocation()
+            
+            
+        }
+        
+        searchPharmacy(name: searchName)
+        //  _ = searchBar.resignFirstResponder()
         
     }
-    //콜아웃 버튼 누른 곳 알기
-    func mapView(mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
-        let annotation = view.annotation!
-        print("버튼을 누른 곳은 : " , annotation.title!, control.tag)
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar, didUpdateLocations locations: [CLLocation], latitude latitudeValue: CLLocationDegrees, longitude longitudeValue: CLLocationDegrees, delta span: Double) {
+        searchBar.showsCancelButton = false
+        searchBar.text = ""
+        endTyping = false
+        guard let newCoords = locationManager.location?.coordinate else {return}
+        
+        let region = MKCoordinateRegion(center: newCoords, latitudinalMeters: 500, longitudinalMeters: 500)
+        myMap.setRegion(region, animated: true)
+        
+        //        locationManager.startUpdatingLocation() //위치 업데이트 시작
+        
+        //  self.myMap.setRegion(pLocation?.coordinate, animated: true)
+        
+        //        let pLocation = CLLocationCoordinate2DMake(latitudeValue, longitudeValue)
+        //        let spanValue = MKCoordinateSpan(latitudeDelta: span, longitudeDelta: span)
+        //        let pRegion = MKCoordinateRegion(center: pLocation, span: spanValue)
+        //        myMap.setRegion(pRegion, animated: true)
+        //filteredDatas = [[String:String]]()
+        // tableView.reloadData()
+        //  _ = searchBar.resignFirstResponder()
     }
     
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if(searchBarIsEmpty()){
+            // filteredDatas = [[String:String]]()
+            endTyping = false
+            
+        }
+        
+        return searchName = searchText
+    }
+    func searchBarIsEmpty() -> Bool {
+        // Returns true if the text is empty or nil
+        return searchBar.text?.isEmpty ?? true
+    }
     
+    //    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    //        if segue.identifier == "pharmacyDetails" {
+    //            var dest = segue.destination as! PharmacyDetailsViewController
+    //            //dest.book =
+    //        }
+    //    }
 }
+

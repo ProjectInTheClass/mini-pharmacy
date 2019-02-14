@@ -55,16 +55,21 @@ class MainTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 
-        return DataCenter.sharedInstnce.drugList.count
+        return DataCenter.sharedInstance.drugList.count
         }
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath) as! TableViewCell
-        cell.alarmName?.text = DataCenter.sharedInstnce.drugList[indexPath.row].alarmName
-        cell.alarmTimeSetting?.text = DataCenter.sharedInstnce.drugList[indexPath.row].alarmTimeSetting! + "  " + DataCenter.sharedInstnce.drugList[indexPath.row].alarmTimeSetting2! + "  " + DataCenter.sharedInstnce.drugList[indexPath.row].alarmTimeSetting3!
-        cell.repetition?.text = DataCenter.sharedInstnce.drugList[indexPath.row].repetition
-        cell.segment?.text = DataCenter.sharedInstnce.drugList[indexPath.row].segment
+        cell.alarmName?.text = DataCenter.sharedInstance.drugList[indexPath.row].alarmName
+        cell.alarmTimeSetting?.text = DataCenter.sharedInstance.drugList[indexPath.row].alarmTimeSetting! + "  " + DataCenter.sharedInstance.drugList[indexPath.row].alarmTimeSetting2! + "  " + DataCenter.sharedInstance.drugList[indexPath.row].alarmTimeSetting3!
+        if DataCenter.sharedInstance.drugList[indexPath.row].repetition != "매일"{
+            cell.repetition?.text = DataCenter.sharedInstance.drugList[indexPath.row].repetition! + "요일마다"
+            
+        }else{
+            cell.repetition?.text = DataCenter.sharedInstance.drugList[indexPath.row].repetition!
+        }
+        cell.segment?.text = DataCenter.sharedInstance.drugList[indexPath.row].segment
             return cell
         
     }
@@ -93,18 +98,18 @@ class MainTableViewController: UITableViewController {
                 }
                 
             })
-            print(DataCenter.sharedInstnce.alarmIdentifierList[indexPath.row])
-            for i in 0..<DataCenter.sharedInstnce.alarmIdentifierList[indexPath.row].count{
-                UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: ["\(DataCenter.sharedInstnce.alarmIdentifierList[indexPath.row][i])"])
+            print(DataCenter.sharedInstance.alarmIdentifierList[indexPath.row])
+            for i in 0..<DataCenter.sharedInstance.alarmIdentifierList[indexPath.row].count{
+                UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: ["\(DataCenter.sharedInstance.alarmIdentifierList[indexPath.row][i])"])
             } // Notification 삭제
             center.getPendingNotificationRequests(completionHandler: { requests in
                 for request in requests {
                     print(request)
                 }
             })
-            DataCenter.sharedInstnce.drugList.remove(at: indexPath.row) //데이터 삭제
-            DataCenter.sharedInstnce.pillList.remove(at: indexPath.row) //약목록 삭제
-            DataCenter.sharedInstnce.alarmIdentifierList.remove(at: indexPath.row)
+            DataCenter.sharedInstance.drugList.remove(at: indexPath.row) //데이터 삭제
+            DataCenter.sharedInstance.pillList.remove(at: indexPath.row) //약목록 삭제
+            DataCenter.sharedInstance.alarmIdentifierList.remove(at: indexPath.row)
             
             tableView.deleteRows(at: [indexPath], with: UITableView.RowAnimation.automatic) // 테이블에서 삭제
 

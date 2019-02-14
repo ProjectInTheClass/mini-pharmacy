@@ -34,7 +34,7 @@ class EditAlarmInfoTableViewController: UITableViewController, UITextFieldDelega
             firstButton.isEnabled = false
             buttonIndex += 1
         } else {
-            let alert = UIAlertController(title: "이런!", message: "첫 번째 시간을 채워주세요!", preferredStyle: .alert)
+            let alert = UIAlertController(title: "잠깐!", message: "첫 번째 시간을 채워주세요!", preferredStyle: .alert)
             let cancelAction = UIAlertAction(title: "확인", style: .cancel, handler: nil)
             alert.addAction(cancelAction)
             self.present(alert, animated: true, completion: nil)
@@ -46,7 +46,7 @@ class EditAlarmInfoTableViewController: UITableViewController, UITextFieldDelega
             secondButton.isHidden = true
             buttonIndex += 1
         } else {
-            let alert = UIAlertController(title: "이런!", message: "두 번째 시간을 채워주세요!", preferredStyle: .alert)
+            let alert = UIAlertController(title: "잠깐!", message: "두 번째 시간을 채워주세요!", preferredStyle: .alert)
             let cancelAction = UIAlertAction(title: "확인", style: .cancel, handler: nil)
             alert.addAction(cancelAction)
             self.present(alert, animated: true, completion: nil)
@@ -112,15 +112,15 @@ class EditAlarmInfoTableViewController: UITableViewController, UITextFieldDelega
             if alarmGranted == true {
                 alarm()
             }
-            DataCenter.sharedInstnce.drugList.remove(at: infoIndexPath.row)
-            DataCenter.sharedInstnce.drugList.insert(userInfo(alarmName: alarmName.text!, memo: memo.text!, alarmTimeSetting: alarmTimeSetting.text!, alarmTimeSetting2: alarmTimeSetting2.text!, alarmTimeSetting3: alarmTimeSetting3.text!, segment: segment, repetition: repetition), at: infoIndexPath.row)
-            DataCenter.sharedInstnce.pillList.remove(at: infoIndexPath.row)
-            DataCenter.sharedInstnce.pillList.insert(drugItems, at: infoIndexPath.row)
-            for i in 0..<DataCenter.sharedInstnce.alarmIdentifierList[infoIndexPath.row].count{
-                UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: ["\(DataCenter.sharedInstnce.alarmIdentifierList[infoIndexPath.row][i])"])
+            DataCenter.sharedInstance.drugList.remove(at: infoIndexPath.row)
+            DataCenter.sharedInstance.drugList.insert(userInfo(alarmName: alarmName.text!, memo: memo.text!, alarmTimeSetting: alarmTimeSetting.text!, alarmTimeSetting2: alarmTimeSetting2.text!, alarmTimeSetting3: alarmTimeSetting3.text!, segment: segment, repetition: repetition), at: infoIndexPath.row)
+            DataCenter.sharedInstance.pillList.remove(at: infoIndexPath.row)
+            DataCenter.sharedInstance.pillList.insert(drugItems, at: infoIndexPath.row)
+            for i in 0..<DataCenter.sharedInstance.alarmIdentifierList[infoIndexPath.row].count{
+                UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: ["\(DataCenter.sharedInstance.alarmIdentifierList[infoIndexPath.row][i])"])
             }
-            DataCenter.sharedInstnce.alarmIdentifierList.remove(at: infoIndexPath.row)
-            DataCenter.sharedInstnce.alarmIdentifierList.insert(alarmIdentifier, at: infoIndexPath.row)
+            DataCenter.sharedInstance.alarmIdentifierList.remove(at: infoIndexPath.row)
+            DataCenter.sharedInstance.alarmIdentifierList.insert(alarmIdentifier, at: infoIndexPath.row)
             
         }else{
             let alert = UIAlertController(title: "다시 입력", message: "필수 항목이 다 입력되지 않았어요!", preferredStyle: .alert)
@@ -170,16 +170,15 @@ class EditAlarmInfoTableViewController: UITableViewController, UITextFieldDelega
         alarmTimeSetting2.inputView = datePicker2
         alarmTimeSetting3.inputView = datePicker3
         
-        alarmName.text! = DataCenter.sharedInstnce.drugList[infoIndexPath.row].alarmName
-        memo.text! = DataCenter.sharedInstnce.drugList[infoIndexPath.row].memo
-        alarmTimeSetting.text! = DataCenter.sharedInstnce.drugList[infoIndexPath.row].alarmTimeSetting!
-        alarmTimeSetting2.text! = DataCenter.sharedInstnce.drugList[infoIndexPath.row].alarmTimeSetting2!
-        alarmTimeSetting3.text! = DataCenter.sharedInstnce.drugList[infoIndexPath.row].alarmTimeSetting3!
-        repetition = DataCenter.sharedInstnce.drugList[infoIndexPath.row].repetition!
-        drugItems = DataCenter.sharedInstnce.pillList[infoIndexPath.row]
-        segment = DataCenter.sharedInstnce.drugList[infoIndexPath.row].segment
-        alarmRepetition.titleLabel?.text! = repetition
-        
+        alarmName.text! = DataCenter.sharedInstance.drugList[infoIndexPath.row].alarmName
+        memo.text! = DataCenter.sharedInstance.drugList[infoIndexPath.row].memo
+        alarmTimeSetting.text! = DataCenter.sharedInstance.drugList[infoIndexPath.row].alarmTimeSetting!
+        alarmTimeSetting2.text! = DataCenter.sharedInstance.drugList[infoIndexPath.row].alarmTimeSetting2!
+        alarmTimeSetting3.text! = DataCenter.sharedInstance.drugList[infoIndexPath.row].alarmTimeSetting3!
+        repetition = DataCenter.sharedInstance.drugList[infoIndexPath.row].repetition!
+        drugItems = DataCenter.sharedInstance.pillList[infoIndexPath.row]
+        segment = DataCenter.sharedInstance.drugList[infoIndexPath.row].segment
+        alarmRepetition.titleLabel?.text! = "                  " + repetition
         drugList1.text = ""
         drugList2.text = ""
         drugList3.text = ""
@@ -212,7 +211,7 @@ class EditAlarmInfoTableViewController: UITableViewController, UITextFieldDelega
     }
     override func viewWillAppear(_ animated: Bool) {
 //        alarmRepetition.titleLabel?.adjustsFontSizeToFitWidth = true
-        alarmRepetition.titleLabel?.text = repetition
+        alarmRepetition.setTitle(repetition, for: .normal)
         if drugItems.count == 1{
             drugList1.text = "💊 " + drugItems[0]["ITEM_NAME"]!
         }else if drugItems.count == 2{
@@ -367,7 +366,9 @@ class EditAlarmInfoTableViewController: UITableViewController, UITextFieldDelega
             dateComponents.hour = Int(subHour)
             dateComponents.minute = Int(subMin)
             
-            if String(string[string.startIndex]) == "P" {
+            if subHour == "12" && String(string[string.startIndex]) == "A" {
+                dateComponents.hour = dateComponents.hour! - 12
+            } else if subHour != "12" && String(string[string.startIndex]) == "P" {
                 dateComponents.hour = dateComponents.hour! + 12
             }
             if repetition == "매일" {
@@ -426,7 +427,9 @@ class EditAlarmInfoTableViewController: UITableViewController, UITextFieldDelega
             dateComponents2.hour = Int(subHour)
             dateComponents2.minute = Int(subMin)
             
-            if String(string2[string2.startIndex]) == "P" {
+            if subHour == "12" && String(string2[string2.startIndex]) == "A" {
+                dateComponents2.hour = dateComponents2.hour! - 12
+            } else if subHour != "12" && String(string2[string2.startIndex]) == "P" {
                 dateComponents2.hour = dateComponents2.hour! + 12
             }
             if repetition == "매일" {
@@ -485,10 +488,11 @@ class EditAlarmInfoTableViewController: UITableViewController, UITextFieldDelega
             dateComponents3.hour = Int(subHour)
             dateComponents3.minute = Int(subMin)
             
-            if String(string3[string3.startIndex]) == "P" {
+            if subHour == "12" && String(string3[string3.startIndex]) == "A" {
+                dateComponents3.hour = dateComponents3.hour! - 12
+            } else if subHour != "12" && String(string3[string3.startIndex]) == "P" {
                 dateComponents3.hour = dateComponents3.hour! + 12
             }
-            
             if repetition == "매일" {
                 var lnMessageId: String = alarmName.text! + "3"
                 alarmTrigger(dateMatcing: dateComponents3, lnMessageId: lnMessageId)
