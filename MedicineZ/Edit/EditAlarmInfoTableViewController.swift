@@ -143,7 +143,6 @@ class EditAlarmInfoTableViewController: UITableViewController, UITextFieldDelega
     override func viewDidLoad() {
         super.viewDidLoad()
        
-        setLocalNotification()
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         view.addGestureRecognizer(tap)
         
@@ -209,6 +208,7 @@ class EditAlarmInfoTableViewController: UITableViewController, UITextFieldDelega
         alarmRepetition.setTitle(repetition, for: .normal)
 
     }
+    
     override func viewWillAppear(_ animated: Bool) {
 //        alarmRepetition.titleLabel?.adjustsFontSizeToFitWidth = true
         alarmRepetition.setTitle(repetition, for: .normal)
@@ -322,21 +322,7 @@ class EditAlarmInfoTableViewController: UITableViewController, UITextFieldDelega
         view.endEditing(true)
     }
     
-    func setLocalNotification() {
-        
-        if #available(iOS 10.0, *) {
-            let center = UNUserNotificationCenter.current()
-            let options: UNAuthorizationOptions = [.alert, .sound];
-            
-            center.requestAuthorization(options: options) {
-                (granted, error) in
-                if granted {
-                    self.alarmGranted = true
-                }
-            }
-            
-        }
-    }
+
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
@@ -413,7 +399,7 @@ class EditAlarmInfoTableViewController: UITableViewController, UITextFieldDelega
         }
         if buttonIndex > 1 {
             
-            
+             if self.alarmTimeSetting2.text! != ""{
             _ = Calendar.current
             var dateComponents2 = DateComponents()
             
@@ -471,10 +457,11 @@ class EditAlarmInfoTableViewController: UITableViewController, UITextFieldDelega
                 var lnMessageId: String = alarmName.text! + "2"
                 alarmTrigger(dateMatcing: dateComponents2, lnMessageId: lnMessageId)
             }
+            }
         }
         if buttonIndex > 2 {
             
-            
+             if self.alarmTimeSetting3.text! != ""{
             _ = Calendar.current
             var dateComponents3 = DateComponents()
             
@@ -534,6 +521,7 @@ class EditAlarmInfoTableViewController: UITableViewController, UITextFieldDelega
             }
             
         }
+        }
         
     }
     
@@ -554,11 +542,7 @@ class EditAlarmInfoTableViewController: UITableViewController, UITextFieldDelega
             print(error?.localizedDescription ?? "")
         }
         alarmIdentifier.append(lnM)
-        center.getPendingNotificationRequests(completionHandler: { requests in
-            for request in requests {
-                print(request)
-            }
-        })
+       
     }
 }
 

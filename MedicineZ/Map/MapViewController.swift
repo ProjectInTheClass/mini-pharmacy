@@ -246,7 +246,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         _ = searchBar.resignFirstResponder()
         
     }
-    func searchBarCancelButtonClicked(_ searchBar: UISearchBar, didUpdateLocations locations: [CLLocation], latitude latitudeValue: CLLocationDegrees, longitude longitudeValue: CLLocationDegrees, delta span: Double) {
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         searchBar.showsCancelButton = false
         searchBar.text = ""
         endTyping = false
@@ -254,17 +254,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         
         let region = MKCoordinateRegion(center: newCoords, latitudinalMeters: 500, longitudinalMeters: 500)
         myMap.setRegion(region, animated: true)
-        
-        //        locationManager.startUpdatingLocation() //위치 업데이트 시작
-        
-        //  self.myMap.setRegion(pLocation?.coordinate, animated: true)
-        
-        //        let pLocation = CLLocationCoordinate2DMake(latitudeValue, longitudeValue)
-        //        let spanValue = MKCoordinateSpan(latitudeDelta: span, longitudeDelta: span)
-        //        let pRegion = MKCoordinateRegion(center: pLocation, span: spanValue)
-        //        myMap.setRegion(pRegion, animated: true)
-        //filteredDatas = [[String:String]]()
-        // tableView.reloadData()
+
         _ = searchBar.resignFirstResponder()
     }
     

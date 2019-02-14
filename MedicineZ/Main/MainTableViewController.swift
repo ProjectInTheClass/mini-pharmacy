@@ -91,22 +91,11 @@ class MainTableViewController: UITableViewController {
         if editingStyle == UITableViewCell.EditingStyle.delete {
             
             // remove the item from the data model
-            let center = UNUserNotificationCenter.current()
-            center.getPendingNotificationRequests(completionHandler: { requests in
-                for request in requests {
-                    print(request)
-                }
-                
-            })
-            print(DataCenter.sharedInstance.alarmIdentifierList[indexPath.row])
+           
             for i in 0..<DataCenter.sharedInstance.alarmIdentifierList[indexPath.row].count{
                 UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: ["\(DataCenter.sharedInstance.alarmIdentifierList[indexPath.row][i])"])
             } // Notification 삭제
-            center.getPendingNotificationRequests(completionHandler: { requests in
-                for request in requests {
-                    print(request)
-                }
-            })
+            
             DataCenter.sharedInstance.drugList.remove(at: indexPath.row) //데이터 삭제
             DataCenter.sharedInstance.pillList.remove(at: indexPath.row) //약목록 삭제
             DataCenter.sharedInstance.alarmIdentifierList.remove(at: indexPath.row)

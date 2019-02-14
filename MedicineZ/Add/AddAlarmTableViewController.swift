@@ -320,7 +320,6 @@ class AddAlarmTableViewController: UITableViewController, AddAlarmViewDelegatePr
     func alarm() {
         if buttonIndex > 0 {
             
-            
             _ = Calendar.current
             var dateComponents = DateComponents()
             
@@ -399,6 +398,7 @@ class AddAlarmTableViewController: UITableViewController, AddAlarmViewDelegatePr
         if buttonIndex > 1 {
             
             
+            if self.alarmTimeSetting2.text! != ""{
             _ = Calendar.current
             var dateComponents2 = DateComponents()
             
@@ -473,10 +473,11 @@ class AddAlarmTableViewController: UITableViewController, AddAlarmViewDelegatePr
                 var lnMessageId: String = alarmName.text! + "2"
                 alarmTrigger(dateMatcing: dateComponents2, lnMessageId: lnMessageId)
             }
+            }
         }
         if buttonIndex > 2 {
             
-            
+             if self.alarmTimeSetting3.text! != ""{
             _ = Calendar.current
             var dateComponents3 = DateComponents()
             
@@ -553,6 +554,7 @@ class AddAlarmTableViewController: UITableViewController, AddAlarmViewDelegatePr
             }
             
         }
+        }
         
     }
     
@@ -573,11 +575,7 @@ class AddAlarmTableViewController: UITableViewController, AddAlarmViewDelegatePr
             print(error?.localizedDescription ?? "")
         }
         alarmIdentifier.append(lnM)
-        center.getPendingNotificationRequests(completionHandler: { requests in
-            for request in requests {
-                print(request)
-            }
-        })
+       
     }
     
 
