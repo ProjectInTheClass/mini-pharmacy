@@ -1,3 +1,4 @@
+
 //
 //  MapViewController.swift
 //  MedicineZ
@@ -18,7 +19,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     var pharmacy = [Pharmacy]()
     var endTyping:Bool = false
     var searchName = ""
-    
+
     
     
     func getJsonFromDirectory() {
@@ -47,28 +48,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     var initialLocation = CLLocation()
     let locationManager = CLLocationManager()
     var geocoder = CLGeocoder()
-    
-    
-    //json data
-    //    do {
-    //    if let file  = Bundle.main.url(forResource: "pharmacy", withExtension: "json"){
-    //    let data  = try Data(contentsOf: file)
-    //    let json = try JSONSerialization.jsonObject(with: data, options: [])
-    //
-    //    if let objects = json as? [Any]{
-    //    for object in objects {
-    //    dbData.append(<JsonFileInputClass>.dataFormJSONObject(json: object as! [String : AnyObject])!)
-    //    }
-    //    } else{
-    //    print("JSON is invalid")
-    //    }
-    //    }else{
-    //    print("no file")
-    //    }
-    //    }  catch {
-    //    print(error.localizedDescription)
-    //
-    //    }
+    var coor = CLLocationCoordinate2D()
     
     
     
@@ -80,12 +60,13 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     override func viewDidLoad() {
         super.viewDidLoad()
         searchBar.delegate = self
-        searchBar.placeholder = "검색할 약국의 이름을 입력하세요."
+        searchBar.placeholder = "검색할 위치나 약국의 이름을 입력하세요."
         
         getJsonFromDirectory()
         //print(pharmacy[0].dutyName)
         
         // Do any additional setup after loading the view.
+        myMap.delegate = self
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest //배터리로 동작할 때 권장되는 가장 높은 수준의 정확도
         locationManager.requestWhenInUseAuthorization() // 위치 접근 허가 요청(어플리케이션이 포그라운드에 있을때만)
@@ -95,34 +76,43 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         
         locationManager.distanceFilter = 100 // 위치가 100미터 바뀔 때마다 애플리케이션이 알림 받음.
         
+        //guard let newCoords = locationManager.location?.coordinate else {return}
+        
+        //let region = MKCoordinateRegion(center: newCoords, latitudinalMeters: 500, longitudinalMeters: 500)
+        //myMap.setRegion(region, animated: true)
+        
+        //coor = newCoords
+        for i in 0..<pharmacy.count {
+            let annotation = MKPointAnnotation()
+            annotation.title = pharmacy[i].dutyName
+            annotation.subtitle = pharmacy[i].dutyTel1! // + "영업시간 : " + String(pharmacy[i].dutyTime1s ?? 0)
+            annotation.coordinate = CLLocationCoordinate2D(latitude: Double(pharmacy[i].wgs84Lat!) ?? 0, longitude: pharmacy[i].wgs84Lon ?? 0)
+            myMap.isZoomEnabled = true // 줌 가능
+            myMap.isScrollEnabled = true // 스크롤 가능
+            //let cood = myMap.centerCoordinate // 중앙 좌표 얻기
+            myMap.addAnnotation(annotation)
+        }
         
         
-        //        for (latitude2, longitude2) in locations {
-        //            let findLocation = CLLocation(latitude: latitude2, longitude: longitude2)
-        //            let geocoder = CLGeocoder()
-        //            let locale = Locale(identifier: "Ko-kr") //원하는 언어의 나라 코드 넣어주기
-        //            geocoder.reverseGeocodeLocation(findLocation, preferredLocale: locale, completionHandler: {(placemarks, error) in
-        //                if let address:[CLPlacemark] = placemarks {
-        //                    if let name: String = address.last?.name {print(name)} //전체 주소
-        //                }
-        //            })
-        //        }
+        
+        
     }
     
-    //    func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
-    //
-    //        var annotationView = myMap.dequeueReusableAnnotationView(withIdentifier: "Museum")
-    //
-    //        if annotationView == nil{
-    //            annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: "Museum")
-    //            annotationView?.image = UIImage(named: "gps")
-    //            annotationView?.canShowCallout = false
-    //
-    //        }else{
-    //            annotationView!.annotation = annotation
-    //        }
-    //        return annotationView
-    //    }
+    
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        for i in 0..<pharmacy.count {
+            let pin = MKPinAnnotationView(annotation: annotation, reuseIdentifier: "\(pharmacy[i].rnum)")
+            if annotation.isEqual(myMap.userLocation) {
+                return nil
+            }
+            
+            pin.canShowCallout = true
+            pin.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
+            return pin
+        }
+        return annotation as! MKAnnotationView
+        
+    }
     
     
     func goLocation(latitude latitudeValue: CLLocationDegrees, longitude longitudeValue: CLLocationDegrees, delta span: Double) -> CLLocationCoordinate2D {
@@ -133,14 +123,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         return pLocation
         
     }
-    /* 위도와 경도로 원하는 핀 설치하기 */
-    func setAnnotation(latitude latitudeValue: CLLocationDegrees, longitude longitudeValue: CLLocationDegrees, delta span :Double, title strTitle: String, subtitle strSubtitle:String) {
-        let annotation = MKPointAnnotation()
-        annotation.coordinate = goLocation(latitude: latitudeValue, longitude: longitudeValue, delta: span)
-        annotation.title = strTitle
-        annotation.subtitle = strSubtitle
-        myMap.addAnnotation(annotation)
-    }
+    
     //CLLocationManagerDelegate 델리게이트 함수 시작
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let latestLocation : AnyObject = locations[locations.count - 1]
@@ -151,21 +134,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             startLocation = latestLocation as? CLLocation
         }
         //        let distanceBetween : CLLocationDistance = latestLocation.distance(from: startLocation) //두 CLLocation 지점간의 거리
-        /*
-         /*위치 정보 추출해 텍스트로 표시하기 */
-         //위도와 경도값으로 주소 찾기
-         CLGeocoder().reverseGeocodeLocation(pLocation!, completionHandler: {
-         (placemarks, error) -> Void in
-         let pm = placemarks!.first
-         let country = pm!.country
-         var address:String = country!
-         //            if pm!.locality != nil {
-         //                address += " "
-         //                address += pm!.thoroughfare!
-         //            }
-         
-         })
-         */
         locationManager.stopUpdatingLocation() //위치 업데이트 중지
     }
     
@@ -190,45 +158,99 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         //  getJsonFromDirectory()
         //        print(pharmacyInfo[0].dutyName)
         
-        // MapViewController.readJSONFromFile (fileName: "pharmacy")
         
-        for i in 0..<pharmacy.count {
-            let annotation = MKPointAnnotation()
-            annotation.title = pharmacy[i].dutyName
-            annotation.coordinate = CLLocationCoordinate2D(latitude: Double(pharmacy[i].wgs84Lat!) ?? 0, longitude: pharmacy[i].wgs84Lon ?? 0)
-            myMap.isZoomEnabled = true // 줌 가능
-            myMap.isScrollEnabled = true // 스크롤 가능
-            //let cood = myMap.centerCoordinate // 중앙 좌표 얻기
-            myMap.addAnnotation(annotation)
-        }
+        
     }
     
     //콜아웃(어노테이션 정보)에 버튼 추가 및 tag이용해 어떤 버튼 눌렸는지 알기
-    func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
-        var annotationView = myMap.dequeueReusableAnnotationView(withIdentifier: "Museum")
+    //2/14 10시에 주석처리함.
+    //    func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
+    //        for i in 0..<pharmacy.count {
+    //        var annotationView = myMap.dequeueReusableAnnotationView(withIdentifier: String(pharmacy[i].rnum!))
+    //            if annotation.isEqual(myMap.userLocation) {
+    //                return nil
+    //            }
+    //
+    //        if annotationView == nil{
+    //            annotationView = MKPinAnnotationView.init(annotation: annotation, reuseIdentifier: String(pharmacy[i].rnum!))
+    //            annotationView?.canShowCallout = true
+    //
+    //            let p = annotation as! Pharmacy
+    //            //add a button on the callout
+    //            let btn = UIButton(type: .infoDark) as UIButton
+    //            annotationView!.rightCalloutAccessoryView = btn
+    //
+    ////            let btn = UIButton(type: UIButton.ButtonType.infoLight)
+    ////            annotationView?.rightCalloutAccessoryView = btn
+    ////            btn.tag = 1
+    ////            let btn2 = UIButton(type: UIButton.ButtonType.infoLight)
+    ////            annotationView?.leftCalloutAccessoryView = btn2
+    ////            btn2.tag = 2
+    //
+    //
+    //        }else{
+    //            annotationView!.annotation = annotation
+    //        }
+    //            return annotationView
+    //        }
+    //        return annotation as! MKAnnotationView
+    //
+    //    }
+    
+    
+    //when the button is tapped we want to perform a segue
+    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+        let annView = view.annotation
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let detailVC = storyboard.instantiateViewController(withIdentifier: "Detail") as! PharmacyDetailsViewController
         
-        if annotationView == nil{
-            annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: "Museum")
-            annotationView?.canShowCallout = true
+        detailVC.name = (annView?.title!)!
+        detailVC.number = ((annView?.subtitle!)!)
+        let cal = Calendar(identifier: .gregorian)
+        let now = Date()
+        let comps = cal.dateComponents([.weekday], from: now)
+        
+        for i in 0..<pharmacy.count {
+            if detailVC.number == pharmacy[i].dutyTel1 {
+                detailVC.address = pharmacy[i].dutyAddr!
+                detailVC.holidayStart = String(pharmacy[i].dutyTime8s ?? 0)
+                detailVC.holidayClose = String(pharmacy[i].dutyTime8c ?? 0)
+            switch comps.weekday! {
+            case 1:
+                detailVC.startTime = pharmacy[i].dutyTime7s
+                detailVC.closeTime = pharmacy[i].dutyTime7c
+            case 2:
+                detailVC.startTime = String(pharmacy[i].dutyTime1s!)
+                detailVC.closeTime = String(pharmacy[i].dutyTime1c!)
+            case 3:
+                detailVC.startTime = String(pharmacy[i].dutyTime2s!)
+                detailVC.closeTime = String(pharmacy[i].dutyTime2c!)
+            case 4:
+                detailVC.startTime = String(pharmacy[i].dutyTime3s!)
+                detailVC.closeTime = String(pharmacy[i].dutyTime3c!)
+            case 5:
+                detailVC.startTime = String(pharmacy[i].dutyTime4s!)
+                detailVC.closeTime = String(pharmacy[i].dutyTime4c!)
+            case 6:
+                detailVC.startTime = String(pharmacy[i].dutyTime5s!)
+                detailVC.closeTime = String(pharmacy[i].dutyTime5c!)
+            case 7:
+                detailVC.startTime = String(pharmacy[i].dutyTime6s!)
+                detailVC.closeTime = String(pharmacy[i].dutyTime6c!)
+            default:
+                detailVC.startTime = String(pharmacy[i].dutyTime1s!)
+                detailVC.closeTime = String(pharmacy[i].dutyTime1c!)
+                
+              }
+                
+            }
             
-            let btn = UIButton(type: UIButton.ButtonType.infoLight)
-            annotationView?.rightCalloutAccessoryView = btn
-            btn.tag = 1
-            let btn2 = UIButton(type: UIButton.ButtonType.infoLight)
-            annotationView?.leftCalloutAccessoryView = btn2
-            btn2.tag = 2
-            
-            
-        }else{
-            annotationView!.annotation = annotation
         }
-        return annotationView
         
-    }
-    //콜아웃 버튼 누른 곳 알기
-    func mapView(mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
-        let annotation = view.annotation!
-        print("버튼을 누른 곳은 : " , annotation.title!, control.tag)
+        detailVC.modalPresentationStyle = .overCurrentContext
+        detailVC.view.backgroundColor = UIColor.clear
+        self.present(detailVC, animated: true, completion: nil)
+        //        self.navigationController?.pushViewController(detailVC, animated: true)
     }
     //검색기능
     func searchPharmacy(name: String) {
@@ -236,6 +258,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             if pharmacy[i].dutyName == name {
                 
                 goLocation(latitude: Double(pharmacy[i].wgs84Lat!) ?? 0, longitude: pharmacy[i].wgs84Lon ?? 0, delta: 0.01)
+                
             } else {
                 
             }
@@ -250,61 +273,89 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     }
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         endTyping = true
-        
-        //Ignoring user
-        UIApplication.shared.beginIgnoringInteractionEvents()
-        
-        //Activity Indicator
-        let activityIndicator = UIActivityIndicatorView()
-        activityIndicator.style = UIActivityIndicatorView.Style.gray
-        activityIndicator.center = self.view.center
-        activityIndicator.hidesWhenStopped = true
-        activityIndicator.startAnimating()
-        
-        self.view.addSubview(activityIndicator)
         searchBar.resignFirstResponder()
         
-        //Create the search request
-        let searchRequest = MKLocalSearch.Request()
-        searchRequest.naturalLanguageQuery = searchBar.text
-        
-        let activeSearch = MKLocalSearch(request: searchRequest)
-        activeSearch.start{ (response, error) in
-            
-            activityIndicator.stopAnimating()
-            UIApplication.shared.endIgnoringInteractionEvents()
-            
-            if response == nil {
-                print("ERROR")
+        let geocoder = CLGeocoder()
+        geocoder.geocodeAddressString(searchBar.text!) {
+            (placemarks:[CLPlacemark]?, error:Error?) in
+            if error == nil {
+                let placemark = placemarks?.first
+                let anno = MKPointAnnotation()
+                anno.coordinate = (placemark?.location?.coordinate)!
+                
+                let span = MKCoordinateSpan(latitudeDelta: 0.03,longitudeDelta: 0.03)
+                let region = MKCoordinateRegion(center: anno.coordinate, span: span)
+                
+                self.myMap.setRegion(region, animated: true)
+            } else {
+                print(error?.localizedDescription ?? "error")
             }
-            else {
-                //Remove annotations
-                //                let annotations = self.myMap.annotaions
-                //                self.myMap.removeAnnotations(annotations)
-                
-                //Getting data
-                let latitude2 = response?.boundingRegion.center.latitude
-                let longitude2 = response?.boundingRegion.center.longitude
-                
-                //Zooming in on annotation
-                let coordinate:CLLocationCoordinate2D = CLLocationCoordinate2DMake(latitude2!, longitude2!)
-                let span = MKCoordinateSpan(latitudeDelta: 0.1,longitudeDelta: 0.1)
-                self.goLocation(latitude: latitude2!, longitude: longitude2!, delta: 0.01)
-                //                self.locationManager.stopUpdatingLocation()
-                
-            }
+            
+            //        //Ignoring user
+            //        UIApplication.shared.beginIgnoringInteractionEvents()
+            //
+            //        //Activity Indicator
+            //        let activityIndicator = UIActivityIndicatorView()
+            //        activityIndicator.style = UIActivityIndicatorView.Style.gray
+            //        activityIndicator.center = self.view.center
+            //        activityIndicator.hidesWhenStopped = true
+            //        activityIndicator.startAnimating()
+            //
+            //        self.view.addSubview(activityIndicator)
+            //        searchBar.resignFirstResponder()
+            //
+            //        //Create the search request
+            //        let searchRequest = MKLocalSearch.Request()
+            //        searchRequest.naturalLanguageQuery = searchBar.text
+            //
+            //        let activeSearch = MKLocalSearch(request: searchRequest)
+            //        activeSearch.start{ (response, error) in
+            //
+            //            activityIndicator.stopAnimating()
+            //            UIApplication.shared.endIgnoringInteractionEvents()
+            //
+            //            if response == nil {
+            //                print("ERROR")
+            //            }
+            //            else {
+            //                //Remove annotations
+            ////                let annotations = self.myMap.annotaions
+            ////                self.myMap.removeAnnotations(annotations)
+            //
+            //                //Getting data
+            //                let latitude2 = response?.boundingRegion.center.latitude
+            //                let longitude2 = response?.boundingRegion.center.longitude
+            //
+            //                //Zooming in on annotation
+            //                let coordinate:CLLocationCoordinate2D = CLLocationCoordinate2DMake(latitude2!, longitude2!)
+            //                let span = MKCoordinateSpan(latitudeDelta: 0.1,longitudeDelta: 0.1)
+            //                self.goLocation(latitude: latitude2!, longitude: longitude2!, delta: 0.01)
+            //                self.locationManager.stopUpdatingLocation()
+            
+            
         }
         
         searchPharmacy(name: searchName)
         //  _ = searchBar.resignFirstResponder()
         
     }
-    func searchBarCancelButtonClicked(_ searchBar: UISearchBar, didUpdateLocations locations: [CLLocation]) {
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar, didUpdateLocations locations: [CLLocation], latitude latitudeValue: CLLocationDegrees, longitude longitudeValue: CLLocationDegrees, delta span: Double) {
         searchBar.showsCancelButton = false
         searchBar.text = ""
         endTyping = false
-        let pLocation = locations.last
-        goLocation(latitude: (pLocation?.coordinate.latitude)!, longitude: (pLocation?.coordinate.longitude)!, delta: 0.01)
+        guard let newCoords = locationManager.location?.coordinate else {return}
+        
+        let region = MKCoordinateRegion(center: newCoords, latitudinalMeters: 500, longitudinalMeters: 500)
+        myMap.setRegion(region, animated: true)
+        
+        //        locationManager.startUpdatingLocation() //위치 업데이트 시작
+        
+        //  self.myMap.setRegion(pLocation?.coordinate, animated: true)
+        
+        //        let pLocation = CLLocationCoordinate2DMake(latitudeValue, longitudeValue)
+        //        let spanValue = MKCoordinateSpan(latitudeDelta: span, longitudeDelta: span)
+        //        let pRegion = MKCoordinateRegion(center: pLocation, span: spanValue)
+        //        myMap.setRegion(pRegion, animated: true)
         //filteredDatas = [[String:String]]()
         // tableView.reloadData()
         //  _ = searchBar.resignFirstResponder()
@@ -323,4 +374,12 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         // Returns true if the text is empty or nil
         return searchBar.text?.isEmpty ?? true
     }
+    
+    //    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    //        if segue.identifier == "pharmacyDetails" {
+    //            var dest = segue.destination as! PharmacyDetailsViewController
+    //            //dest.book =
+    //        }
+    //    }
 }
+

@@ -19,7 +19,6 @@
 		5237465F2211944300346BC5 /* EditDrugAddTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5237465E2211944300346BC5 /* EditDrugAddTableViewController.swift */; };
 		523746682212914D00346BC5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 523746672212914C00346BC5 /* Assets.xcassets */; };
 		525C84D7220C275F00953458 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525C84D6220C275F00953458 /* TableViewCell.swift */; };
-		525C84D9220C3B0600953458 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525C84D8220C3B0600953458 /* MapViewController.swift */; };
 		527B8FE8220423D1009BCEB0 /* MainTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527B8FE7220423D1009BCEB0 /* MainTableViewController.swift */; };
 		527B8FED22055F38009BCEB0 /* MedicineZ-Bridging-Header.m in Sources */ = {isa = PBXBuildFile; fileRef = 527B8FEC22055F38009BCEB0 /* MedicineZ-Bridging-Header.m */; };
 		52E47353220B02AB00C8D8B7 /* DataCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52E47352220B02AB00C8D8B7 /* DataCenter.swift */; };
@@ -27,6 +26,9 @@
 		52F3D1C522100E8C007D2F20 /* AlarmInfoTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F3D1C422100E8C007D2F20 /* AlarmInfoTableViewController.swift */; };
 		52F51986221305A700F8CD40 /* SoundSettingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F51985221305A700F8CD40 /* SoundSettingTableViewController.swift */; };
 		52F5198A2213FEEE00F8CD40 /* Pharmacy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F519892213FEEE00F8CD40 /* Pharmacy.swift */; };
+		52F51990221519C400F8CD40 /* pharmacy.json in Resources */ = {isa = PBXBuildFile; fileRef = 52F5198F221519C400F8CD40 /* pharmacy.json */; };
+		52F51992221519CC00F8CD40 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F51991221519CC00F8CD40 /* MapViewController.swift */; };
+		52F51994221519D600F8CD40 /* PharmacyDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F51993221519D600F8CD40 /* PharmacyDetailsViewController.swift */; };
 		52F897F02202CC4F007E1F0D /* userInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F897EF2202CC4F007E1F0D /* userInfo.swift */; };
 		52F897F22202CEBA007E1F0D /* AddAlarmTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F897F12202CEBA007E1F0D /* AddAlarmTableViewController.swift */; };
 /* End PBXBuildFile section */
@@ -47,7 +49,6 @@
 		5237465E2211944300346BC5 /* EditDrugAddTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditDrugAddTableViewController.swift; sourceTree = "<group>"; };
 		523746672212914C00346BC5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		525C84D6220C275F00953458 /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
-		525C84D8220C3B0600953458 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		527B8FE7220423D1009BCEB0 /* MainTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTableViewController.swift; sourceTree = "<group>"; };
 		527B8FEB22055F37009BCEB0 /* MedicineZ-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MedicineZ-Bridging-Header.h"; sourceTree = "<group>"; };
 		527B8FEC22055F38009BCEB0 /* MedicineZ-Bridging-Header.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "MedicineZ-Bridging-Header.m"; sourceTree = "<group>"; };
@@ -57,7 +58,9 @@
 		52F3D1C422100E8C007D2F20 /* AlarmInfoTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmInfoTableViewController.swift; sourceTree = "<group>"; };
 		52F51985221305A700F8CD40 /* SoundSettingTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundSettingTableViewController.swift; sourceTree = "<group>"; };
 		52F519892213FEEE00F8CD40 /* Pharmacy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pharmacy.swift; sourceTree = "<group>"; };
-		52F5198B221437C600F8CD40 /* pharmacy.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = pharmacy.json; sourceTree = "<group>"; };
+		52F5198F221519C400F8CD40 /* pharmacy.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = pharmacy.json; sourceTree = "<group>"; };
+		52F51991221519CC00F8CD40 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		52F51993221519D600F8CD40 /* PharmacyDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PharmacyDetailsViewController.swift; sourceTree = "<group>"; };
 		52F897EF2202CC4F007E1F0D /* userInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = userInfo.swift; sourceTree = "<group>"; };
 		52F897F12202CEBA007E1F0D /* AddAlarmTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAlarmTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -76,6 +79,7 @@
 		5234877721E82403004BB1F3 = {
 			isa = PBXGroup;
 			children = (
+				52F5198F221519C400F8CD40 /* pharmacy.json */,
 				5234878221E82403004BB1F3 /* MedicineZ */,
 				5234878121E82403004BB1F3 /* Products */,
 				527B8FEE2205671A009BCEB0 /* Frameworks */,
@@ -100,10 +104,11 @@
 				523746672212914C00346BC5 /* Assets.xcassets */,
 				5234878C21E82404004BB1F3 /* LaunchScreen.storyboard */,
 				5234878F21E82404004BB1F3 /* Info.plist */,
+				52F51993221519D600F8CD40 /* PharmacyDetailsViewController.swift */,
+				52F51991221519CC00F8CD40 /* MapViewController.swift */,
 				52374665221197A100346BC5 /* Data */,
 				52374663221196F500346BC5 /* Add */,
 				52374666221197B000346BC5 /* Main */,
-				525C84D8220C3B0600953458 /* MapViewController.swift */,
 				523746622211968B00346BC5 /* Edit */,
 				523746642211977D00346BC5 /* Search */,
 				52F5197E2212FB3200F8CD40 /* Settings */,
@@ -144,7 +149,6 @@
 		52374665221197A100346BC5 /* Data */ = {
 			isa = PBXGroup;
 			children = (
-				52F5198B221437C600F8CD40 /* pharmacy.json */,
 				52F897EF2202CC4F007E1F0D /* userInfo.swift */,
 				52E47352220B02AB00C8D8B7 /* DataCenter.swift */,
 				52F519892213FEEE00F8CD40 /* Pharmacy.swift */,
@@ -240,6 +244,7 @@
 			files = (
 				5234878E21E82404004BB1F3 /* LaunchScreen.storyboard in Resources */,
 				523746682212914D00346BC5 /* Assets.xcassets in Resources */,
+				52F51990221519C400F8CD40 /* pharmacy.json in Resources */,
 				5234878921E82403004BB1F3 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -258,11 +263,12 @@
 				52F3D1BD220D64D8007D2F20 /* AlarmRepetitionTableViewController.swift in Sources */,
 				5237465D221185D900346BC5 /* EditAlarmRepetitionTableViewController.swift in Sources */,
 				52F51986221305A700F8CD40 /* SoundSettingTableViewController.swift in Sources */,
+				52F51992221519CC00F8CD40 /* MapViewController.swift in Sources */,
 				52F897F02202CC4F007E1F0D /* userInfo.swift in Sources */,
 				527B8FE8220423D1009BCEB0 /* MainTableViewController.swift in Sources */,
-				525C84D9220C3B0600953458 /* MapViewController.swift in Sources */,
 				5237465F2211944300346BC5 /* EditDrugAddTableViewController.swift in Sources */,
 				5237465B22116CF900346BC5 /* EditAlarmInfoTableViewController.swift in Sources */,
+				52F51994221519D600F8CD40 /* PharmacyDetailsViewController.swift in Sources */,
 				52F897F22202CEBA007E1F0D /* AddAlarmTableViewController.swift in Sources */,
 				520FA24322103E32004CD515 /* SearchTableViewController.swift in Sources */,
 				520FA24522103E32004CD515 /* WebViewController.swift in Sources */,
