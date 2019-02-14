@@ -231,7 +231,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
                 let anno = MKPointAnnotation()
                 anno.coordinate = (placemark?.location?.coordinate)!
                 
-                let span = MKCoordinateSpan(latitudeDelta: 0.03,longitudeDelta: 0.03)
+                let span = MKCoordinateSpan(latitudeDelta: 0.01,longitudeDelta: 0.01)
                 let region = MKCoordinateRegion(center: anno.coordinate, span: span)
                 
                 self.myMap.setRegion(region, animated: true)

@@ -9,7 +9,6 @@ import UserNotifications
 import UIKit
 
 class EditAlarmInfoTableViewController: UITableViewController, UITextFieldDelegate, UNUserNotificationCenterDelegate, EditAlarmRepetitionProtocol, EditAlarmInfoProtocol {
-    var alarmGranted: Bool = UserDefaults.standard.bool(forKey: "switchState")
     var drugItems = [[String:String]]()
     var infoIndexPath = IndexPath()
     var segment = ""
@@ -109,18 +108,17 @@ class EditAlarmInfoTableViewController: UITableViewController, UITextFieldDelega
 
     @IBAction func save(_ sender: Any) {
         if(alarmName.text != "" && alarmTimeSetting.text != "" && alarmRepetition.titleLabel?.text != ""){
-            if alarmGranted == true {
-                alarm()
-            }
-            DataCenter.sharedInstance.drugList.remove(at: infoIndexPath.row)
-            DataCenter.sharedInstance.drugList.insert(userInfo(alarmName: alarmName.text!, memo: memo.text!, alarmTimeSetting: alarmTimeSetting.text!, alarmTimeSetting2: alarmTimeSetting2.text!, alarmTimeSetting3: alarmTimeSetting3.text!, segment: segment, repetition: repetition), at: infoIndexPath.row)
-            DataCenter.sharedInstance.pillList.remove(at: infoIndexPath.row)
-            DataCenter.sharedInstance.pillList.insert(drugItems, at: infoIndexPath.row)
             for i in 0..<DataCenter.sharedInstance.alarmIdentifierList[infoIndexPath.row].count{
                 UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: ["\(DataCenter.sharedInstance.alarmIdentifierList[infoIndexPath.row][i])"])
             }
             DataCenter.sharedInstance.alarmIdentifierList.remove(at: infoIndexPath.row)
+            alarm()
             DataCenter.sharedInstance.alarmIdentifierList.insert(alarmIdentifier, at: infoIndexPath.row)
+            DataCenter.sharedInstance.drugList.remove(at: infoIndexPath.row)
+            DataCenter.sharedInstance.drugList.insert(userInfo(alarmName: alarmName.text!, memo: memo.text!, alarmTimeSetting: alarmTimeSetting.text!, alarmTimeSetting2: alarmTimeSetting2.text!, alarmTimeSetting3: alarmTimeSetting3.text!, segment: segment, repetition: repetition), at: infoIndexPath.row)
+            DataCenter.sharedInstance.pillList.remove(at: infoIndexPath.row)
+            DataCenter.sharedInstance.pillList.insert(drugItems, at: infoIndexPath.row)
+            
             
         }else{
             let alert = UIAlertController(title: "다시 입력", message: "필수 항목이 다 입력되지 않았어요!", preferredStyle: .alert)
@@ -359,7 +357,23 @@ class EditAlarmInfoTableViewController: UITableViewController, UITextFieldDelega
             }
             if repetition == "매일" {
                 var lnMessageId: String = alarmName.text! + "1"
-                alarmTrigger(dateMatcing: dateComponents, lnMessageId: lnMessageId)
+                let content = UNMutableNotificationContent()
+                content.title = "미니약국"
+                content.body = "약 먹을 시간이에요!"
+                content.sound = UNNotificationSound.default
+                let lnM = lnMessageId
+                let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
+                let request = UNNotificationRequest(identifier: lnM, content: content, trigger: trigger)
+                let center = UNUserNotificationCenter.current()
+                center.add(request) { (error) in
+                    print(error?.localizedDescription ?? "")
+                }
+                alarmIdentifier.append(lnM)
+                center.getPendingNotificationRequests(completionHandler: { requests in
+                    for request in requests {
+                        print(request)
+                    }
+                })
             }
             if repetition != "매일" && repetition.contains("일") {
                 dateComponents.weekday = 1
@@ -399,7 +413,7 @@ class EditAlarmInfoTableViewController: UITableViewController, UITextFieldDelega
         }
         if buttonIndex > 1 {
             
-             if self.alarmTimeSetting2.text! != ""{
+            if self.alarmTimeSetting2.text! != ""{
             _ = Calendar.current
             var dateComponents2 = DateComponents()
             
@@ -420,7 +434,23 @@ class EditAlarmInfoTableViewController: UITableViewController, UITextFieldDelega
             }
             if repetition == "매일" {
                 var lnMessageId: String = alarmName.text! + "2"
-                alarmTrigger(dateMatcing: dateComponents2, lnMessageId: lnMessageId)
+                let content = UNMutableNotificationContent()
+                content.title = "미니약국"
+                content.body = "약 먹을 시간이에요!"
+                content.sound = UNNotificationSound.default
+                let lnM = lnMessageId
+                let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents2, repeats: true)
+                let request = UNNotificationRequest(identifier: lnM, content: content, trigger: trigger)
+                let center = UNUserNotificationCenter.current()
+                center.add(request) { (error) in
+                    print(error?.localizedDescription ?? "")
+                }
+                alarmIdentifier.append(lnM)
+                center.getPendingNotificationRequests(completionHandler: { requests in
+                    for request in requests {
+                        print(request)
+                    }
+                })
             }
             if repetition != "매일" && repetition.contains("일") {
                 dateComponents2.weekday = 1
@@ -482,7 +512,23 @@ class EditAlarmInfoTableViewController: UITableViewController, UITextFieldDelega
             }
             if repetition == "매일" {
                 var lnMessageId: String = alarmName.text! + "3"
-                alarmTrigger(dateMatcing: dateComponents3, lnMessageId: lnMessageId)
+                let content = UNMutableNotificationContent()
+                content.title = "미니약국"
+                content.body = "약 먹을 시간이에요!"
+                content.sound = UNNotificationSound.default
+                let lnM = lnMessageId
+                let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents3, repeats: true)
+                let request = UNNotificationRequest(identifier: lnM, content: content, trigger: trigger)
+                let center = UNUserNotificationCenter.current()
+                center.add(request) { (error) in
+                    print(error?.localizedDescription ?? "")
+                }
+                alarmIdentifier.append(lnM)
+                center.getPendingNotificationRequests(completionHandler: { requests in
+                    for request in requests {
+                        print(request)
+                    }
+                })
             }
             if repetition != "매일" && repetition.contains("일") {
                 dateComponents3.weekday = 1
