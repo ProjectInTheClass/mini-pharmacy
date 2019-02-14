@@ -18,7 +18,7 @@ class AddAlarmTableViewController: UITableViewController, AddAlarmViewDelegatePr
     var friday: Bool = false
     var saturday: Bool = false
     var sunday: Bool = false
-    var repetition: String = ""
+    var repetition: String = "선택"
     var drugItems = [[String:String]]()
     var buttonIndex:Int = 1
 
@@ -183,8 +183,8 @@ class AddAlarmTableViewController: UITableViewController, AddAlarmViewDelegatePr
         alarmTimeSetting.inputView = datePicker
         alarmTimeSetting2.inputView = datePicker2
         alarmTimeSetting3.inputView = datePicker3
-        alarmRepetition.titleLabel?.text = repetition
-        
+        alarmRepetition.setTitle(repetition, for: .normal)
+
         drugList1.text = ""
         drugList2.text = ""
         drugList3.text = ""
@@ -253,7 +253,7 @@ class AddAlarmTableViewController: UITableViewController, AddAlarmViewDelegatePr
         alarmRepetition.titleLabel?.adjustsFontSizeToFitWidth = true
         let alarmGranted1 = UserDefaults.standard.bool(forKey: "alarmGranted")
         alarmGranted = alarmGranted1
-        alarmRepetition.titleLabel?.text = repetition
+        alarmRepetition.setTitle(repetition, for: .normal)
         if drugItems.count == 1{
             drugList1.text = "💊 " + drugItems[0]["ITEM_NAME"]!
         }else if drugItems.count == 2{

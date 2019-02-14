@@ -25,6 +25,17 @@ class PharmacyDetailsViewController: UIViewController {
     var holidayStart = ""
     var holidayClose = ""
     
+    @IBAction func close(_ sender: Any) {
+        self.dismiss(animated: false, completion: nil)
+    }
+    @IBAction func call(_ sender: Any) {
+        if let phoneCallURL = URL(string: "tel://\(number)"){
+            let application:UIApplication = UIApplication.shared
+            if (application.canOpenURL(phoneCallURL)) {
+                application.open(phoneCallURL, options : [:], completionHandler: nil)
+            }
+        }
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -60,9 +71,5 @@ class PharmacyDetailsViewController: UIViewController {
         }
         
     }
-    @objc func dismissModal(){
-        self.dismiss(animated: true, completion: nil)
-    }
-    
 
 }

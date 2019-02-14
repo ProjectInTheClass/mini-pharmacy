@@ -247,9 +247,11 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             
         }
         
-        detailVC.modalPresentationStyle = .overCurrentContext
-        detailVC.view.backgroundColor = UIColor.clear
-        self.present(detailVC, animated: true, completion: nil)
+        let navBarOnModal = UINavigationController(rootViewController: detailVC)
+        navBarOnModal.modalPresentationStyle = .overCurrentContext
+        navBarOnModal.view.backgroundColor = UIColor.clear
+        navBarOnModal.navigationBar.barTintColor = UIColor(displayP3Red: 195/255, green: 225/255, blue: 249/255, alpha: 1.0)
+        self.present(navBarOnModal, animated: false, completion: nil)
         //        self.navigationController?.pushViewController(detailVC, animated: true)
     }
     //검색기능

@@ -178,8 +178,7 @@ class EditAlarmInfoTableViewController: UITableViewController, UITextFieldDelega
         repetition = DataCenter.sharedInstance.drugList[infoIndexPath.row].repetition!
         drugItems = DataCenter.sharedInstance.pillList[infoIndexPath.row]
         segment = DataCenter.sharedInstance.drugList[infoIndexPath.row].segment
-        alarmRepetition.titleLabel?.text! = repetition
-        
+        alarmRepetition.titleLabel?.text! = "                  " + repetition
         drugList1.text = ""
         drugList2.text = ""
         drugList3.text = ""
@@ -212,7 +211,7 @@ class EditAlarmInfoTableViewController: UITableViewController, UITextFieldDelega
     }
     override func viewWillAppear(_ animated: Bool) {
 //        alarmRepetition.titleLabel?.adjustsFontSizeToFitWidth = true
-        alarmRepetition.titleLabel?.text = repetition
+        alarmRepetition.setTitle(repetition, for: .normal)
         if drugItems.count == 1{
             drugList1.text = "💊 " + drugItems[0]["ITEM_NAME"]!
         }else if drugItems.count == 2{

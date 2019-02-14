@@ -2978,18 +2978,17 @@
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oji-ak-Vrw">
                                                     <rect key="frame" x="119" y="13.5" width="240" height="33"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="240" id="7t0-2Z-oRj"/>
+                                                        <constraint firstAttribute="width" constant="240" id="aWr-nG-JSw"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <state key="normal" title="                                선택"/>
+                                                    <state key="normal" title="선택"/>
                                                     <connections>
-                                                        <segue destination="Aet-zD-z4H" kind="show" id="5uZ-d0-DdI"/>
+                                                        <segue destination="WXV-9W-dpG" kind="show" id="FfU-XI-56t"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="iHd-K9-ALI" firstAttribute="leading" secondItem="gwA-i2-r1R" secondAttribute="leadingMargin" id="Bq3-sF-6Ps"/>
-                                                <constraint firstItem="oji-ak-Vrw" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="iHd-K9-ALI" secondAttribute="trailing" constant="8" symbolic="YES" id="N2H-zy-fme"/>
                                                 <constraint firstItem="iHd-K9-ALI" firstAttribute="centerY" secondItem="gwA-i2-r1R" secondAttribute="centerY" id="O5a-ZM-q2L"/>
                                                 <constraint firstItem="oji-ak-Vrw" firstAttribute="centerY" secondItem="gwA-i2-r1R" secondAttribute="centerY" id="POO-KQ-twC"/>
                                                 <constraint firstAttribute="trailing" secondItem="oji-ak-Vrw" secondAttribute="trailing" constant="16" id="rbg-OS-TSh"/>
@@ -3101,7 +3100,7 @@
                                                                 <color key="titleColor" red="0.016804177310000001" green="0.19835099580000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             </state>
                                                             <connections>
-                                                                <segue destination="WXV-9W-dpG" kind="show" id="nxZ-K4-NdD"/>
+                                                                <segue destination="Aet-zD-z4H" kind="show" id="KaO-wd-Q7K"/>
                                                             </connections>
                                                         </button>
                                                     </subviews>
@@ -3464,7 +3463,18 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="lpi-io-vJ7"/>
                     </view>
-                    <navigationItem key="navigationItem" title="약국 상세정보" id="GhD-I9-tKf"/>
+                    <navigationItem key="navigationItem" title="약국 상세정보" id="GhD-I9-tKf">
+                        <barButtonItem key="leftBarButtonItem" title="닫기" id="jTp-BF-kle">
+                            <connections>
+                                <action selector="close:" destination="1Hk-6b-o3s" id="wYF-c7-86l"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Item" id="5jr-JI-iBw">
+                            <connections>
+                                <action selector="call:" destination="1Hk-6b-o3s" id="Ka7-YN-RMu"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="holidayTime" destination="VyY-15-6TJ" id="zES-y4-sBR"/>
                         <outlet property="pharmacyAddress" destination="cuS-Nx-KHP" id="CL0-jA-y65"/>
