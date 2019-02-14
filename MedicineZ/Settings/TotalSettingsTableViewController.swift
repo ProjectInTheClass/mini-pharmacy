@@ -16,22 +16,13 @@ class TotalSettingsTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        if UserDefaults.standard.bool(forKey: "switchState") == true {
-            alarmOnOff.text! = "켬"
-        } else {
-            alarmOnOff.text! = "끔"
-        }
         
         
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        if UserDefaults.standard.bool(forKey: "switchState") == true {
-            alarmOnOff.text! = "켬"
-        } else {
-            alarmOnOff.text! = "끔"
-        }
+        
     }
     
     

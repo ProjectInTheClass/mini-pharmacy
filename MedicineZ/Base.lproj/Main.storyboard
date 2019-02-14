@@ -518,7 +518,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="5Qk-AX-vZT" kind="show" id="10p-Gh-17K"/>
+                                            <segue destination="wru-Sr-SQf" kind="show" id="QRq-Ac-CCj"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="Roe-Qt-vUq" detailTextLabel="1Jz-D9-Ewn" style="IBUITableViewCellStyleValue1" id="bv6-4Q-pwC">
@@ -559,54 +559,43 @@
             </objects>
             <point key="canvasLocation" x="272.80000000000001" y="2184.5577211394307"/>
         </scene>
-        <!--라이선스-->
-        <scene sceneID="C3o-yZ-XOU">
+        <!--View Controller-->
+        <scene sceneID="mOz-Ac-jfc">
             <objects>
-                <tableViewController id="5Qk-AX-vZT" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="60" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="xcr-Il-Dcr">
+                <viewController id="wru-Sr-SQf" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="KtV-h8-YZn">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="License" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IPD-DT-2GH">
+                                <rect key="frame" x="126" y="155" width="123" height="45"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="37"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="sgP-du-cOa">
+                                <rect key="frame" x="0.0" y="240" width="375" height="92"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <mutableString key="text">- Church localization marker sign free icon   "designed by Freepik from Flaticon" 
+- Negative free icon "designed by Alfredo Hernandez from Flaticon" 
+- Plus free icon “designed by Alfredo Hernandez from Flaticon" 
+- Search free icon “designed by Smashicons from Flaticon" 
+- Pharmacy free icon "designed by Freepik from Flaticon" 
+- Pill free icon "designed by Freepik from Flaticon" 
+- Settings free icon  "designed by Gregor Cresnarfrom Flaticon" </mutableString>
+                                <fontDescription key="fontDescription" type="system" pointSize="9"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <sections>
-                            <tableViewSection id="Ude-ic-tlq">
-                                <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="k6q-Rb-6De">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="k6q-Rb-6De" id="N5N-Rt-hiK">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="59.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="HJ2-Mu-g11">
-                                        <rect key="frame" x="0.0" y="60" width="375" height="60"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="HJ2-Mu-g11" id="6Mw-AI-MiB">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="59.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="EBI-2C-zJE">
-                                        <rect key="frame" x="0.0" y="120" width="375" height="60"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="EBI-2C-zJE" id="p03-cf-GxY">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="59.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                </cells>
-                            </tableViewSection>
-                        </sections>
-                        <connections>
-                            <outlet property="dataSource" destination="5Qk-AX-vZT" id="mzN-kS-SrO"/>
-                            <outlet property="delegate" destination="5Qk-AX-vZT" id="LeQ-Jg-HYv"/>
-                        </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" title="라이선스" id="TWW-lX-CWa"/>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="1aA-v5-1Am" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                        <viewLayoutGuide key="safeArea" id="fGT-uf-NzU"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="aam-fX-ud7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1036" y="3036"/>
+            <point key="canvasLocation" x="1044" y="2180.0599700149928"/>
         </scene>
         <!--알람 반복-->
         <scene sceneID="i3Z-oU-4YX">

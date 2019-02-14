@@ -104,8 +104,7 @@
 				523746672212914C00346BC5 /* Assets.xcassets */,
 				5234878C21E82404004BB1F3 /* LaunchScreen.storyboard */,
 				5234878F21E82404004BB1F3 /* Info.plist */,
-				52F51993221519D600F8CD40 /* PharmacyDetailsViewController.swift */,
-				52F51991221519CC00F8CD40 /* MapViewController.swift */,
+				52A925D722157D1D000A3FB0 /* Map */,
 				52374665221197A100346BC5 /* Data */,
 				52374663221196F500346BC5 /* Add */,
 				52374666221197B000346BC5 /* Main */,
@@ -173,6 +172,15 @@
 				527B8FEF2205671A009BCEB0 /* libsqlite3.tbd */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		52A925D722157D1D000A3FB0 /* Map */ = {
+			isa = PBXGroup;
+			children = (
+				52F51993221519D600F8CD40 /* PharmacyDetailsViewController.swift */,
+				52F51991221519CC00F8CD40 /* MapViewController.swift */,
+			);
+			path = Map;
 			sourceTree = "<group>";
 		};
 		52F5197E2212FB3200F8CD40 /* Settings */ = {

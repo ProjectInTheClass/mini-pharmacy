@@ -13,14 +13,11 @@ import CoreLocation
 
 class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate, UISearchBarDelegate {
     
-    
     @IBOutlet weak var searchBar: UISearchBar!
     
     var pharmacy = [Pharmacy]()
     var endTyping:Bool = false
     var searchName = ""
-
-    
     
     func getJsonFromDirectory() {
         let path = Bundle.main.path(forResource: "pharmacy", ofType: "json")
@@ -30,40 +27,33 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             let jlist = try JSONDecoder().decode([Pharmacy].self, from: data)
             pharmacy = jlist
             print(pharmacy[0].dutyName!)
-            
         } catch let err{
             print(err)
         }
-        
     }
     
     
     /*지도*/
     
-    
     //    var locations = [[String:Int]]()
-    
-    var coords : CLLocationCoordinate2D?
     
     var initialLocation = CLLocation()
     let locationManager = CLLocationManager()
     var geocoder = CLGeocoder()
     var coor = CLLocationCoordinate2D()
-    
-    
+    var activityIndicator:UIActivityIndicatorView = UIActivityIndicatorView()
     
     @IBOutlet weak var myMap: MKMapView!
     
     var startLocation: CLLocation!
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         searchBar.delegate = self
-        searchBar.placeholder = "검색할 지역의 이름을 입력하세요."
+        searchBar.placeholder = "검색할 위치나 약국의 이름을 입력하세요."
         
         getJsonFromDirectory()
-        //print(pharmacy[0].dutyName)
         
         // Do any additional setup after loading the view.
         myMap.delegate = self
@@ -76,16 +66,10 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         
         locationManager.distanceFilter = 100 // 위치가 100미터 바뀔 때마다 애플리케이션이 알림 받음.
         
-        //guard let newCoords = locationManager.location?.coordinate else {return}
-        
-        //let region = MKCoordinateRegion(center: newCoords, latitudinalMeters: 500, longitudinalMeters: 500)
-        //myMap.setRegion(region, animated: true)
-        
-        //coor = newCoords
         for i in 0..<pharmacy.count {
             let annotation = MKPointAnnotation()
             annotation.title = pharmacy[i].dutyName
-            annotation.subtitle = pharmacy[i].dutyTel1! // + "영업시간 : " + String(pharmacy[i].dutyTime1s ?? 0)
+            annotation.subtitle = pharmacy[i].dutyTel1!
             annotation.coordinate = CLLocationCoordinate2D(latitude: Double(pharmacy[i].wgs84Lat!) ?? 0, longitude: pharmacy[i].wgs84Lon ?? 0)
             myMap.isZoomEnabled = true // 줌 가능
             myMap.isScrollEnabled = true // 스크롤 가능
@@ -94,23 +78,25 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         }
         
         
-        
-        
     }
     
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-        for i in 0..<pharmacy.count {
-            let pin = MKPinAnnotationView(annotation: annotation, reuseIdentifier: "\(pharmacy[i].rnum)")
-            if annotation.isEqual(myMap.userLocation) {
-                return nil
-            }
-            
-            pin.canShowCallout = true
-            pin.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
-            return pin
+        if annotation.isEqual(myMap.userLocation) {
+            return nil
         }
-        return annotation as! MKAnnotationView
+        var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: "pharmacy")
+        if annotationView == nil {
+            annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: "pharmacy")
+            annotationView!.canShowCallout = true
+        }
+        else {
+            annotationView!.annotation = annotation
+        }
+        let pinImage = UIImage(named: "ma")
+        annotationView!.image = pinImage
+        annotationView?.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
+        return annotationView
         
     }
     
@@ -155,48 +141,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        //  getJsonFromDirectory()
-        //        print(pharmacyInfo[0].dutyName)
-        
-        
         
     }
-    
-    //콜아웃(어노테이션 정보)에 버튼 추가 및 tag이용해 어떤 버튼 눌렸는지 알기
-    //2/14 10시에 주석처리함.
-    //    func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
-    //        for i in 0..<pharmacy.count {
-    //        var annotationView = myMap.dequeueReusableAnnotationView(withIdentifier: String(pharmacy[i].rnum!))
-    //            if annotation.isEqual(myMap.userLocation) {
-    //                return nil
-    //            }
-    //
-    //        if annotationView == nil{
-    //            annotationView = MKPinAnnotationView.init(annotation: annotation, reuseIdentifier: String(pharmacy[i].rnum!))
-    //            annotationView?.canShowCallout = true
-    //
-    //            let p = annotation as! Pharmacy
-    //            //add a button on the callout
-    //            let btn = UIButton(type: .infoDark) as UIButton
-    //            annotationView!.rightCalloutAccessoryView = btn
-    //
-    ////            let btn = UIButton(type: UIButton.ButtonType.infoLight)
-    ////            annotationView?.rightCalloutAccessoryView = btn
-    ////            btn.tag = 1
-    ////            let btn2 = UIButton(type: UIButton.ButtonType.infoLight)
-    ////            annotationView?.leftCalloutAccessoryView = btn2
-    ////            btn2.tag = 2
-    //
-    //
-    //        }else{
-    //            annotationView!.annotation = annotation
-    //        }
-    //            return annotationView
-    //        }
-    //        return annotation as! MKAnnotationView
-    //
-    //    }
-    
     
     //when the button is tapped we want to perform a segue
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
@@ -206,6 +152,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         
         detailVC.name = (annView?.title!)!
         detailVC.number = ((annView?.subtitle!)!)
+        let navBarOnModal = UINavigationController(rootViewController: detailVC)
         let cal = Calendar(identifier: .gregorian)
         let now = Date()
         let comps = cal.dateComponents([.weekday], from: now)
@@ -215,42 +162,41 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
                 detailVC.address = pharmacy[i].dutyAddr!
                 detailVC.holidayStart = String(pharmacy[i].dutyTime8s ?? 0)
                 detailVC.holidayClose = String(pharmacy[i].dutyTime8c ?? 0)
-            switch comps.weekday! {
-            case 1:
-                detailVC.startTime = pharmacy[i].dutyTime7s
-                detailVC.closeTime = pharmacy[i].dutyTime7c
-            case 2:
-                detailVC.startTime = String(pharmacy[i].dutyTime1s!)
-                detailVC.closeTime = String(pharmacy[i].dutyTime1c!)
-            case 3:
-                detailVC.startTime = String(pharmacy[i].dutyTime2s!)
-                detailVC.closeTime = String(pharmacy[i].dutyTime2c!)
-            case 4:
-                detailVC.startTime = String(pharmacy[i].dutyTime3s!)
-                detailVC.closeTime = String(pharmacy[i].dutyTime3c!)
-            case 5:
-                detailVC.startTime = String(pharmacy[i].dutyTime4s!)
-                detailVC.closeTime = String(pharmacy[i].dutyTime4c!)
-            case 6:
-                detailVC.startTime = String(pharmacy[i].dutyTime5s!)
-                detailVC.closeTime = String(pharmacy[i].dutyTime5c!)
-            case 7:
-                detailVC.startTime = String(pharmacy[i].dutyTime6s!)
-                detailVC.closeTime = String(pharmacy[i].dutyTime6c!)
-            default:
-                detailVC.startTime = String(pharmacy[i].dutyTime1s!)
-                detailVC.closeTime = String(pharmacy[i].dutyTime1c!)
-                
-              }
+                switch comps.weekday! {
+                case 1:
+                    detailVC.startTime = pharmacy[i].dutyTime7s
+                    detailVC.closeTime = pharmacy[i].dutyTime7c
+                case 2:
+                    detailVC.startTime = String(pharmacy[i].dutyTime1s!)
+                    detailVC.closeTime = String(pharmacy[i].dutyTime1c!)
+                case 3:
+                    detailVC.startTime = String(pharmacy[i].dutyTime2s!)
+                    detailVC.closeTime = String(pharmacy[i].dutyTime2c!)
+                case 4:
+                    detailVC.startTime = String(pharmacy[i].dutyTime3s!)
+                    detailVC.closeTime = String(pharmacy[i].dutyTime3c!)
+                case 5:
+                    detailVC.startTime = String(pharmacy[i].dutyTime4s!)
+                    detailVC.closeTime = String(pharmacy[i].dutyTime4c!)
+                case 6:
+                    detailVC.startTime = String(pharmacy[i].dutyTime5s!)
+                    detailVC.closeTime = String(pharmacy[i].dutyTime5c!)
+                case 7:
+                    detailVC.startTime = String(pharmacy[i].dutyTime6s!)
+                    detailVC.closeTime = String(pharmacy[i].dutyTime6c!)
+                default:
+                    detailVC.startTime = String(pharmacy[i].dutyTime1s!)
+                    detailVC.closeTime = String(pharmacy[i].dutyTime1c!)
+                    
+                }
                 
             }
             
         }
         
-        let navBarOnModal = UINavigationController(rootViewController: detailVC)
         navBarOnModal.modalPresentationStyle = .overCurrentContext
         navBarOnModal.view.backgroundColor = UIColor.clear
-        navBarOnModal.navigationBar.barTintColor = UIColor(displayP3Red: 195/255, green: 225/255, blue: 249/255, alpha: 1.0)
+        navBarOnModal.navigationBar.barTintColor = UIColor(displayP3Red: 195/255, green: 225/255, blue: 249/255, alpha: 1)
         self.present(navBarOnModal, animated: false, completion: nil)
         //        self.navigationController?.pushViewController(detailVC, animated: true)
     }
@@ -293,52 +239,11 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
                 print(error?.localizedDescription ?? "error")
             }
             
-            //        //Ignoring user
-            //        UIApplication.shared.beginIgnoringInteractionEvents()
-            //
-            //        //Activity Indicator
-            //        let activityIndicator = UIActivityIndicatorView()
-            //        activityIndicator.style = UIActivityIndicatorView.Style.gray
-            //        activityIndicator.center = self.view.center
-            //        activityIndicator.hidesWhenStopped = true
-            //        activityIndicator.startAnimating()
-            //
-            //        self.view.addSubview(activityIndicator)
-            //        searchBar.resignFirstResponder()
-            //
-            //        //Create the search request
-            //        let searchRequest = MKLocalSearch.Request()
-            //        searchRequest.naturalLanguageQuery = searchBar.text
-            //
-            //        let activeSearch = MKLocalSearch(request: searchRequest)
-            //        activeSearch.start{ (response, error) in
-            //
-            //            activityIndicator.stopAnimating()
-            //            UIApplication.shared.endIgnoringInteractionEvents()
-            //
-            //            if response == nil {
-            //                print("ERROR")
-            //            }
-            //            else {
-            //                //Remove annotations
-            ////                let annotations = self.myMap.annotaions
-            ////                self.myMap.removeAnnotations(annotations)
-            //
-            //                //Getting data
-            //                let latitude2 = response?.boundingRegion.center.latitude
-            //                let longitude2 = response?.boundingRegion.center.longitude
-            //
-            //                //Zooming in on annotation
-            //                let coordinate:CLLocationCoordinate2D = CLLocationCoordinate2DMake(latitude2!, longitude2!)
-            //                let span = MKCoordinateSpan(latitudeDelta: 0.1,longitudeDelta: 0.1)
-            //                self.goLocation(latitude: latitude2!, longitude: longitude2!, delta: 0.01)
-            //                self.locationManager.stopUpdatingLocation()
-            
             
         }
         
         searchPharmacy(name: searchName)
-          _ = searchBar.resignFirstResponder()
+        _ = searchBar.resignFirstResponder()
         
     }
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar, didUpdateLocations locations: [CLLocation], latitude latitudeValue: CLLocationDegrees, longitude longitudeValue: CLLocationDegrees, delta span: Double) {
@@ -360,7 +265,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         //        myMap.setRegion(pRegion, animated: true)
         //filteredDatas = [[String:String]]()
         // tableView.reloadData()
-          _ = searchBar.resignFirstResponder()
+        _ = searchBar.resignFirstResponder()
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
