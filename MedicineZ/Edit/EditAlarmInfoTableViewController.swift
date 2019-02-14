@@ -362,6 +362,7 @@ class EditAlarmInfoTableViewController: UITableViewController, UITextFieldDelega
                 content.body = "약 먹을 시간이에요!"
                 content.sound = UNNotificationSound.default
                 let lnM = lnMessageId
+                
                 let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
                 let request = UNNotificationRequest(identifier: lnM, content: content, trigger: trigger)
                 let center = UNUserNotificationCenter.current()
