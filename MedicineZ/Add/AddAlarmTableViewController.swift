@@ -10,7 +10,7 @@ import UIKit
 
 
 
-class AddAlarmTableViewController: UITableViewController, AddAlarmViewDelegateProtocol, AddAlarmViewDelegateProtocol2, UITextFieldDelegate, UNUserNotificationCenterDelegate {
+class AddAlarmTableViewController: UITableViewController, AddAlarmViewDelegateProtocol, AddAlarmViewDelegateProtocol2, UITextFieldDelegate {
     var monday: Bool = false
     var tuesday: Bool = false
     var wednesday: Bool = false

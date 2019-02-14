@@ -8,7 +8,7 @@
 import UserNotifications
 import UIKit
 
-class EditAlarmInfoTableViewController: UITableViewController, UITextFieldDelegate, UNUserNotificationCenterDelegate, EditAlarmRepetitionProtocol, EditAlarmInfoProtocol {
+class EditAlarmInfoTableViewController: UITableViewController, UITextFieldDelegate, EditAlarmRepetitionProtocol, EditAlarmInfoProtocol {
     var drugItems = [[String:String]]()
     var infoIndexPath = IndexPath()
     var segment = ""
