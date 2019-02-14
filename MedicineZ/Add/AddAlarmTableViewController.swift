@@ -22,7 +22,8 @@ class AddAlarmTableViewController: UITableViewController, AddAlarmViewDelegatePr
     var drugItems = [[String:String]]()
     var buttonIndex:Int = 1
 
-    var alarmGranted: Bool = false
+//    var alarmGranted: Bool = false
+    var alarmGranted = UserDefaults.standard.bool(forKey: "alarmGranted")
     var alarmIdentifier = [String]()
 
     var drugListName = [String]()
@@ -344,7 +345,7 @@ class AddAlarmTableViewController: UITableViewController, AddAlarmViewDelegatePr
             dateComponents.minute = Int(subMin)
             
             if subHour == "12" && String(string[string.startIndex]) == "A" {
-                dateComponents.hour = dateComponents.hour! + 12
+                dateComponents.hour = dateComponents.hour! - 12
             } else if subHour != "12" && String(string[string.startIndex]) == "P" {
                 dateComponents.hour = dateComponents.hour! + 12
             }
@@ -421,9 +422,12 @@ class AddAlarmTableViewController: UITableViewController, AddAlarmViewDelegatePr
             dateComponents2.hour = Int(subHour)
             dateComponents2.minute = Int(subMin)
             
-            if String(string2[string2.startIndex]) == "P" {
+            if subHour == "12" && String(string2[string2.startIndex]) == "A" {
+                dateComponents2.hour = dateComponents2.hour! - 12
+            } else if subHour != "12" && String(string2[string2.startIndex]) == "P" {
                 dateComponents2.hour = dateComponents2.hour! + 12
             }
+            
             if repetition == "매일" {
                 var lnMessageId: String = alarmName.text! + "2"
                 let content = UNMutableNotificationContent()
@@ -496,7 +500,9 @@ class AddAlarmTableViewController: UITableViewController, AddAlarmViewDelegatePr
             dateComponents3.hour = Int(subHour)
             dateComponents3.minute = Int(subMin)
             
-            if String(string3[string3.startIndex]) == "P" {
+            if subHour == "12" && String(string3[string3.startIndex]) == "A" {
+                dateComponents3.hour = dateComponents3.hour! - 12
+            } else if subHour != "12" && String(string3[string3.startIndex]) == "P" {
                 dateComponents3.hour = dateComponents3.hour! + 12
             }
             

@@ -11,6 +11,7 @@
 		520FA24422103E32004CD515 /* DrugInfoTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 520FA24022103E31004CD515 /* DrugInfoTableViewController.swift */; };
 		520FA24522103E32004CD515 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 520FA24122103E31004CD515 /* WebViewController.swift */; };
 		520FA24622103E32004CD515 /* DrugAddTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 520FA24222103E31004CD515 /* DrugAddTableViewController.swift */; };
+		520FA28822144747004CD515 /* TotalSettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 520FA28722144747004CD515 /* TotalSettingsTableViewController.swift */; };
 		5234878421E82403004BB1F3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5234878321E82403004BB1F3 /* AppDelegate.swift */; };
 		5234878921E82403004BB1F3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5234878721E82403004BB1F3 /* Main.storyboard */; };
 		5234878E21E82404004BB1F3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5234878C21E82404004BB1F3 /* LaunchScreen.storyboard */; };
@@ -37,6 +38,7 @@
 		520FA24022103E31004CD515 /* DrugInfoTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrugInfoTableViewController.swift; sourceTree = "<group>"; };
 		520FA24122103E31004CD515 /* WebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		520FA24222103E31004CD515 /* DrugAddTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrugAddTableViewController.swift; sourceTree = "<group>"; };
+		520FA28722144747004CD515 /* TotalSettingsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalSettingsTableViewController.swift; sourceTree = "<group>"; };
 		5234878021E82403004BB1F3 /* MedicineZ.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MedicineZ.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5234878321E82403004BB1F3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5234878821E82403004BB1F3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -175,6 +177,7 @@
 		52F5197E2212FB3200F8CD40 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
+				520FA28722144747004CD515 /* TotalSettingsTableViewController.swift */,
 				52F51985221305A700F8CD40 /* SoundSettingTableViewController.swift */,
 			);
 			path = Settings;
@@ -254,6 +257,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				52F3D1C522100E8C007D2F20 /* AlarmInfoTableViewController.swift in Sources */,
+				520FA28822144747004CD515 /* TotalSettingsTableViewController.swift in Sources */,
 				52E47353220B02AB00C8D8B7 /* DataCenter.swift in Sources */,
 				520FA24622103E32004CD515 /* DrugAddTableViewController.swift in Sources */,
 				527B8FED22055F38009BCEB0 /* MedicineZ-Bridging-Header.m in Sources */,

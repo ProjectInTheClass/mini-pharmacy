@@ -44,7 +44,7 @@ class MainTableViewController: UITableViewController {
                 }
             }
         }
-        
+        UserDefaults.standard.synchronize()
     }
     
     // MARK: - Table view data source
