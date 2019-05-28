@@ -51,7 +51,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         super.viewDidLoad()
         
         searchBar.delegate = self
-        searchBar.placeholder = "검색할 위치나 약국의 이름을 입력하세요."
+        searchBar.placeholder = "지역을 입력하세요.(ex.동작구 흑석동)"
         
         getJsonFromDirectory()
         
