@@ -25,7 +25,6 @@
                     <connections>
                         <segue destination="GYu-oz-4Pb" kind="relationship" relationship="viewControllers" id="odx-3W-rdp"/>
                         <segue destination="Rt5-mo-8ul" kind="relationship" relationship="viewControllers" id="Ues-a1-zr1"/>
-                        <segue destination="NEQ-od-9aN" kind="relationship" relationship="viewControllers" id="Crz-Dw-BBG"/>
                         <segue destination="1u3-Mi-hlH" kind="relationship" relationship="viewControllers" id="cGG-BO-4H9"/>
                     </connections>
                 </tabBarController>
@@ -449,24 +448,6 @@
             </objects>
             <point key="canvasLocation" x="272.80000000000001" y="821.73913043478262"/>
         </scene>
-        <!--약국-->
-        <scene sceneID="kgi-On-Gps">
-            <objects>
-                <navigationController id="NEQ-od-9aN" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="약국" image="pharmacy" id="5ji-0J-IUh"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="xU0-yt-PRE">
-                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <color key="barTintColor" red="0.76484799390000002" green="0.88103479149999997" blue="0.97698765990000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="ITL-J1-KsR" kind="relationship" relationship="rootViewController" id="RLn-fd-Pc1"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Mgb-BF-cC5" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-567" y="1504"/>
-        </scene>
         <!--설정-->
         <scene sceneID="hWd-2g-aT4">
             <objects>
@@ -494,39 +475,15 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <view key="tableFooterView" contentMode="scaleToFill" id="fwz-Og-ViK">
-                            <rect key="frame" x="0.0" y="180" width="375" height="472"/>
+                            <rect key="frame" x="0.0" y="120" width="375" height="472"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </view>
                         <sections>
                             <tableViewSection id="IOr-aK-VQ5">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="bv6-4Q-pwC">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="bv6-4Q-pwC" id="Hbi-C6-IcV">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="59.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="알람설정" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="znX-nz-ASi">
-                                                    <rect key="frame" x="16" y="19" width="59" height="21"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aaL-Sb-7MK">
-                                                    <rect key="frame" x="310" y="14" width="49" height="31"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <connections>
-                                                        <action selector="alarmSwitch:" destination="qrl-3y-rDB" eventType="valueChanged" id="EPO-wb-BJC"/>
-                                                    </connections>
-                                                </switch>
-                                            </subviews>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="XXD-JP-Mz4" style="IBUITableViewCellStyleDefault" id="8Q0-JS-62k">
-                                        <rect key="frame" x="0.0" y="60" width="375" height="60"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="8Q0-JS-62k" id="3aW-6M-7Sm">
                                             <rect key="frame" x="0.0" y="0.0" width="341" height="59.5"/>
@@ -546,7 +503,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="2er-zQ-slP" detailTextLabel="uRh-gF-CLI" style="IBUITableViewCellStyleValue1" id="702-sd-MTd">
-                                        <rect key="frame" x="0.0" y="120" width="375" height="60"/>
+                                        <rect key="frame" x="0.0" y="60" width="375" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="702-sd-MTd" id="3QK-aB-3B4">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="59.5"/>
@@ -578,9 +535,6 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="설정" id="9hF-aH-WxH"/>
-                    <connections>
-                        <outlet property="alarmSwitch" destination="aaL-Sb-7MK" id="X7a-rJ-Q9v"/>
-                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aOg-PC-40U" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -605,13 +559,13 @@
                                 <rect key="frame" x="0.0" y="240" width="375" height="92"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <mutableString key="text">- Church localization marker sign free icon   "designed by Freepik from Flaticon" 
+                                <string key="text">- Church localization marker sign free icon   "designed by Freepik from Flaticon" 
 - Negative free icon "designed by Alfredo Hernandez from Flaticon" 
 - Plus free icon “designed by Alfredo Hernandez from Flaticon" 
 - Search free icon “designed by Smashicons from Flaticon" 
 - Pharmacy free icon "designed by Freepik from Flaticon" 
 - Pill free icon "designed by Freepik from Flaticon" 
-- Settings free icon  "designed by Gregor Cresnarfrom Flaticon" </mutableString>
+- Settings free icon  "designed by Gregor Cresnarfrom Flaticon" </string>
                                 <fontDescription key="fontDescription" type="system" pointSize="9"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
@@ -1351,52 +1305,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="D34-1y-dY5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2149.5999999999999" y="169.56521739130437"/>
-        </scene>
-        <!--약국-->
-        <scene sceneID="fVC-gE-6hM">
-            <objects>
-                <viewController id="ITL-J1-KsR" customClass="MapViewController" customModule="MedicineZ" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="bZu-Nk-fBf">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="V53-aZ-u07">
-                                <rect key="frame" x="0.0" y="64" width="375" height="56"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </searchBar>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="OqI-YM-LoQ">
-                                <rect key="frame" x="0.0" y="120" width="375" height="498"/>
-                            </mapView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstItem="OqI-YM-LoQ" firstAttribute="bottom" secondItem="iFh-ge-iTt" secondAttribute="bottom" id="9AV-T4-2Zq"/>
-                            <constraint firstItem="OqI-YM-LoQ" firstAttribute="leading" secondItem="iFh-ge-iTt" secondAttribute="leading" id="J4K-KE-WZw"/>
-                            <constraint firstItem="V53-aZ-u07" firstAttribute="top" secondItem="iFh-ge-iTt" secondAttribute="top" id="Sal-Qc-ffi"/>
-                            <constraint firstItem="V53-aZ-u07" firstAttribute="leading" secondItem="OqI-YM-LoQ" secondAttribute="leading" id="W3a-uL-Wdz"/>
-                            <constraint firstItem="V53-aZ-u07" firstAttribute="trailing" secondItem="OqI-YM-LoQ" secondAttribute="trailing" id="tBi-wv-7e2"/>
-                            <constraint firstItem="OqI-YM-LoQ" firstAttribute="trailing" secondItem="iFh-ge-iTt" secondAttribute="trailing" id="tgA-Dv-lh5"/>
-                            <constraint firstItem="OqI-YM-LoQ" firstAttribute="top" secondItem="V53-aZ-u07" secondAttribute="bottom" id="ymQ-g8-7YK"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="iFh-ge-iTt"/>
-                    </view>
-                    <navigationItem key="navigationItem" title="약국" id="oVs-FF-WSr">
-                        <barButtonItem key="rightBarButtonItem" title="Item" image="gps" id="naN-U8-YZr">
-                            <color key="tintColor" red="0.2083544635" green="0.68079405179999997" blue="0.90523801810000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            <connections>
-                                <action selector="sgChangeLocation:" destination="ITL-J1-KsR" id="5ru-u5-GtF"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
-                    <connections>
-                        <outlet property="myMap" destination="OqI-YM-LoQ" id="HYe-PD-o4P"/>
-                        <outlet property="searchBar" destination="V53-aZ-u07" id="LK4-sf-NaI"/>
-                        <segue destination="1Hk-6b-o3s" kind="show" id="2iJ-1t-73y"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="vNj-Jv-evn" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="271.19999999999999" y="1502.6986506746628"/>
         </scene>
         <!--Table View Controller-->
         <scene sceneID="Sns-N5-bY4">
@@ -3333,107 +3241,9 @@
             </objects>
             <point key="canvasLocation" x="1780" y="-806"/>
         </scene>
-        <!--약국 상세정보-->
-        <scene sceneID="qpA-xw-hmg">
-            <objects>
-                <viewController storyboardIdentifier="Detail" modalPresentationStyle="overFullScreen" id="1Hk-6b-o3s" customClass="PharmacyDetailsViewController" customModule="MedicineZ" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="Qv1-tL-cQJ">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pwF-3H-QYe">
-                                <rect key="frame" x="0.0" y="432" width="375" height="186"/>
-                                <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" axis="vertical" alignment="top" spacing="9" translatesAutoresizingMaskIntoConstraints="NO" id="Pcp-mX-7uN">
-                                        <rect key="frame" x="28" y="23" width="328.5" height="153.5"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="열린약국                                 " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FRO-8d-cVK">
-                                                <rect key="frame" x="0.0" y="0.0" width="288" height="32.5"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="27"/>
-                                                <color key="textColor" red="0.2857122131" green="0.58332451399999996" blue="0.67899935229999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="02) 123 - 4567                              " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0fo-k7-ZlE">
-                                                <rect key="frame" x="0.0" y="41.5" width="247.5" height="20.5"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="서울시 동작구 흑석동 123-4                           " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cuS-Nx-KHP">
-                                                <rect key="frame" x="0.0" y="71" width="328.5" height="21.5"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="운영시간  AM 10:00 - PM 11:00       " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GkS-YK-Y5j">
-                                                <rect key="frame" x="0.0" y="101.5" width="272.5" height="21.5"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="공휴일  AM 10:00 - PM 11:00         " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VyY-15-6TJ">
-                                                <rect key="frame" x="0.0" y="132" width="266.5" height="21.5"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                        </subviews>
-                                    </stackView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kxc-ak-afc">
-                                        <rect key="frame" x="316" y="23" width="44" height="44"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="44" id="bvb-XK-Xbv"/>
-                                            <constraint firstAttribute="height" constant="44" id="oGE-id-jUL"/>
-                                        </constraints>
-                                        <state key="normal" title="Button" image="auricular-phone-symbol-in-a-circle-2"/>
-                                        <connections>
-                                            <action selector="call:" destination="1Hk-6b-o3s" eventType="touchUpInside" id="2Ie-Oh-idR"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="kxc-ak-afc" secondAttribute="trailing" constant="15" id="0JX-lK-5WS"/>
-                                    <constraint firstItem="kxc-ak-afc" firstAttribute="top" secondItem="pwF-3H-QYe" secondAttribute="top" constant="23" id="pg3-z7-rw2"/>
-                                </constraints>
-                            </view>
-                        </subviews>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstItem="pwF-3H-QYe" firstAttribute="top" secondItem="lpi-io-vJ7" secondAttribute="top" constant="368" id="P6T-kf-d8b"/>
-                            <constraint firstAttribute="trailing" secondItem="pwF-3H-QYe" secondAttribute="trailing" id="dAi-7m-r2N"/>
-                            <constraint firstItem="pwF-3H-QYe" firstAttribute="bottom" secondItem="lpi-io-vJ7" secondAttribute="bottom" id="h5X-Vf-one"/>
-                            <constraint firstItem="pwF-3H-QYe" firstAttribute="leading" secondItem="Qv1-tL-cQJ" secondAttribute="leading" id="xc9-iu-nXg"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="lpi-io-vJ7"/>
-                    </view>
-                    <navigationItem key="navigationItem" title="약국 상세정보" id="GhD-I9-tKf">
-                        <barButtonItem key="leftBarButtonItem" title="닫기" id="DGO-rp-ukR">
-                            <connections>
-                                <action selector="close:" destination="1Hk-6b-o3s" id="Mf9-SO-Vk2"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
-                    <connections>
-                        <outlet property="holidayTime" destination="VyY-15-6TJ" id="zES-y4-sBR"/>
-                        <outlet property="pharmacyAddress" destination="cuS-Nx-KHP" id="CL0-jA-y65"/>
-                        <outlet property="pharmacyName" destination="FRO-8d-cVK" id="gxj-oH-JYR"/>
-                        <outlet property="pharmacyNumber" destination="0fo-k7-ZlE" id="5LP-5V-pCR"/>
-                        <outlet property="pharmacyTime" destination="GkS-YK-Y5j" id="hLc-wA-WUp"/>
-                        <outlet property="viewInfo" destination="pwF-3H-QYe" id="OQ6-r4-6IZ"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="0Jq-5N-uvP" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1036" y="1502.6986506746628"/>
-        </scene>
     </scenes>
     <resources>
-        <image name="auricular-phone-symbol-in-a-circle-2" width="384" height="384"/>
-        <image name="gps" width="24" height="24"/>
         <image name="negative" width="24" height="24"/>
-        <image name="pharmacy" width="18.399999618530273" height="18.399999618530273"/>
         <image name="pill" width="18.399999618530273" height="18.399999618530273"/>
         <image name="plus" width="24" height="24"/>
         <image name="search" width="18.399999618530273" height="18.399999618530273"/>
